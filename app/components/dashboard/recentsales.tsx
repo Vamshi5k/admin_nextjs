@@ -4,6 +4,16 @@ import {
     AvatarImage,
 } from "@/components/ui/avatar"
 
+import {
+    Table,
+    TableBody,
+    TableCaption,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
+} from "@/components/ui/table"
+
 export function RecentSales() {
     return (
         <div className="space-y-8">

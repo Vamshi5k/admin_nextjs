@@ -10,7 +10,11 @@ import {
     Settings,
     User,
     ChevronRight,
-    ChevronLeft
+    ChevronLeft,
+    Users,
+    ShoppingBasket,
+    Tags,
+    DraftingCompass
 } from "lucide-react";
 import { Nav } from "./Nav";
 import { Button } from "./ui/button";
@@ -20,7 +24,7 @@ const Sidebar = () => {
 
     useEffect(() => {
         const handleResize = () => {
-            setIsCollapsed(window.innerWidth < 768); 
+            setIsCollapsed(window.innerWidth < 768);
         };
 
         handleResize();
@@ -48,17 +52,17 @@ const Sidebar = () => {
                     {isCollapsed ? <ChevronLeft /> : <ChevronRight />}
                 </Button>
             </div>
-            
+
 
             <Nav
                 isCollapsed={isCollapsed}
                 links={[
                     { title: "Dashboard", icon: LayoutDashboard, variant: "default", href: '/' },
-                    { title: "Posts", icon: Newspaper, variant: "ghost", href: '/posts' },
-                    { title: "Categories", icon: Folders, variant: "ghost", href: '/categories' },
-                    { title: "Transactions", icon: CreditCard, variant: "ghost", href: '/transactions' },
-                    { title: "Profile", icon: User, variant: "ghost", href: '/profile' },
-                    { title: "Settings", icon: Settings, variant: "ghost", href: '/settings' },
+                    { title: "UsersList", icon: Users, variant: "ghost", href: '/userslist' },
+                    { title: "Products", icon: ShoppingBasket, variant: "ghost", href: '/products' },
+                    { title: "Cateogires", icon: Tags, variant: "ghost", href: '/categories' },
+                    { title: "Brands", icon: DraftingCompass, variant: "ghost", href: '/brands' },
+                    { title: "Account Settings", icon: Settings, variant: "ghost", href: '/settings' },
                 ]}
             />
         </motion.div>

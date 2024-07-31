@@ -3,12 +3,13 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
+import { Toaster } from "@/components/ui/toaster"
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Admin DashBoard",
-  description: "Admin DashBoard For Pratice",
+  description: "Admin DashBoard For Practice",
 };
 
 export default function RootLayout({
@@ -19,16 +20,19 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className="flex">
-          <div className="h-[100vh] border-r border-slate-200">
+        <div className="flex h-screen">
+          {/* Sidebar */}
+          <div className="border-r border-slate-200">
             <Sidebar />
           </div>
-          <div className="w-full md: w-max-[1400px]">
+
+          {/* Main content */}
+          <div className="flex-1 flex flex-col">
             <Navbar />
-            <div className="p-10">
+            <div className="flex-1 overflow-y-auto p-10">
+              <Toaster />
               {children}
             </div>
-
           </div>
         </div>
       </body>

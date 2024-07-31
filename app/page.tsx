@@ -1,121 +1,61 @@
+"use client";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
+} from "@/components/ui/card";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { Overview } from "./components/dashboard/overview";
 import { RecentSales } from "./components/dashboard/recentsales";
+import DashboardCard from "./components/dashboard/Card/DashboardCard";
+import { Car, Coins, ShoppingCart } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function Home() {
+  const [orders, setOrders] = useState<any>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const GetOrders = async () => {
+    try {
+      const response = await axios.get('/api/orders');
+      if (!response.data) {
+        throw new Error('Error Fetching Orders');
+      }
+      setOrders(response.data);
+    } catch (error) {
+      setError("Error Fetching Orders");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    GetOrders();
+  }, []);
+
   return (
     <main>
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">
-              Total Revenue
-            </CardTitle>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              className="h-4 w-4 text-muted-foreground"
-            >
-              <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
-            </svg>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">$45,231.89</div>
-            <p className="text-xs text-muted-foreground">
-              +20.1% from last month
-            </p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">
-              Subscriptions
-            </CardTitle>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              className="h-4 w-4 text-muted-foreground"
-            >
-              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-              <circle cx="9" cy="7" r="4" />
-              <path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
-            </svg>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">+2350</div>
-            <p className="text-xs text-muted-foreground">
-              +180.1% from last month
-            </p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Sales</CardTitle>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              className="h-4 w-4 text-muted-foreground"
-            >
-              <rect width="20" height="14" x="2" y="5" rx="2" />
-              <path d="M2 10h20" />
-            </svg>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">+12,234</div>
-            <p className="text-xs text-muted-foreground">
-              +19% from last month
-            </p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">
-              Active Now
-            </CardTitle>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              className="h-4 w-4 text-muted-foreground"
-            >
-              <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
-            </svg>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">+573</div>
-            <p className="text-xs text-muted-foreground">
-              +201 since last hour
-            </p>
-          </CardContent>
-        </Card>
+      {/* CARDS SECTION STARTS HERE */}
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 mb-10">
+        <DashboardCard title={"New Orders"} Icon={<ShoppingCart size={20} aria-label="New Orders" />} number={200} description={"You have new orders today."} />
+        <DashboardCard title={"Completed Orders"} Icon={<Car size={20} aria-label="Completed Orders" />} number={125} description={"Completed Orders Today."} />
+        <DashboardCard title={"Total Revenue"} Icon={<Coins size={20} aria-label="Total Revenue" />} number={"25,000"} description={"+20.1% from last month"} />
       </div>
+      {/* CARDS SECTION ENDS HERE */}
 
-
+      {/* OVERVIEW AND TRANSACTION SECTIONS STARTS HERE */}
       <div className="mt-10 mb-10">
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
           <Card className="col-span-4">
@@ -128,9 +68,9 @@ export default function Home() {
           </Card>
           <Card className="col-span-3">
             <CardHeader>
-              <CardTitle>Recent Sales</CardTitle>
+              <CardTitle>Recent Transactions</CardTitle>
               <CardDescription>
-                You made 265 sales this month.
+                Latest Top 5 Transactions
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -139,9 +79,52 @@ export default function Home() {
           </Card>
         </div>
       </div>
+      {/* OVERVIEW AND TRANSACTION SECTIONS ENDS HERE */}
 
-
-
+      {/* RECENT ORDERS TABLE STARTS HERE */}
+      <div className="mt-10 mb-10">
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-lg md:text-2xl font-semibold">Recent Orders</CardTitle>
+            <CardDescription>Latest 5 Orders</CardDescription>
+          </CardHeader>
+          <CardContent>
+            {loading ? (
+              <p className="text-lg md:text-2xl font-semibold">Loading recent orders...</p>
+            ) : error ? (
+              <p className="text-red-500">Error: {error}</p>
+            ) : (
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead className="text-black font-semibold">S.NO</TableHead>
+                    <TableHead className="text-black font-semibold">ORDER NUMBER</TableHead>
+                    <TableHead className="text-black font-semibold">NO. OF PRODUCTS</TableHead>
+                    <TableHead className="text-black font-semibold">AMOUNT</TableHead>
+                    <TableHead className="text-black font-semibold text-end">STATUS</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {orders?.slice(-5)?.map((order: any, index: number) => (
+                    <TableRow key={order?.id}>
+                      <TableCell className="font-medium">{index + 1}</TableCell>
+                      <TableCell>{order?.orderNumber}</TableCell>
+                      <TableCell>{order?.productCount}</TableCell>
+                      <TableCell>{order?.amount}</TableCell>
+                      <TableCell className="text-end">
+                        <Badge variant={order?.status === 'Completed' ? 'success' : order?.status === 'Pending' ? 'warning' : 'error'}>
+                          {order?.status}
+                        </Badge>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            )}
+          </CardContent>
+        </Card>
+      </div>
+      {/* RECENT ORDERS TABLE ENDS HERE */}
     </main>
   );
 }
