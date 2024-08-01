@@ -1,0 +1,758 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "price": 15000,
+      "productname": "Memory Foam Mattress",
+      "qty": 5,
+      "saleprice": 12000,
+      "status": "1",
+      "type": "Mattress",
+      "image": "https://rukminim2.flixcart.com/image/416/416/xif0q/bed-mattress/x/x/h/normal-top-single-5-35-78-shapesense-orthopedic-classic-memory-original-imah2fdmp4tsphmr.jpeg?q=70&crop=false"
+    },
+    {
+      "id": 2,
+      "price": 20000,
+      "productname": "Orthopedic Mattress",
+      "qty": 3,
+      "saleprice": 18000,
+      "status": "0",
+      "type": "Mattress",
+      "image": "https://rukminim2.flixcart.com/image/416/416/xif0q/bed-mattress/u/n/4/normal-top-single-4-35-72-spine-master-with-nff-tech-bonded-foam-original-imahfxnw9fjufkzg.jpeg?q=70&crop=false"
+    },
+    {
+      "id": 3,
+      "price": 25000,
+      "productname": "Gel-Infused Mattress",
+      "qty": 2,
+      "saleprice": 23000,
+      "status": "1",
+      "type": "Mattress",
+      "image": "https://rukminim2.flixcart.com/image/832/832/xif0q/bed-mattress/r/2/l/normal-top-king-5-72-78-aircell-series-dual-ortho-reversible-original-imah2v297p3fcf93.jpeg?q=70&crop=false"
+    },
+    {
+      "id": 4,
+      "price": 3000,
+      "productname": "Hypoallergenic Pillow",
+      "qty": 10,
+      "saleprice": 2500,
+      "status": "1",
+      "type": "Pillow",
+      "image": "https://m.media-amazon.com/images/I/61+w9mB919L._AC_SY300_SX300_.jpg"
+    },
+    {
+      "id": 5,
+      "price": 3500,
+      "productname": "Memory Foam Pillow",
+      "qty": 8,
+      "saleprice": 3000,
+      "status": "1",
+      "type": "Pillow",
+      "image": "https://m.media-amazon.com/images/I/71HAEoBbUYL.__AC_SX300_SY300_QL70_FMwebp_.jpg"
+    },
+    {
+      "id": 6,
+      "price": 22000,
+      "productname": "Latex Mattress",
+      "qty": 4,
+      "saleprice": 20000,
+      "status": "0",
+      "type": "Mattress",
+      "image": "https://m.media-amazon.com/images/I/9188-lChosL.__AC_SY300_SX300_QL70_FMwebp_.jpg"
+    },
+    {
+      "id": 7,
+      "price": 2500,
+      "productname": "Feather Pillow",
+      "qty": 12,
+      "saleprice": 2000,
+      "status": "1",
+      "type": "Pillow",
+      "image": "https://m.media-amazon.com/images/I/51ergTbpNlL.__AC_SX300_SY300_QL70_FMwebp_.jpg"
+    },
+    {
+      "id": 8,
+      "price": 30000,
+      "productname": "Hybrid Mattress",
+      "qty": 1,
+      "saleprice": 28000,
+      "status": "1",
+      "type": "Mattress",
+      "image": "https://m.media-amazon.com/images/I/913FrlOZF-L.__AC_SX300_SY300_QL70_FMwebp_.jpg"
+    },
+    {
+      "id": 9,
+      "price": 4000,
+      "productname": "Cooling Gel Pillow",
+      "qty": 6,
+      "saleprice": 3500,
+      "status": "0",
+      "type": "Pillow",
+      "image": "https://m.media-amazon.com/images/I/81OsnIAMFbL.__AC_SX300_SY300_QL70_FMwebp_.jpg"
+    },
+    {
+      "id": 10,
+      "price": 12000,
+      "productname": "Cotton Mattress",
+      "qty": 7,
+      "saleprice": 10000,
+      "status": "1",
+      "type": "Mattress",
+      "image": "https://m.media-amazon.com/images/I/81xdmqm3QyS.__AC_SX300_SY300_QL70_FMwebp_.jpg"
+    }
+  ],
+  "userslist": [
+    {
+      "id": "1",
+      "name": "Vamshi",
+      "email": "Vamshianimela@spackdigi.com",
+      "mobile": "+91 7995541707",
+      "status": 1,
+      "dateOfJoining": "31-07-2024",
+      "profilePic": "https://randomuser.me/api/portraits/men/1.jpg"
+    },
+    {
+      "id": "2",
+      "name": "K. Anisha",
+      "email": "AnishaK@spackdigi.com",
+      "mobile": "+91 9876543210",
+      "status": 0,
+      "dateOfJoining": "28-06-2024",
+      "profilePic": ""
+    },
+    {
+      "id": "3",
+      "name": "Ravi",
+      "email": "RaviS@spackdigi.com",
+      "mobile": "+91 8765432109",
+      "status": 1,
+      "dateOfJoining": "15-05-2024",
+      "profilePic": "https://randomuser.me/api/portraits/men/2.jpg"
+    },
+    {
+      "id": "4",
+      "name": "Priya",
+      "email": "PriyaN@spackdigi.com",
+      "mobile": "+91 7654321098",
+      "status": 0,
+      "dateOfJoining": "12-04-2024",
+      "profilePic": ""
+    },
+    {
+      "id": "5",
+      "name": "M. Arjun",
+      "email": "ArjunM@spackdigi.com",
+      "mobile": "+91 6543210987",
+      "status": 1,
+      "dateOfJoining": "01-03-2024",
+      "profilePic": "https://randomuser.me/api/portraits/men/3.jpg"
+    }
+  ],
+  "orders": [
+    {
+      "id": "1",
+      "orderNumber": "#0321457856244",
+      "productCount": 5,
+      "amount": "₹10,000",
+      "status": "Pending"
+    },
+    {
+      "id": "2",
+      "orderNumber": "#0321457856245",
+      "productCount": 3,
+      "amount": "₹5,000",
+      "status": "Completed"
+    },
+    {
+      "id": "3",
+      "orderNumber": "#0321457856246",
+      "productCount": 2,
+      "amount": "₹2,500",
+      "status": "Cancelled"
+    },
+    {
+      "id": "4",
+      "orderNumber": "#0321457856247",
+      "productCount": 4,
+      "amount": "₹7,000",
+      "status": "Pending"
+    },
+    {
+      "id": "5",
+      "orderNumber": "#0321457856248",
+      "productCount": 1,
+      "amount": "₹1,500",
+      "status": "Completed"
+    },
+    {
+      "id": "6",
+      "orderNumber": "#0321457856249",
+      "productCount": 6,
+      "amount": "₹15,000",
+      "status": "Pending"
+    },
+    {
+      "id": "7",
+      "orderNumber": "#0321457856250",
+      "productCount": 2,
+      "amount": "₹3,000",
+      "status": "Completed"
+    },
+    {
+      "id": "8",
+      "orderNumber": "#0321457856251",
+      "productCount": 8,
+      "amount": "₹20,000",
+      "status": "Pending"
+    },
+    {
+      "id": "9",
+      "orderNumber": "#0321457856252",
+      "productCount": 4,
+      "amount": "₹8,500",
+      "status": "Completed"
+    },
+    {
+      "id": "10",
+      "orderNumber": "#0321457856253",
+      "productCount": 3,
+      "amount": "₹4,200",
+      "status": "Cancelled"
+    }
+  ],
+  "brands": [
+    {
+      "id": "1",
+      "brandName": "LuxSleep",
+      "description": "Offers luxurious mattresses and sleep products that combine comfort with high-end design.",
+      "category": "Mattresses",
+      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmG8gS0z1B3eyJ9Y1a7F6jXxYH5K8V-wrY2Q&s",
+      "status": 1,
+      "dateAdded": "2024-07-01"
+    },
+    {
+      "id": "2",
+      "brandName": "SleepEssentials",
+      "description": "Provides essential sleep products, including mattresses and pillows designed for comfort and support.",
+      "category": "Mattresses",
+      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQG9RIzLPZcC-FtGybqS_JYfC_dPy1dR2W2gg&s",
+      "status": 1,
+      "dateAdded": "2024-07-10"
+    },
+    {
+      "id": "3",
+      "brandName": "SnoozePlus",
+      "description": "Specializes in high-quality mattresses and sleep accessories for a perfect night's rest.",
+      "category": "Mattresses",
+      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2K2V4iTQBFTRb_a_VmqPbnF2HHwlOMXt9aA&s",
+      "status": 0,
+      "dateAdded": "2024-06-15"
+    },
+    {
+      "id": "4",
+      "brandName": "Restful Nights",
+      "description": "Known for innovative sleep solutions and premium quality mattresses that ensure a restful night.",
+      "category": "Mattresses",
+      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQG9RIzLPZcC-FtGybqS_JYfC_dPy1dR2W2gg&s",
+      "status": 1,
+      "dateAdded": "2024-06-25"
+    },
+    {
+      "id": "5",
+      "brandName": "CozyCloud",
+      "description": "Offers a range of comfortable pillows and bedding products designed to enhance sleep quality.",
+      "category": "Pillows",
+      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCSAk1WgiYXLXZJcS7zvT3tqtKRRilDzeRfQ&s",
+      "status": 1,
+      "dateAdded": "2024-05-01"
+    },
+    {
+      "id": "6",
+      "brandName": "DreamySleep",
+      "description": "Focuses on providing high-quality sleep products, including ergonomic pillows and supportive mattresses.",
+      "category": "Pillows",
+      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyyxPgVQmJ8zrEgIWXW57LDP9cvZrHByAkJg&s",
+      "status": 0,
+      "dateAdded": "2024-05-10"
+    },
+    {
+      "id": "7",
+      "brandName": "PerfectRest",
+      "description": "Specializes in creating the perfect sleep environment with its range of premium pillows and bedding products.",
+      "category": "Pillows",
+      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQn3qKwnr1SAF7fh2pRX0OMbnS9P9Cnn2Rwbw&s",
+      "status": 1,
+      "dateAdded": "2024-04-15"
+    }
+  ],
+
+  "neworders": [
+    {
+      "order_id": "ORD123461",
+      "customer": {
+        "name": "Sonia Kapoor",
+        "email": "sonia.kapoor@example.com",
+        "phone": "+91-9100001111",
+        "address": {
+          "street": "321 Birch Street",
+          "city": "Chennai",
+          "state": "Tamil Nadu",
+          "postal_code": "600001",
+          "country": "India"
+        }
+      },
+      "total_amount": "₹15,999.00",
+      "status": 0,
+      "products": [
+        {
+          "product_name": "Memory Foam Mattress",
+          "quantity": 1,
+          "price_per_unit": "₹14,999.00"
+        },
+        {
+          "product_name": "Cooling Gel Pillow",
+          "quantity": 1,
+          "price_per_unit": "₹999.00"
+        }
+      ]
+    },
+    {
+      "order_id": "ORD123462",
+      "customer": {
+        "name": "Rajesh Mehta",
+        "email": "rajesh.mehta@example.com",
+        "phone": "+91-9200002222",
+        "address": {
+          "street": "654 Maple Avenue",
+          "city": "Noida",
+          "state": "Uttar Pradesh",
+          "postal_code": "201301",
+          "country": "India"
+        }
+      },
+      "total_amount": "₹29,999.00",
+      "status": 0,
+      "products": [
+        {
+          "product_name": "Latex Mattress",
+          "quantity": 1,
+          "price_per_unit": "₹29,999.00"
+        }
+      ]
+    },
+    {
+      "order_id": "ORD123463",
+      "customer": {
+        "name": "Anita Rao",
+        "email": "anita.rao@example.com",
+        "phone": "+91-9300003333",
+        "address": {
+          "street": "987 Ash Street",
+          "city": "Kolkata",
+          "state": "West Bengal",
+          "postal_code": "700001",
+          "country": "India"
+        }
+      },
+      "total_amount": "₹7,999.00",
+      "status": 0,
+      "products": [
+        {
+          "product_name": "Memory Foam Pillow",
+          "quantity": 2,
+          "price_per_unit": "₹3,999.00"
+        }
+      ]
+    },
+    {
+      "order_id": "ORD123464",
+      "customer": {
+        "name": "Sunil Patel",
+        "email": "sunil.patel@example.com",
+        "phone": "+91-9400004444",
+        "address": {
+          "street": "852 Elm Street",
+          "city": "Ahmedabad",
+          "state": "Gujarat",
+          "postal_code": "380001",
+          "country": "India"
+        }
+      },
+      "total_amount": "₹18,999.00",
+      "status": 2,
+      "products": [
+        {
+          "product_name": "Orthopedic Mattress",
+          "quantity": 1,
+          "price_per_unit": "₹17,999.00"
+        },
+        {
+          "product_name": "Latex Pillow",
+          "quantity": 1,
+          "price_per_unit": "₹999.00"
+        }
+      ]
+    },
+    {
+      "order_id": "ORD123465",
+      "customer": {
+        "name": "Rina Agarwal",
+        "email": "rina.agarwal@example.com",
+        "phone": "+91-9500005555",
+        "address": {
+          "street": "963 Pine Street",
+          "city": "Pune",
+          "state": "Maharashtra",
+          "postal_code": "411001",
+          "country": "India"
+        }
+      },
+      "total_amount": "₹13,999.00",
+      "status": 2,
+      "products": [
+        {
+          "product_name": "Cooling Gel Pillow",
+          "quantity": 2,
+          "price_per_unit": "₹5,999.00"
+        },
+        {
+          "product_name": "Memory Foam Mattress",
+          "quantity": 1,
+          "price_per_unit": "₹7,999.00"
+        }
+      ]
+    },
+    {
+      "order_id": "ORD123466",
+      "customer": {
+        "name": "Vikram Saini",
+        "email": "vikram.saini@example.com",
+        "phone": "+91-9600006666",
+        "address": {
+          "street": "741 Cedar Avenue",
+          "city": "Jaipur",
+          "state": "Rajasthan",
+          "postal_code": "302001",
+          "country": "India"
+        }
+      },
+      "total_amount": "₹22,999.00",
+      "status": 2,
+      "products": [
+        {
+          "product_name": "Latex Mattress",
+          "quantity": 1,
+          "price_per_unit": "₹21,999.00"
+        },
+        {
+          "product_name": "Cooling Gel Pillow",
+          "quantity": 1,
+          "price_per_unit": "₹999.00"
+        }
+      ]
+    },
+    {
+      "order_id": "ORD123467",
+      "customer": {
+        "name": "Neha Verma",
+        "email": "neha.verma@example.com",
+        "phone": "+91-9700007777",
+        "address": {
+          "street": "852 Oak Street",
+          "city": "Chandigarh",
+          "state": "Chandigarh",
+          "postal_code": "160001",
+          "country": "India"
+        }
+      },
+      "total_amount": "₹9,999.00",
+      "status": 2,
+      "products": [
+        {
+          "product_name": "Memory Foam Pillow",
+          "quantity": 2,
+          "price_per_unit": "₹4,999.00"
+        }
+      ]
+    },
+    {
+      "order_id": "ORD123468",
+      "customer": {
+        "name": "Pooja Singh",
+        "email": "pooja.singh@example.com",
+        "phone": "+91-9800008888",
+        "address": {
+          "street": "321 Maple Avenue",
+          "city": "Indore",
+          "state": "Madhya Pradesh",
+          "postal_code": "452001",
+          "country": "India"
+        }
+      },
+      "total_amount": "₹25,999.00",
+      "status": 3,
+      "products": [
+        {
+          "product_name": "Orthopedic Mattress",
+          "quantity": 1,
+          "price_per_unit": "₹24,999.00"
+        },
+        {
+          "product_name": "Cooling Gel Pillow",
+          "quantity": 1,
+          "price_per_unit": "₹999.00"
+        }
+      ]
+    },
+    {
+      "order_id": "ORD123469",
+      "customer": {
+        "name": "Karan Johar",
+        "email": "karan.johar@example.com",
+        "phone": "+91-9900009999",
+        "address": {
+          "street": "789 Pine Street",
+          "city": "Kanpur",
+          "state": "Uttar Pradesh",
+          "postal_code": "208001",
+          "country": "India"
+        }
+      },
+      "total_amount": "₹6,999.00",
+      "status": 3,
+      "products": [
+        {
+          "product_name": "Memory Foam Pillow",
+          "quantity": 3,
+          "price_per_unit": "₹2,333.00"
+        }
+      ]
+    },
+    {
+      "order_id": "ORD123470",
+      "customer": {
+        "name": "Shivani Gupta",
+        "email": "shivani.gupta@example.com",
+        "phone": "+91-8800000000",
+        "address": {
+          "street": "654 Maple Avenue",
+          "city": "Amritsar",
+          "state": "Punjab",
+          "postal_code": "143001",
+          "country": "India"
+        }
+      },
+      "total_amount": "₹18,999.00",
+      "status": 4,
+      "products": [
+        {
+          "product_name": "Latex Mattress",
+          "quantity": 1,
+          "price_per_unit": "₹17,999.00"
+        },
+        {
+          "product_name": "Cooling Gel Pillow",
+          "quantity": 1,
+          "price_per_unit": "₹999.00"
+        }
+      ]
+    },
+    {
+      "order_id": "ORD123471",
+      "customer": {
+        "name": "Amitabh Bachchan",
+        "email": "amitabh.bachchan@example.com",
+        "phone": "+91-9900112233",
+        "address": {
+          "street": "321 Elm Street",
+          "city": "Surat",
+          "state": "Gujarat",
+          "postal_code": "395001",
+          "country": "India"
+        }
+      },
+      "total_amount": "₹11,999.00",
+      "status": 4,
+      "products": [
+        {
+          "product_name": "Cooling Gel Pillow",
+          "quantity": 2,
+          "price_per_unit": "₹5,999.00"
+        }
+      ]
+    },
+    {
+      "order_id": "ORD123472",
+      "customer": {
+        "name": "Sandeep Reddy",
+        "email": "sandeep.reddy@example.com",
+        "phone": "+91-9700223344",
+        "address": {
+          "street": "852 Ash Avenue",
+          "city": "Bhopal",
+          "state": "Madhya Pradesh",
+          "postal_code": "462001",
+          "country": "India"
+        }
+      },
+      "total_amount": "₹24,999.00",
+      "status": 4,
+      "products": [
+        {
+          "product_name": "Orthopedic Mattress",
+          "quantity": 1,
+          "price_per_unit": "₹24,999.00"
+        }
+      ]
+    },
+    {
+      "order_id": "ORD123473",
+      "customer": {
+        "name": "Rita Verma",
+        "email": "rita.verma@example.com",
+        "phone": "+91-9300334455",
+        "address": {
+          "street": "963 Oak Avenue",
+          "city": "Nagpur",
+          "state": "Maharashtra",
+          "postal_code": "440001",
+          "country": "India"
+        }
+      },
+      "total_amount": "₹8,999.00",
+      "status": 4,
+      "products": [
+        {
+          "product_name": "Memory Foam Pillow",
+          "quantity": 3,
+          "price_per_unit": "₹2,999.00"
+        }
+      ]
+    },
+    {
+      "order_id": "ORD123474",
+      "customer": {
+        "name": "Deepak Sharma",
+        "email": "deepak.sharma@example.com",
+        "phone": "+91-9100112244",
+        "address": {
+          "street": "456 Oak Street",
+          "city": "Jaipur",
+          "state": "Rajasthan",
+          "postal_code": "302001",
+          "country": "India"
+        }
+      },
+      "total_amount": "₹12,999.00",
+      "status": 5,
+      "products": [
+        {
+          "product_name": "Latex Mattress",
+          "quantity": 1,
+          "price_per_unit": "₹11,999.00"
+        },
+        {
+          "product_name": "Cooling Gel Pillow",
+          "quantity": 1,
+          "price_per_unit": "₹999.00"
+        }
+      ]
+    },
+    {
+      "order_id": "ORD123475",
+      "customer": {
+        "name": "Kavita Joshi",
+        "email": "kavita.joshi@example.com",
+        "phone": "+91-9200445566",
+        "address": {
+          "street": "852 Pine Street",
+          "city": "Patna",
+          "state": "Bihar",
+          "postal_code": "800001",
+          "country": "India"
+        }
+      },
+      "total_amount": "₹7,999.00",
+      "status": 5,
+      "products": [
+        {
+          "product_name": "Cooling Gel Pillow",
+          "quantity": 2,
+          "price_per_unit": "₹3,999.00"
+        }
+      ]
+    },
+    {
+      "order_id": "ORD123476",
+      "customer": {
+        "name": "Rohit Malhotra",
+        "email": "rohit.malhotra@example.com",
+        "phone": "+91-9300556677",
+        "address": {
+          "street": "321 Cedar Avenue",
+          "city": "Vadodara",
+          "state": "Gujarat",
+          "postal_code": "390001",
+          "country": "India"
+        }
+      },
+      "total_amount": "₹17,999.00",
+      "status": 5,
+      "products": [
+        {
+          "product_name": "Orthopedic Mattress",
+          "quantity": 1,
+          "price_per_unit": "₹17,999.00"
+        }
+      ]
+    },
+    {
+      "order_id": "ORD123477",
+      "customer": {
+        "name": "Suman Patil",
+        "email": "suman.patil@example.com",
+        "phone": "+91-9400667788",
+        "address": {
+          "street": "654 Cedar Avenue",
+          "city": "Bhubaneswar",
+          "state": "Odisha",
+          "postal_code": "751001",
+          "country": "India"
+        }
+      },
+      "total_amount": "₹8,999.00",
+      "status": 5,
+      "products": [
+        {
+          "product_name": "Memory Foam Pillow",
+          "quantity": 3,
+          "price_per_unit": "₹2,999.00"
+        }
+      ]
+    },
+    {
+      "order_id": "ORD123478",
+      "customer": {
+        "name": "Madhuri Dixit",
+        "email": "madhuri.dixit@example.com",
+        "phone": "+91-9500778899",
+        "address": {
+          "street": "789 Ash Avenue",
+          "city": "Gwalior",
+          "state": "Madhya Pradesh",
+          "postal_code": "474001",
+          "country": "India"
+        }
+      },
+      "total_amount": "₹9,999.00",
+      "status": 5,
+      "products": [
+        {
+          "product_name": "Cooling Gel Pillow",
+          "quantity": 2,
+          "price_per_unit": "₹4,999.00"
+        }
+      ]
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -28,12 +28,14 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import { AxiosError } from 'axios';
 import axiosInstance from "@/app/Instance";
-import { useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 
-const AddProduct = () => {
+const EditProduct = () => {
     const [loading, setLoading] = useState(false);
+    const [product, setProduct] = useState<any>(null);
     const { toast } = useToast();
     const router = useRouter();
+    const { id } = useParams();  
 
     // This Are The Form Validations
     const formSchema = z.object({
@@ -62,9 +64,36 @@ const AddProduct = () => {
             saleprice: "",
             qty: "",
             type: "Mattress",
-            status: "0", // Ensure the default value matches the Select component's value
+            status: "InStock",
         },
     });
+
+    const getProductById = async (id: any) => {
+        try {
+            const res = await axiosInstance.get(`/products/${id}`);
+            setProduct(res.data);
+            form.reset({
+                productname: res.data.productname,
+                price: res.data.price.toString(),
+                saleprice: res.data.saleprice.toString(),
+                qty: res.data.qty.toString(),
+                type: res.data.type,
+                status: res.data.status,
+            });
+        } catch (error) {
+            console.error("Error fetching product:", error);
+            toast({
+                title: "Fetch Error",
+                description: "There was an error fetching the product details.",
+            });
+        }
+    };
+
+    useEffect(() => {
+        if (id) {
+            getProductById(id);
+        }
+    }, [id]);
 
     const onSubmit = async (data: z.infer<typeof formSchema>) => {
         setLoading(true);
@@ -76,13 +105,13 @@ const AddProduct = () => {
         };
 
         try {
-            await axiosInstance.post('/products', formattedData, {
+            await axiosInstance.put(`/products/${id}`, formattedData, {
                 headers: { 'Content-Type': 'application/json' },
             });
 
             toast({
-                title: "Product Added",
-                description: "Product added successfully!",
+                title: "Product Updated",
+                description: "Product updated successfully!",
                 variant: 'success'
             });
             router.push('/products');
@@ -92,8 +121,8 @@ const AddProduct = () => {
                 toast({
                     title: "Submission Error",
                     description: `There was an error submitting the form: ${error.response?.data?.error || error.message}`,
-                    variant: 'destructive'
-                }, );
+                    variant: 'destructive'  
+                });
             } else {
                 console.error("Unexpected error:", error);
             }
@@ -102,15 +131,17 @@ const AddProduct = () => {
         }
     };
 
+    if (!product) return <p>Loading...</p>;
+
     return (
         <div className="p-4">
             <Card>
                 <CardHeader>
                     <div className="space-y-6 p-5 pb-2">
                         <div className="space-y-0.5">
-                            <h2 className="text-2xl font-bold tracking-tight">Add Product</h2>
+                            <h2 className="text-2xl font-bold tracking-tight">Edit Product</h2>
                             <p className="text-gray-400 text-sm">
-                                Fill the form and add the product to your list.
+                                Fill the form and update the product details.
                             </p>
                         </div>
                         <Separator className="my-6" />
@@ -120,8 +151,7 @@ const AddProduct = () => {
                     <Form {...form}>
                         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                             <div className="grid grid-cols-2 gap-4">
-                                {/* Column 0 */}
-                                {/* Uncomment if image upload is needed */}
+                                {/* Product Image (optional) */}
                                 {/* <div className="col-span-2 md:col-span-1">
                                     <FormField
                                         control={form.control}
@@ -137,7 +167,7 @@ const AddProduct = () => {
                                         )}
                                     />
                                 </div> */}
-                                {/* Column 1 */}
+                                
                                 <div className="col-span-2 md:col-span-1">
                                     <FormField
                                         control={form.control}
@@ -176,7 +206,6 @@ const AddProduct = () => {
                                     />
                                 </div>
 
-                                {/* Column 2 */}
                                 <div className="col-span-2 md:col-span-1">
                                     <FormField
                                         control={form.control}
@@ -216,7 +245,6 @@ const AddProduct = () => {
                                     />
                                 </div>
 
-                                {/* Column 3 */}
                                 <div className="col-span-2 md:col-span-1">
                                     <FormField
                                         control={form.control}
@@ -226,8 +254,8 @@ const AddProduct = () => {
                                                 <FormLabel>Type</FormLabel>
                                                 <FormControl>
                                                     <Select
-                                                        defaultValue={field.value || "Mattress"}
                                                         onValueChange={field.onChange}
+                                                        value={field.value || "Mattress"}
                                                     >
                                                         <SelectTrigger className="w-full">
                                                             <SelectValue placeholder="Select Type" />
@@ -247,7 +275,6 @@ const AddProduct = () => {
                                     />
                                 </div>
 
-                                {/* Column 4 */}
                                 <div className="col-span-2 md:col-span-1">
                                     <FormField
                                         control={form.control}
@@ -257,8 +284,8 @@ const AddProduct = () => {
                                                 <FormLabel>Status</FormLabel>
                                                 <FormControl>
                                                     <Select
-                                                        defaultValue={field.value || "0"}
                                                         onValueChange={field.onChange}
+                                                        value={field.value || "InStock"}
                                                     >
                                                         <SelectTrigger className="w-full">
                                                             <SelectValue placeholder="Select Status" />
@@ -279,9 +306,7 @@ const AddProduct = () => {
                                 </div>
                             </div>
                             <div className="text-end">
-                                <Button type="submit" disabled={loading}>
-                                    {loading ? "Submitting..." : "Submit"}
-                                </Button>
+                                <Button type="submit">Update</Button>
                             </div>
                         </form>
                     </Form>
@@ -291,4 +316,4 @@ const AddProduct = () => {
     );
 };
 
-export default AddProduct;
+export default EditProduct;

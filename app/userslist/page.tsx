@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Avatar, AvatarFallback, AvatarImage } from '@radix-ui/react-avatar';
-import axios from 'axios';
+import axiosInstance from '../Instance';
 import { Eye, EyeOff } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 
@@ -35,7 +35,7 @@ const UserList = () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.get('/api/users');
+      const response = await axiosInstance.get('/userslist');
       if (response?.data) {
         setUsers(response.data);
       }

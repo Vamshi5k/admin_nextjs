@@ -20,22 +20,26 @@ import DashboardCard from "./components/dashboard/Card/DashboardCard";
 import { Car, Coins, ShoppingCart } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import axiosInstance from "./Instance";
+import { useToast } from "@/components/ui/use-toast";
 
 export default function Home() {
+  const { toast } = useToast();
   const [orders, setOrders] = useState<any>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   const GetOrders = async () => {
     try {
-      const response = await axios.get('/api/orders');
+      const response = await axiosInstance.get('/orders');
       if (!response.data) {
         throw new Error('Error Fetching Orders');
       }
       setOrders(response.data);
     } catch (error) {
       setError("Error Fetching Orders");
+     
+
     } finally {
       setLoading(false);
     }

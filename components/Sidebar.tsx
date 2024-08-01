@@ -14,7 +14,8 @@ import {
     Users,
     ShoppingBasket,
     Tags,
-    DraftingCompass
+    DraftingCompass,
+    Package
 } from "lucide-react";
 import { Nav } from "./Nav";
 import { Button } from "./ui/button";
@@ -60,8 +61,9 @@ const Sidebar = () => {
                     { title: "Dashboard", icon: LayoutDashboard, variant: "default", href: '/' },
                     { title: "UsersList", icon: Users, variant: "ghost", href: '/userslist' },
                     { title: "Products", icon: ShoppingBasket, variant: "ghost", href: '/products' },
-                    { title: "Cateogires", icon: Tags, variant: "ghost", href: '/categories' },
                     { title: "Brands", icon: DraftingCompass, variant: "ghost", href: '/brands' },
+                    { title: "Orders", icon: Package, variant: "ghost", href: '/orders' },
+                    { title: "Cateogires", icon: Tags, variant: "ghost", href: '/categories' },
                     { title: "Account Settings", icon: Settings, variant: "ghost", href: '/settings' },
                 ]}
             />

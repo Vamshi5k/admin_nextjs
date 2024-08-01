@@ -1,34 +1,92 @@
 "use client";
-import React, { useEffect, useState } from 'react'
+
+import React, { useEffect, useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { Avatar, AvatarFallback, AvatarImage } from '@radix-ui/react-avatar';
+import { Avatar, AvatarImage } from '@radix-ui/react-avatar';
 import { Pencil, Plus, Trash } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog';
 import { Badge } from '@/components/ui/badge';
-import axios from 'axios';
+import axiosInstance from '../Instance';
 import Link from 'next/link';
+import { useToast } from '@/components/ui/use-toast';
+
+// Define the Product type
+interface Product {
+  id: string;
+  image: string;
+  productname: string;
+  price: number;
+  saleprice: number;
+  qty: number;
+  type: string;
+  status: string;
+}
 
 const Products = () => {
-  const [products, setProducts] = useState<any>([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null)
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [openDialog, setOpenDialog] = useState<boolean>(false);
+  const [selectedProductId, setSelectedProductId] = useState<any>(null);
+  const [error, setError] = useState<string | null>(null);
+  const { toast } = useToast();
 
-
+  // Fetch products
   const GetProducts = async () => {
+    setLoading(true);
+    setError(null); // Clear previous errors
     try {
-      const res = await axios.get(`/api/products`)
-      if (res?.data) {
-        setProducts(res?.data)
-      }
+      const res = await axiosInstance.get('/products');
+      setProducts(res.data);
     } catch (error) {
-      console.log("Error Fetching The Products Data")
+      console.error("Error Fetching The Products Data:", error);
+      setError("Failed to load products.");
+    } finally {
+      setLoading(false);
     }
-  }
+  };
 
+  // Load products on mount
   useEffect(() => {
-    GetProducts()
-  }, [])
+    GetProducts();
+  }, []);
+
+
+  // Delete product
+  const handleDeleteConfirm = async () => {
+    if (selectedProductId !== null) {
+      try {
+        await axiosInstance.delete(`/products/${selectedProductId}`);
+        setProducts(products.filter((product) => product?.id !== selectedProductId));
+        toast({
+          description: 'Product deleted successfully',
+          variant: 'success',
+        });
+      } catch (error) {
+        console.log('Error deleting the product');
+        toast({
+          description: 'Error deleting the product',
+          variant: 'destructive',
+        });
+      } finally {
+        setOpenDialog(false);
+        setSelectedProductId(null);
+      }
+    }
+  };
+
+
+  const handleDeleteClick = (id: any) => {
+    setSelectedProductId(id);
+    setOpenDialog(true);
+  };
+
+  const handleDeleteCancel = () => {
+    setOpenDialog(false);
+    setSelectedProductId(null);
+  };
+
 
   return (
     <div>
@@ -37,21 +95,20 @@ const Products = () => {
           <div className='w-full h-auto flex justify-between items-center'>
             <div>
               <CardTitle className="text-lg md:text-2xl font-semibold">Products</CardTitle>
-              <CardDescription className='text-xs mt-1'>Overall {products.length} New Products</CardDescription>
+              <CardDescription className='text-xs mt-1'>Overall {products.length} Products</CardDescription>
             </div>
             <div>
-              <Link href={'/products/addproduct'}>
+              <Link href='/products/addproduct'>
                 <Button>
                   <Plus className="mr-2 h-4 w-4" /> New Product
                 </Button>
               </Link>
-
             </div>
           </div>
         </CardHeader>
         <CardContent>
           {loading ? (
-            <p className="text-lg md:text-xl font-semibold">Loading users...</p>
+            <p className="text-lg md:text-xl font-semibold">Loading products...</p>
           ) : error ? (
             <p className="text-red-500">Error: {error}</p>
           ) : (
@@ -69,35 +126,32 @@ const Products = () => {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {products?.map((item: any, index: number) => {
-                  return (
-                    <TableRow key={index}>
-                      <TableCell>{index + 1}</TableCell>
-                      <TableCell className='font-semibold'>
-                        <div className='flex items-center gap-2'>
-                          <Avatar>
-
-                            <AvatarImage src={item?.image} width={40} className='rounded-lg' />
-
-                          </Avatar>
-                          {item?.name}
-                        </div>
-
-                      </TableCell>
-                      <TableCell>₹ {item?.price}</TableCell>
-                      <TableCell>₹ {item?.salePrice}</TableCell>
-                      <TableCell>
-                        <Badge variant={"outline"}>
-                          {item?.quantity}
-                        </Badge>
-                      </TableCell>
-                      <TableCell>
-                        <Badge variant={item?.type === "Mattress" ? "success" : "warning"}>{item?.type}</Badge>
-                      </TableCell>
-                      <TableCell>
-                        <Badge variant={item?.status === 0 ? "secondary" : "error"}>{item?.status === 0 ? "In Stock" : item?.status === 1 ? "Out Of Stock" : ""}</Badge>
-                      </TableCell>
-                      <TableCell>
+                {products.map((item, index) => (
+                  <TableRow key={item.id}>
+                    <TableCell>{index + 1}</TableCell>
+                    <TableCell className='font-semibold'>
+                      <div className='flex items-center gap-2'>
+                        <Avatar>
+                          <AvatarImage src={item.image} width={40} className='rounded-lg' />
+                        </Avatar>
+                        {item.productname}
+                      </div>
+                    </TableCell>
+                    <TableCell>₹ {item.price.toFixed(2)}</TableCell>
+                    <TableCell>₹ {item.saleprice.toFixed(2)}</TableCell>
+                    <TableCell>
+                      <Badge variant="outline">{item.qty}</Badge>
+                    </TableCell>
+                    <TableCell>
+                      <Badge variant={item.type === "Mattress" ? "success" : "warning"}>{item.type}</Badge>
+                    </TableCell>
+                    <TableCell>
+                      <Badge variant={item.status === "0" ? "secondary" : "error"}>
+                        {item.status === "0" ? 'In Stock' : "Out Of Stock"}
+                      </Badge>
+                    </TableCell>
+                    <TableCell>
+                      <Link href={`/products/editproduct/${item.id}`}>
                         <Button
                           variant="outline"
                           size="icon"
@@ -105,24 +159,40 @@ const Products = () => {
                         >
                           <Pencil className='h-4 w-4' />
                         </Button>
-                        <Button
-                          variant="outline"
-                          size="icon"
-                        >
-                          <Trash className='h-4 w-4' />
-                        </Button>
-                      </TableCell>
-                    </TableRow>
-                  )
-                })}
-
+                      </Link>
+                      <AlertDialog>
+                        <AlertDialogTrigger asChild>
+                          <Button
+                            variant="outline"
+                            size="icon"
+                            onClick={() => handleDeleteClick(item.id)}
+                          >
+                            <Trash className='h-4 w-4' />
+                          </Button>
+                        </AlertDialogTrigger>
+                        <AlertDialogContent>
+                          <AlertDialogHeader>
+                            <AlertDialogTitle>Confirm Delete</AlertDialogTitle>
+                            <AlertDialogDescription>
+                              Are you sure you want to delete this product? This action cannot be undone.
+                            </AlertDialogDescription>
+                          </AlertDialogHeader>
+                          <AlertDialogFooter>
+                            <AlertDialogCancel onClick={handleDeleteCancel}>Cancel</AlertDialogCancel>
+                            <AlertDialogAction onClick={handleDeleteConfirm}>Yes, Delete</AlertDialogAction>
+                          </AlertDialogFooter>
+                        </AlertDialogContent>
+                      </AlertDialog>
+                    </TableCell>
+                  </TableRow>
+                ))}
               </TableBody>
             </Table>
           )}
         </CardContent>
       </Card>
     </div>
-  )
-}
+  );
+};
 
-export default Products
+export default Products;
