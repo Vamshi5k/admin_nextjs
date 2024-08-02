@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Eye } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
@@ -9,24 +10,49 @@ import axiosInstance from '@/app/Instance';
 import Image from 'next/image';
 import No_Data from "../../../img/data.png";
 
+interface Order {
+    id: string;
+    orderId: any;
+    customerDetails: {
+        name: string;
+    };
+    products: any[];
+    totalCost: number;
+    status: number;
+}
+
 const Shipping = () => {
-    const [neworders, setOrders] = useState<any>([]);
+    const [neworders, setOrders] = useState<Order[]>([]);
+    const [loading, setLoading] = useState<boolean>(true);
+    const [error, setError] = useState<string | null>(null);
+    const router = useRouter();
 
     const GetNewOrders = async () => {
+        setLoading(true);
         try {
             const res = await axiosInstance.get('/neworders');
             if (res?.data) {
-                const orders = res.data.filter((item: any) => item?.status === 3);
+                const orders = res.data.filter((item: Order) => item?.status === 2);
                 setOrders(orders);
             }
-        } catch (error) {
+        } catch (error: any) {
+            setError('Error fetching new orders. Please try again later.');
             console.error('Error fetching new orders:', error);
+        } finally {
+            setLoading(false);
         }
     };
 
     useEffect(() => {
         GetNewOrders();
     }, []);
+
+    const HandleViewOrder = (orderId: number) => {
+        router.push(`/orders/${orderId}`)
+    }
+
+    if (loading) return <div>Loading...</div>;
+    if (error) return <div className='text-red-500'>{error}</div>;
 
     return (
         <Card className='mt-10'>
@@ -48,20 +74,20 @@ const Shipping = () => {
                             </TableRow>
                         </TableHeader>
                         <TableBody>
-                            {neworders.map((item: any, index: number) => (
+                            {neworders.map((item: Order, index: number) => (
                                 <TableRow key={item.id}>
                                     <TableCell>{index + 1}</TableCell>
-                                    <TableCell>{item?.order_id}</TableCell>
-                                    <TableCell>{item?.customer?.name}</TableCell>
+                                    <TableCell className='font-bold'>#{item.orderId}</TableCell>
+                                    <TableCell>{item.customerDetails.name}</TableCell>
                                     <TableCell>
-                                        <Badge variant="outline">{item?.products.length}</Badge>
+                                        <Badge variant="outline">{item.products.length}</Badge>
                                     </TableCell>
-                                    <TableCell>{item?.total_amount}</TableCell>
+                                    <TableCell>₹ {item.totalCost}</TableCell>
                                     <TableCell>
                                         <Badge variant="secondary">Shipping</Badge>
                                     </TableCell>
                                     <TableCell>
-                                        <Button variant="outline" size="icon">
+                                        <Button variant="outline" size="icon" onClick={() => HandleViewOrder(item?.orderId)}>
                                             <Eye className='h-4 w-4' />
                                         </Button>
                                     </TableCell>

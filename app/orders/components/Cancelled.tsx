@@ -8,19 +8,35 @@ import { Badge } from '@/components/ui/badge';
 import axiosInstance from '@/app/Instance';
 import Image from 'next/image';
 import No_Data from "../../../img/data.png";
+import { useRouter } from 'next/navigation';
 
-const Return = () => {
-    const [neworders, setOrders] = useState<any>([]);
+interface Order {
+    id: string;
+    orderId: any;
+    customerDetails: { name: string };
+    products: any[];
+    totalCost: number;
+    status: number;
+}
+
+const Return: React.FC = () => {
+    const [neworders, setOrders] = useState<Order[]>([]);
+    const [loading, setLoading] = useState<boolean>(true);
+    const [error, setError] = useState<string | null>(null);
+    const router = useRouter();
 
     const GetNewOrders = async () => {
         try {
             const res = await axiosInstance.get('/neworders');
             if (res?.data) {
-                const orders = res.data.filter((item: any) => item?.status === 6);
+                const orders = res.data.filter((item: Order) => item?.status === 5);
                 setOrders(orders);
             }
         } catch (error) {
             console.error('Error fetching new orders:', error);
+            setError('Failed to load orders');
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -28,13 +44,22 @@ const Return = () => {
         GetNewOrders();
     }, []);
 
+    if (loading) return <div>Loading...</div>;
+
+
+    const handleViewOrder = (orderId: any) => {
+        router.push(`/orders/${orderId}`)
+    }
+
     return (
         <Card className='mt-10'>
             <CardHeader>
                 <CardTitle>Cancelled Orders</CardTitle>
             </CardHeader>
             <CardContent>
-                {neworders.length > 0 ? (
+                {error ? (
+                    <div className='text-red-500'>{error}</div>
+                ) : neworders.length > 0 ? (
                     <Table>
                         <TableHeader>
                             <TableRow>
@@ -48,20 +73,20 @@ const Return = () => {
                             </TableRow>
                         </TableHeader>
                         <TableBody>
-                            {neworders.map((item: any, index: number) => (
+                            {neworders.map((item, index) => (
                                 <TableRow key={item.id}>
                                     <TableCell>{index + 1}</TableCell>
-                                    <TableCell>{item?.order_id}</TableCell>
-                                    <TableCell>{item?.customer?.name}</TableCell>
+                                    <TableCell className='font-bold'>#{item.orderId}</TableCell>
+                                    <TableCell>{item.customerDetails.name}</TableCell>
                                     <TableCell>
-                                        <Badge variant="outline">{item?.products.length}</Badge>
+                                        <Badge variant="outline">{item.products.length}</Badge>
                                     </TableCell>
-                                    <TableCell>{item?.total_amount}</TableCell>
+                                    <TableCell>₹ {item.totalCost}</TableCell>
                                     <TableCell>
-                                        <Badge variant="error">{item?.status === 6 ? "Cancelled" : ""}</Badge>
+                                        <Badge variant="error">Cancelled</Badge>
                                     </TableCell>
                                     <TableCell>
-                                        <Button variant="outline" size="icon">
+                                        <Button variant="outline" size="icon" onClick={() => handleViewOrder(item?.orderId)}>
                                             <Eye className='h-4 w-4' />
                                         </Button>
                                     </TableCell>

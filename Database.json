@@ -288,471 +288,561 @@
 
   "neworders": [
     {
-      "order_id": "ORD123461",
-      "customer": {
-        "name": "Sonia Kapoor",
-        "email": "sonia.kapoor@example.com",
-        "phone": "+91-9100001111",
-        "address": {
-          "street": "321 Birch Street",
-          "city": "Chennai",
-          "state": "Tamil Nadu",
-          "postal_code": "600001",
-          "country": "India"
-        }
+      "id": 1,
+      "orderId": "ORD001",
+      "customerDetails": {
+        "name": "Amit Sharma",
+        "address": "123 MG Road, Mumbai, Maharashtra, 400001",
+        "phone": "+91-9876543210",
+        "email": "amit.sharma@example.com",
+        "orderType": "Cash On Delivery"
       },
-      "total_amount": "₹15,999.00",
-      "status": 0,
       "products": [
-        {
-          "product_name": "Memory Foam Mattress",
-          "quantity": 1,
-          "price_per_unit": "₹14,999.00"
-        },
-        {
-          "product_name": "Cooling Gel Pillow",
-          "quantity": 1,
-          "price_per_unit": "₹999.00"
-        }
-      ]
+        { "productName": "King Size Mattress", "quantity": 1, "price": 15000 },
+        { "productName": "Memory Foam Pillow", "quantity": 2, "price": 2000 }
+      ],
+      "totalCost": 17000,
+      "subTotal": 15000,
+      "deliveryFee": 2000,
+      "status": 1,
+      "orderDate": "Mon, Aug 5, 2024",
+      "orderTime": "10:30 AM",
+      "deliveryAddress": {
+        "addressLine": "123 MG Road",
+        "buildingName": "",
+        "streetNo": "",
+        "postalCode": "400001"
+      },
+      "billingAddress": "Same as Shipping Address"
     },
     {
-      "order_id": "ORD123462",
-      "customer": {
-        "name": "Rajesh Mehta",
-        "email": "rajesh.mehta@example.com",
-        "phone": "+91-9200002222",
-        "address": {
-          "street": "654 Maple Avenue",
-          "city": "Noida",
-          "state": "Uttar Pradesh",
-          "postal_code": "201301",
-          "country": "India"
-        }
+      "orderId": "ORD002",
+      "customerDetails": {
+        "name": "Sita Patel",
+        "address": "456 Elm Street, Delhi, Delhi, 110001",
+        "phone": "+91-9123456789",
+        "email": "sita.patel@example.com",
+        "orderType": "Online Payment"
       },
-      "total_amount": "₹29,999.00",
-      "status": 0,
       "products": [
-        {
-          "product_name": "Latex Mattress",
-          "quantity": 1,
-          "price_per_unit": "₹29,999.00"
-        }
-      ]
-    },
-    {
-      "order_id": "ORD123463",
-      "customer": {
-        "name": "Anita Rao",
-        "email": "anita.rao@example.com",
-        "phone": "+91-9300003333",
-        "address": {
-          "street": "987 Ash Street",
-          "city": "Kolkata",
-          "state": "West Bengal",
-          "postal_code": "700001",
-          "country": "India"
-        }
-      },
-      "total_amount": "₹7,999.00",
-      "status": 0,
-      "products": [
-        {
-          "product_name": "Memory Foam Pillow",
-          "quantity": 2,
-          "price_per_unit": "₹3,999.00"
-        }
-      ]
-    },
-    {
-      "order_id": "ORD123464",
-      "customer": {
-        "name": "Sunil Patel",
-        "email": "sunil.patel@example.com",
-        "phone": "+91-9400004444",
-        "address": {
-          "street": "852 Elm Street",
-          "city": "Ahmedabad",
-          "state": "Gujarat",
-          "postal_code": "380001",
-          "country": "India"
-        }
-      },
-      "total_amount": "₹18,999.00",
+        { "productName": "Queen Size Mattress", "quantity": 1, "price": 12000 },
+        { "productName": "Cotton Pillow", "quantity": 4, "price": 800 }
+      ],
+      "totalCost": 13600,
+      "subTotal": 12000,
+      "deliveryFee": 1600,
       "status": 2,
-      "products": [
-        {
-          "product_name": "Orthopedic Mattress",
-          "quantity": 1,
-          "price_per_unit": "₹17,999.00"
-        },
-        {
-          "product_name": "Latex Pillow",
-          "quantity": 1,
-          "price_per_unit": "₹999.00"
-        }
-      ]
+      "orderDate": "Tue, Aug 6, 2024",
+      "orderTime": "11:00 AM",
+      "deliveryAddress": {
+        "addressLine": "456 Elm Street",
+        "buildingName": "",
+        "streetNo": "",
+        "postalCode": "110001"
+      },
+      "billingAddress": "Same as Shipping Address"
     },
     {
-      "order_id": "ORD123465",
-      "customer": {
-        "name": "Rina Agarwal",
-        "email": "rina.agarwal@example.com",
-        "phone": "+91-9500005555",
-        "address": {
-          "street": "963 Pine Street",
-          "city": "Pune",
-          "state": "Maharashtra",
-          "postal_code": "411001",
-          "country": "India"
-        }
+      "orderId": "ORD003",
+      "customerDetails": {
+        "name": "Rajesh Kumar",
+        "address": "789 Park Avenue, Bangalore, Karnataka, 560001",
+        "phone": "+91-9876543211",
+        "email": "rajesh.kumar@example.com",
+        "orderType": "Cash On Delivery"
       },
-      "total_amount": "₹13,999.00",
-      "status": 2,
       "products": [
-        {
-          "product_name": "Cooling Gel Pillow",
-          "quantity": 2,
-          "price_per_unit": "₹5,999.00"
-        },
-        {
-          "product_name": "Memory Foam Mattress",
-          "quantity": 1,
-          "price_per_unit": "₹7,999.00"
-        }
-      ]
-    },
-    {
-      "order_id": "ORD123466",
-      "customer": {
-        "name": "Vikram Saini",
-        "email": "vikram.saini@example.com",
-        "phone": "+91-9600006666",
-        "address": {
-          "street": "741 Cedar Avenue",
-          "city": "Jaipur",
-          "state": "Rajasthan",
-          "postal_code": "302001",
-          "country": "India"
-        }
-      },
-      "total_amount": "₹22,999.00",
-      "status": 2,
-      "products": [
-        {
-          "product_name": "Latex Mattress",
-          "quantity": 1,
-          "price_per_unit": "₹21,999.00"
-        },
-        {
-          "product_name": "Cooling Gel Pillow",
-          "quantity": 1,
-          "price_per_unit": "₹999.00"
-        }
-      ]
-    },
-    {
-      "order_id": "ORD123467",
-      "customer": {
-        "name": "Neha Verma",
-        "email": "neha.verma@example.com",
-        "phone": "+91-9700007777",
-        "address": {
-          "street": "852 Oak Street",
-          "city": "Chandigarh",
-          "state": "Chandigarh",
-          "postal_code": "160001",
-          "country": "India"
-        }
-      },
-      "total_amount": "₹9,999.00",
-      "status": 2,
-      "products": [
-        {
-          "product_name": "Memory Foam Pillow",
-          "quantity": 2,
-          "price_per_unit": "₹4,999.00"
-        }
-      ]
-    },
-    {
-      "order_id": "ORD123468",
-      "customer": {
-        "name": "Pooja Singh",
-        "email": "pooja.singh@example.com",
-        "phone": "+91-9800008888",
-        "address": {
-          "street": "321 Maple Avenue",
-          "city": "Indore",
-          "state": "Madhya Pradesh",
-          "postal_code": "452001",
-          "country": "India"
-        }
-      },
-      "total_amount": "₹25,999.00",
+        { "productName": "Single Size Mattress", "quantity": 2, "price": 8000 },
+        { "productName": "Orthopedic Pillow", "quantity": 1, "price": 1500 }
+      ],
+      "totalCost": 17500,
+      "subTotal": 9500,
+      "deliveryFee": 8000,
       "status": 3,
-      "products": [
-        {
-          "product_name": "Orthopedic Mattress",
-          "quantity": 1,
-          "price_per_unit": "₹24,999.00"
-        },
-        {
-          "product_name": "Cooling Gel Pillow",
-          "quantity": 1,
-          "price_per_unit": "₹999.00"
-        }
-      ]
+      "orderDate": "Wed, Aug 7, 2024",
+      "orderTime": "12:00 PM",
+      "deliveryAddress": {
+        "addressLine": "789 Park Avenue",
+        "buildingName": "",
+        "streetNo": "",
+        "postalCode": "560001"
+      },
+      "billingAddress": "Same as Shipping Address"
     },
     {
-      "order_id": "ORD123469",
-      "customer": {
-        "name": "Karan Johar",
-        "email": "karan.johar@example.com",
-        "phone": "+91-9900009999",
-        "address": {
-          "street": "789 Pine Street",
-          "city": "Kanpur",
-          "state": "Uttar Pradesh",
-          "postal_code": "208001",
-          "country": "India"
-        }
+      "orderId": "ORD004",
+      "customerDetails": {
+        "name": "Anjali Desai",
+        "address": "321 Oak Road, Chennai, Tamil Nadu, 600001",
+        "phone": "+91-9988776655",
+        "email": "anjali.desai@example.com",
+        "orderType": "Online Payment"
       },
-      "total_amount": "₹6,999.00",
+      "products": [
+        {
+          "productName": "Double Size Mattress",
+          "quantity": 1,
+          "price": 10000
+        },
+        { "productName": "Feather Pillow", "quantity": 3, "price": 1800 }
+      ],
+      "totalCost": 11800,
+      "subTotal": 10000,
+      "deliveryFee": 1800,
+      "status": 4,
+      "orderDate": "Thu, Aug 8, 2024",
+      "orderTime": "1:30 PM",
+      "deliveryAddress": {
+        "addressLine": "321 Oak Road",
+        "buildingName": "",
+        "streetNo": "",
+        "postalCode": "600001"
+      },
+      "billingAddress": "Same as Shipping Address"
+    },
+    {
+      "orderId": "ORD005",
+      "customerDetails": {
+        "name": "Vikram Singh",
+        "address": "654 Maple Street, Kolkata, West Bengal, 700001",
+        "phone": "+91-9123456781",
+        "email": "vikram.singh@example.com",
+        "orderType": "Cash On Delivery"
+      },
+      "products": [
+        { "productName": "Luxury Mattress", "quantity": 1, "price": 25000 },
+        { "productName": "Gel Pillow", "quantity": 2, "price": 2500 }
+      ],
+      "totalCost": 27500,
+      "subTotal": 25000,
+      "deliveryFee": 2500,
+      "status": 5,
+      "orderDate": "Fri, Aug 9, 2024",
+      "orderTime": "2:00 PM",
+      "deliveryAddress": {
+        "addressLine": "654 Maple Street",
+        "buildingName": "",
+        "streetNo": "",
+        "postalCode": "700001"
+      },
+      "billingAddress": "Same as Shipping Address"
+    },
+    {
+      "orderId": "ORD006",
+      "customerDetails": {
+        "name": "Priya Gupta",
+        "address": "987 Pine Lane, Hyderabad, Telangana, 500001",
+        "phone": "+91-9988776656",
+        "email": "priya.gupta@example.com",
+        "orderType": "Online Payment"
+      },
+      "products": [
+        { "productName": "Orthopedic Mattress", "quantity": 1, "price": 18000 },
+        { "productName": "Memory Foam Pillow", "quantity": 1, "price": 1000 }
+      ],
+      "totalCost": 19000,
+      "subTotal": 18000,
+      "deliveryFee": 1000,
+      "status": 0,
+      "orderDate": "Sat, Aug 10, 2024",
+      "orderTime": "3:00 PM",
+      "deliveryAddress": {
+        "addressLine": "987 Pine Lane",
+        "buildingName": "",
+        "streetNo": "",
+        "postalCode": "500001"
+      },
+      "billingAddress": "Same as Shipping Address"
+    },
+    {
+      "orderId": "ORD007",
+      "customerDetails": {
+        "name": "Neha Arora",
+        "address": "135 Birch Street, Pune, Maharashtra, 411001",
+        "phone": "+91-9876543212",
+        "email": "neha.arora@example.com",
+        "orderType": "Cash On Delivery"
+      },
+      "products": [
+        { "productName": "Single Size Mattress", "quantity": 1, "price": 7000 },
+        { "productName": "Cotton Pillow", "quantity": 2, "price": 600 }
+      ],
+      "totalCost": 8200,
+      "subTotal": 7000,
+      "deliveryFee": 1200,
+      "status": 1,
+      "orderDate": "Sun, Aug 11, 2024",
+      "orderTime": "4:00 PM",
+      "deliveryAddress": {
+        "addressLine": "135 Birch Street",
+        "buildingName": "",
+        "streetNo": "",
+        "postalCode": "411001"
+      },
+      "billingAddress": "Same as Shipping Address"
+    },
+    {
+      "orderId": "ORD008",
+      "customerDetails": {
+        "name": "Ravi Mehta",
+        "address": "246 Cedar Road, Ahmedabad, Gujarat, 380001",
+        "phone": "+91-9123456782",
+        "email": "ravi.mehta@example.com",
+        "orderType": "Online Payment"
+      },
+      "products": [
+        { "productName": "Queen Size Mattress", "quantity": 1, "price": 13000 },
+        { "productName": "Gel Pillow", "quantity": 1, "price": 1200 }
+      ],
+      "totalCost": 14200,
+      "subTotal": 13000,
+      "deliveryFee": 1200,
+      "status": 2,
+      "orderDate": "Mon, Aug 12, 2024",
+      "orderTime": "5:00 PM",
+      "deliveryAddress": {
+        "addressLine": "246 Cedar Road",
+        "buildingName": "",
+        "streetNo": "",
+        "postalCode": "380001"
+      },
+      "billingAddress": "Same as Shipping Address"
+    },
+    {
+      "orderId": "ORD009",
+      "customerDetails": {
+        "name": "Simran Kaur",
+        "address": "579 Willow Street, Jaipur, Rajasthan, 302001",
+        "phone": "+91-9988776657",
+        "email": "simran.kaur@example.com",
+        "orderType": "Cash On Delivery"
+      },
+      "products": [
+        { "productName": "Luxury Mattress", "quantity": 1, "price": 30000 },
+        { "productName": "Memory Foam Pillow", "quantity": 2, "price": 2000 }
+      ],
+      "totalCost": 32000,
+      "subTotal": 30000,
+      "deliveryFee": 2000,
       "status": 3,
-      "products": [
-        {
-          "product_name": "Memory Foam Pillow",
-          "quantity": 3,
-          "price_per_unit": "₹2,333.00"
-        }
-      ]
+      "orderDate": "Tue, Aug 13, 2024",
+      "orderTime": "6:00 PM",
+      "deliveryAddress": {
+        "addressLine": "579 Willow Street",
+        "buildingName": "",
+        "streetNo": "",
+        "postalCode": "302001"
+      },
+      "billingAddress": "Same as Shipping Address"
     },
     {
-      "order_id": "ORD123470",
-      "customer": {
-        "name": "Shivani Gupta",
-        "email": "shivani.gupta@example.com",
-        "phone": "+91-8800000000",
-        "address": {
-          "street": "654 Maple Avenue",
-          "city": "Amritsar",
-          "state": "Punjab",
-          "postal_code": "143001",
-          "country": "India"
-        }
+      "orderId": "ORD010",
+      "customerDetails": {
+        "name": "Arjun Patel",
+        "address": "802 Ash Avenue, Surat, Gujarat, 395001",
+        "phone": "+91-9876543213",
+        "email": "arjun.patel@example.com",
+        "orderType": "Online Payment"
       },
-      "total_amount": "₹18,999.00",
-      "status": 4,
       "products": [
         {
-          "product_name": "Latex Mattress",
-          "quantity": 1,
-          "price_per_unit": "₹17,999.00"
+          "productName": "Double Size Mattress",
+          "quantity": 2,
+          "price": 11000
         },
-        {
-          "product_name": "Cooling Gel Pillow",
-          "quantity": 1,
-          "price_per_unit": "₹999.00"
-        }
-      ]
-    },
-    {
-      "order_id": "ORD123471",
-      "customer": {
-        "name": "Amitabh Bachchan",
-        "email": "amitabh.bachchan@example.com",
-        "phone": "+91-9900112233",
-        "address": {
-          "street": "321 Elm Street",
-          "city": "Surat",
-          "state": "Gujarat",
-          "postal_code": "395001",
-          "country": "India"
-        }
-      },
-      "total_amount": "₹11,999.00",
+        { "productName": "Feather Pillow", "quantity": 2, "price": 1600 }
+      ],
+      "totalCost": 12800,
+      "subTotal": 11000,
+      "deliveryFee": 1800,
       "status": 4,
-      "products": [
-        {
-          "product_name": "Cooling Gel Pillow",
-          "quantity": 2,
-          "price_per_unit": "₹5,999.00"
-        }
-      ]
+      "orderDate": "Wed, Aug 14, 2024",
+      "orderTime": "7:00 PM",
+      "deliveryAddress": {
+        "addressLine": "802 Ash Avenue",
+        "buildingName": "",
+        "streetNo": "",
+        "postalCode": "395001"
+      },
+      "billingAddress": "Same as Shipping Address"
     },
     {
-      "order_id": "ORD123472",
-      "customer": {
-        "name": "Sandeep Reddy",
-        "email": "sandeep.reddy@example.com",
-        "phone": "+91-9700223344",
-        "address": {
-          "street": "852 Ash Avenue",
-          "city": "Bhopal",
-          "state": "Madhya Pradesh",
-          "postal_code": "462001",
-          "country": "India"
-        }
+      "orderId": "ORD011",
+      "customerDetails": {
+        "name": "Kavita Sharma",
+        "address": "123 Cedar Lane, Mumbai, Maharashtra, 400002",
+        "phone": "+91-9123456783",
+        "email": "kavita.sharma@example.com",
+        "orderType": "Cash On Delivery"
       },
-      "total_amount": "₹24,999.00",
-      "status": 4,
       "products": [
-        {
-          "product_name": "Orthopedic Mattress",
-          "quantity": 1,
-          "price_per_unit": "₹24,999.00"
-        }
-      ]
-    },
-    {
-      "order_id": "ORD123473",
-      "customer": {
-        "name": "Rita Verma",
-        "email": "rita.verma@example.com",
-        "phone": "+91-9300334455",
-        "address": {
-          "street": "963 Oak Avenue",
-          "city": "Nagpur",
-          "state": "Maharashtra",
-          "postal_code": "440001",
-          "country": "India"
-        }
-      },
-      "total_amount": "₹8,999.00",
-      "status": 4,
-      "products": [
-        {
-          "product_name": "Memory Foam Pillow",
-          "quantity": 3,
-          "price_per_unit": "₹2,999.00"
-        }
-      ]
-    },
-    {
-      "order_id": "ORD123474",
-      "customer": {
-        "name": "Deepak Sharma",
-        "email": "deepak.sharma@example.com",
-        "phone": "+91-9100112244",
-        "address": {
-          "street": "456 Oak Street",
-          "city": "Jaipur",
-          "state": "Rajasthan",
-          "postal_code": "302001",
-          "country": "India"
-        }
-      },
-      "total_amount": "₹12,999.00",
+        { "productName": "King Size Mattress", "quantity": 1, "price": 16000 },
+        { "productName": "Cotton Pillow", "quantity": 3, "price": 1200 }
+      ],
+      "totalCost": 17200,
+      "subTotal": 16000,
+      "deliveryFee": 1200,
       "status": 5,
+      "orderDate": "Thu, Aug 15, 2024",
+      "orderTime": "8:00 PM",
+      "deliveryAddress": {
+        "addressLine": "123 Cedar Lane",
+        "buildingName": "",
+        "streetNo": "",
+        "postalCode": "400002"
+      },
+      "billingAddress": "Same as Shipping Address"
+    },
+    {
+      "orderId": "ORD012",
+      "customerDetails": {
+        "name": "Sanjay Kumar",
+        "address": "234 Oak Street, Noida, Uttar Pradesh, 201301",
+        "phone": "+91-9988776658",
+        "email": "sanjay.kumar@example.com",
+        "orderType": "Online Payment"
+      },
+      "products": [
+        { "productName": "Single Size Mattress", "quantity": 3, "price": 7000 },
+        { "productName": "Gel Pillow", "quantity": 2, "price": 2000 }
+      ],
+      "totalCost": 24000,
+      "subTotal": 21000,
+      "deliveryFee": 3000,
+      "status": 0,
+      "orderDate": "Fri, Aug 16, 2024",
+      "orderTime": "9:00 PM",
+      "deliveryAddress": {
+        "addressLine": "234 Oak Street",
+        "buildingName": "",
+        "streetNo": "",
+        "postalCode": "201301"
+      },
+      "billingAddress": "Same as Shipping Address"
+    },
+    {
+      "orderId": "ORD013",
+      "customerDetails": {
+        "name": "Ritika Mehta",
+        "address": "345 Birch Avenue, Kanpur, Uttar Pradesh, 208001",
+        "phone": "+91-9876543214",
+        "email": "ritika.mehta@example.com",
+        "orderType": "Cash On Delivery"
+      },
       "products": [
         {
-          "product_name": "Latex Mattress",
-          "quantity": 1,
-          "price_per_unit": "₹11,999.00"
+          "productName": "Memory Foam Mattress",
+          "quantity": 2,
+          "price": 14000
         },
+        { "productName": "Feather Pillow", "quantity": 1, "price": 800 }
+      ],
+      "totalCost": 14800,
+      "subTotal": 14000,
+      "deliveryFee": 800,
+      "status": 1,
+      "orderDate": "Sat, Aug 17, 2024",
+      "orderTime": "10:00 AM",
+      "deliveryAddress": {
+        "addressLine": "345 Birch Avenue",
+        "buildingName": "",
+        "streetNo": "",
+        "postalCode": "208001"
+      },
+      "billingAddress": "Same as Shipping Address"
+    },
+    {
+      "orderId": "ORD014",
+      "customerDetails": {
+        "name": "Nitin Joshi",
+        "address": "456 Maple Avenue, Ludhiana, Punjab, 141001",
+        "phone": "+91-9123456784",
+        "email": "nitin.joshi@example.com",
+        "orderType": "Online Payment"
+      },
+      "products": [
+        { "productName": "Luxury Mattress", "quantity": 2, "price": 25000 },
+        { "productName": "Memory Foam Pillow", "quantity": 2, "price": 2000 }
+      ],
+      "totalCost": 27000,
+      "subTotal": 25000,
+      "deliveryFee": 2000,
+      "status": 2,
+      "orderDate": "Sun, Aug 18, 2024",
+      "orderTime": "11:00 AM",
+      "deliveryAddress": {
+        "addressLine": "456 Maple Avenue",
+        "buildingName": "",
+        "streetNo": "",
+        "postalCode": "141001"
+      },
+      "billingAddress": "Same as Shipping Address"
+    },
+    {
+      "orderId": "ORD015",
+      "customerDetails": {
+        "name": "Deepika Reddy",
+        "address": "567 Pine Street, Vijayawada, Andhra Pradesh, 520001",
+        "phone": "+91-9988776659",
+        "email": "deepika.reddy@example.com",
+        "orderType": "Cash On Delivery"
+      },
+      "products": [
+        { "productName": "Queen Size Mattress", "quantity": 1, "price": 12000 },
+        { "productName": "Gel Pillow", "quantity": 2, "price": 2400 }
+      ],
+      "totalCost": 14400,
+      "subTotal": 12000,
+      "deliveryFee": 2400,
+      "status": 3,
+      "orderDate": "Mon, Aug 19, 2024",
+      "orderTime": "12:00 PM",
+      "deliveryAddress": {
+        "addressLine": "567 Pine Street",
+        "buildingName": "",
+        "streetNo": "",
+        "postalCode": "520001"
+      },
+      "billingAddress": "Same as Shipping Address"
+    },
+    {
+      "orderId": "ORD016",
+      "customerDetails": {
+        "name": "Aarti Singh",
+        "address": "678 Oak Lane, Bhubaneswar, Odisha, 751001",
+        "phone": "+91-9876543215",
+        "email": "aarti.singh@example.com",
+        "orderType": "Online Payment"
+      },
+      "products": [
+        { "productName": "Orthopedic Mattress", "quantity": 1, "price": 20000 },
+        { "productName": "Memory Foam Pillow", "quantity": 3, "price": 3000 }
+      ],
+      "totalCost": 23000,
+      "subTotal": 20000,
+      "deliveryFee": 3000,
+      "status": 4,
+      "orderDate": "Tue, Aug 20, 2024",
+      "orderTime": "1:00 PM",
+      "deliveryAddress": {
+        "addressLine": "678 Oak Lane",
+        "buildingName": "",
+        "streetNo": "",
+        "postalCode": "751001"
+      },
+      "billingAddress": "Same as Shipping Address"
+    },
+    {
+      "orderId": "ORD017",
+      "customerDetails": {
+        "name": "Rohit Arora",
+        "address": "789 Cedar Street, Ranchi, Jharkhand, 834001",
+        "phone": "+91-9123456785",
+        "email": "rohit.arora@example.com",
+        "orderType": "Cash On Delivery"
+      },
+      "products": [
         {
-          "product_name": "Cooling Gel Pillow",
+          "productName": "Double Size Mattress",
           "quantity": 1,
-          "price_per_unit": "₹999.00"
-        }
-      ]
+          "price": 11000
+        },
+        { "productName": "Cotton Pillow", "quantity": 2, "price": 800 }
+      ],
+      "totalCost": 11800,
+      "subTotal": 11000,
+      "deliveryFee": 800,
+      "status": 5,
+      "orderDate": "Wed, Aug 21, 2024",
+      "orderTime": "2:00 PM",
+      "deliveryAddress": {
+        "addressLine": "789 Cedar Street",
+        "buildingName": "",
+        "streetNo": "",
+        "postalCode": "834001"
+      },
+      "billingAddress": "Same as Shipping Address"
     },
     {
-      "order_id": "ORD123475",
-      "customer": {
-        "name": "Kavita Joshi",
-        "email": "kavita.joshi@example.com",
-        "phone": "+91-9200445566",
-        "address": {
-          "street": "852 Pine Street",
-          "city": "Patna",
-          "state": "Bihar",
-          "postal_code": "800001",
-          "country": "India"
-        }
+      "orderId": "ORD018",
+      "customerDetails": {
+        "name": "Kiran Sharma",
+        "address": "890 Birch Avenue, Indore, Madhya Pradesh, 452001",
+        "phone": "+91-9988776660",
+        "email": "kiran.sharma@example.com",
+        "orderType": "Online Payment"
       },
-      "total_amount": "₹7,999.00",
-      "status": 5,
       "products": [
-        {
-          "product_name": "Cooling Gel Pillow",
-          "quantity": 2,
-          "price_per_unit": "₹3,999.00"
-        }
-      ]
+        { "productName": "Luxury Mattress", "quantity": 1, "price": 27000 },
+        { "productName": "Feather Pillow", "quantity": 2, "price": 2000 }
+      ],
+      "totalCost": 29000,
+      "subTotal": 27000,
+      "deliveryFee": 2000,
+      "status": 0,
+      "orderDate": "Thu, Aug 22, 2024",
+      "orderTime": "3:00 PM",
+      "deliveryAddress": {
+        "addressLine": "890 Birch Avenue",
+        "buildingName": "",
+        "streetNo": "",
+        "postalCode": "452001"
+      },
+      "billingAddress": "Same as Shipping Address"
     },
     {
-      "order_id": "ORD123476",
-      "customer": {
-        "name": "Rohit Malhotra",
-        "email": "rohit.malhotra@example.com",
-        "phone": "+91-9300556677",
-        "address": {
-          "street": "321 Cedar Avenue",
-          "city": "Vadodara",
-          "state": "Gujarat",
-          "postal_code": "390001",
-          "country": "India"
-        }
+      "orderId": "ORD019",
+      "customerDetails": {
+        "name": "Divya Patel",
+        "address": "901 Maple Lane, Agra, Uttar Pradesh, 282001",
+        "phone": "+91-9876543216",
+        "email": "divya.patel@example.com",
+        "orderType": "Cash On Delivery"
       },
-      "total_amount": "₹17,999.00",
-      "status": 5,
       "products": [
-        {
-          "product_name": "Orthopedic Mattress",
-          "quantity": 1,
-          "price_per_unit": "₹17,999.00"
-        }
-      ]
+        { "productName": "Queen Size Mattress", "quantity": 2, "price": 12000 },
+        { "productName": "Cotton Pillow", "quantity": 2, "price": 800 }
+      ],
+      "totalCost": 13600,
+      "subTotal": 12000,
+      "deliveryFee": 1600,
+      "status": 1,
+      "orderDate": "Fri, Aug 23, 2024",
+      "orderTime": "4:00 PM",
+      "deliveryAddress": {
+        "addressLine": "901 Maple Lane",
+        "buildingName": "",
+        "streetNo": "",
+        "postalCode": "282001"
+      },
+      "billingAddress": "Same as Shipping Address"
     },
     {
-      "order_id": "ORD123477",
-      "customer": {
-        "name": "Suman Patil",
-        "email": "suman.patil@example.com",
-        "phone": "+91-9400667788",
-        "address": {
-          "street": "654 Cedar Avenue",
-          "city": "Bhubaneswar",
-          "state": "Odisha",
-          "postal_code": "751001",
-          "country": "India"
-        }
+      "orderId": "ORD020",
+      "customerDetails": {
+        "name": "Manoj Kumar",
+        "address": "102 Cedar Street, Trivandrum, Kerala, 695001",
+        "phone": "+91-9123456786",
+        "email": "manoj.kumar@example.com",
+        "orderType": "Online Payment"
       },
-      "total_amount": "₹8,999.00",
-      "status": 5,
       "products": [
-        {
-          "product_name": "Memory Foam Pillow",
-          "quantity": 3,
-          "price_per_unit": "₹2,999.00"
-        }
-      ]
-    },
-    {
-      "order_id": "ORD123478",
-      "customer": {
-        "name": "Madhuri Dixit",
-        "email": "madhuri.dixit@example.com",
-        "phone": "+91-9500778899",
-        "address": {
-          "street": "789 Ash Avenue",
-          "city": "Gwalior",
-          "state": "Madhya Pradesh",
-          "postal_code": "474001",
-          "country": "India"
-        }
+        { "productName": "Single Size Mattress", "quantity": 1, "price": 7500 },
+        { "productName": "Memory Foam Pillow", "quantity": 2, "price": 2000 }
+      ],
+      "totalCost": 9500,
+      "subTotal": 7500,
+      "deliveryFee": 2000,
+      "status": 2,
+      "orderDate": "Sat, Aug 24, 2024",
+      "orderTime": "5:00 PM",
+      "deliveryAddress": {
+        "addressLine": "102 Cedar Street",
+        "buildingName": "",
+        "streetNo": "",
+        "postalCode": "695001"
       },
-      "total_amount": "₹9,999.00",
-      "status": 5,
-      "products": [
-        {
-          "product_name": "Cooling Gel Pillow",
-          "quantity": 2,
-          "price_per_unit": "₹4,999.00"
-        }
-      ]
+      "billingAddress": "Same as Shipping Address"
     }
   ]
 }

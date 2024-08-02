@@ -15,7 +15,8 @@ import {
     ShoppingBasket,
     Tags,
     DraftingCompass,
-    Package
+    Package,
+    Wallet
 } from "lucide-react";
 import { Nav } from "./Nav";
 import { Button } from "./ui/button";
@@ -63,6 +64,7 @@ const Sidebar = () => {
                     { title: "Products", icon: ShoppingBasket, variant: "ghost", href: '/products' },
                     { title: "Brands", icon: DraftingCompass, variant: "ghost", href: '/brands' },
                     { title: "Orders", icon: Package, variant: "ghost", href: '/orders' },
+                    { title: "Transactions", icon: Wallet, variant: "ghost", href: '/transactions' },
                     { title: "Cateogires", icon: Tags, variant: "ghost", href: '/categories' },
                     { title: "Account Settings", icon: Settings, variant: "ghost", href: '/settings' },
                 ]}

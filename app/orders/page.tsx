@@ -1,8 +1,6 @@
 "use client";
 import React, { useState } from 'react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { DropdownMenuCheckboxItemProps } from "@radix-ui/react-dropdown-menu"
-
 import { Button } from "@/components/ui/button"
 import {
     DropdownMenu,
@@ -20,16 +18,15 @@ import Delivered from './components/Delivered';
 import Return from './components/Return';
 import Cancelled from './components/Cancelled';
 
-type Checked = DropdownMenuCheckboxItemProps["checked"]
 const Orders = () => {
-    const [showStatusBar, setShowStatusBar] = React.useState<Checked>(true)
-    const [showActivityBar, setShowActivityBar] = React.useState<Checked>(false)
-    const [showPanel, setShowPanel] = React.useState<Checked>(false)
+    const [showStatusBar, setShowStatusBar] = useState(true);
+    const [showActivityBar, setShowActivityBar] = useState(false);
+    const [showPanel, setShowPanel] = useState(false);
 
     return (
         <div>
             <Tabs defaultValue="New" className="w-full">
-                <div className='flex justify-between items-center'>
+                <div className='flex justify-between items-center mb-4'>
                     <TabsList>
                         <TabsTrigger value="New">New Orders</TabsTrigger>
                         <TabsTrigger value="Processed">Processed Orders</TabsTrigger>
@@ -38,6 +35,7 @@ const Orders = () => {
                         <TabsTrigger value="Return">Return / Replacement</TabsTrigger>
                         <TabsTrigger value="Cancelled">Cancelled</TabsTrigger>
                     </TabsList>
+
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                             <Button
@@ -54,20 +52,20 @@ const Orders = () => {
                             <DropdownMenuSeparator />
                             <DropdownMenuCheckboxItem
                                 checked={showStatusBar}
-                                onCheckedChange={setShowStatusBar}
+                                onCheckedChange={() => setShowStatusBar(!showStatusBar)}
                             >
                                 Status Bar
                             </DropdownMenuCheckboxItem>
                             <DropdownMenuCheckboxItem
                                 checked={showActivityBar}
-                                onCheckedChange={setShowActivityBar}
+                                onCheckedChange={() => setShowActivityBar(!showActivityBar)}
                                 disabled
                             >
                                 Activity Bar
                             </DropdownMenuCheckboxItem>
                             <DropdownMenuCheckboxItem
                                 checked={showPanel}
-                                onCheckedChange={setShowPanel}
+                                onCheckedChange={() => setShowPanel(!showPanel)}
                             >
                                 Panel
                             </DropdownMenuCheckboxItem>
@@ -95,7 +93,7 @@ const Orders = () => {
                 </TabsContent>
             </Tabs>
         </div>
-    )
+    );
 }
 
-export default Orders
+export default Orders;

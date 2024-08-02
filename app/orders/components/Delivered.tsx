@@ -8,25 +8,51 @@ import { Badge } from '@/components/ui/badge';
 import axiosInstance from '@/app/Instance';
 import Image from 'next/image';
 import No_Data from "../../../img/data.png";
+import { useRouter } from 'next/navigation';
+
+interface Order {
+    id: string;
+    orderId: string;
+    customerDetails: {
+        name: string;
+    };
+    products: any[]; 
+    totalCost: number;
+    status: number;
+}
 
 const Delivered = () => {
-    const [neworders, setOrders] = useState<any>([]);
+    const [orders, setOrders] = useState<Order[]>([]);
+    const [loading, setLoading] = useState<boolean>(true);
+    const [error, setError] = useState<string | null>(null);
+    const router = useRouter();
 
-    const GetNewOrders = async () => {
+    const GetDeliveredOrders = async () => {
+        setLoading(true);
         try {
             const res = await axiosInstance.get('/neworders');
             if (res?.data) {
-                const orders = res.data.filter((item: any) => item?.status === 4);
-                setOrders(orders);
+                const deliveredOrders = res.data.filter((item: Order) => item?.status === 3);
+                setOrders(deliveredOrders);
             }
-        } catch (error) {
-            console.error('Error fetching new orders:', error);
+        } catch (error: any) {
+            setError('Error fetching delivered orders. Please try again later.');
+            console.error('Error fetching delivered orders:', error);
+        } finally {
+            setLoading(false);
         }
     };
 
     useEffect(() => {
-        GetNewOrders();
+        GetDeliveredOrders();
     }, []);
+
+    if (loading) return <div>Loading...</div>;
+    if (error) return <div className='text-red-500'>{error}</div>;
+
+    const handleViewOrder = (orderId: any) =>{
+        router.push(`/orders/${orderId}`)
+    }
 
     return (
         <Card className='mt-10'>
@@ -34,7 +60,7 @@ const Delivered = () => {
                 <CardTitle>Delivered Orders</CardTitle>
             </CardHeader>
             <CardContent>
-                {neworders.length > 0 ? (
+                {orders.length > 0 ? (
                     <Table>
                         <TableHeader>
                             <TableRow>
@@ -48,20 +74,20 @@ const Delivered = () => {
                             </TableRow>
                         </TableHeader>
                         <TableBody>
-                            {neworders.map((item: any, index: number) => (
+                            {orders.map((item: Order, index: number) => (
                                 <TableRow key={item.id}>
                                     <TableCell>{index + 1}</TableCell>
-                                    <TableCell>{item?.order_id}</TableCell>
-                                    <TableCell>{item?.customer?.name}</TableCell>
+                                    <TableCell className='font-bold'>#{item.orderId}</TableCell>
+                                    <TableCell>{item.customerDetails.name}</TableCell>
                                     <TableCell>
-                                        <Badge variant="outline">{item?.products.length}</Badge>
+                                        <Badge variant="outline">{item.products.length}</Badge>
                                     </TableCell>
-                                    <TableCell>{item?.total_amount}</TableCell>
+                                    <TableCell>₹ {item.totalCost}</TableCell>
                                     <TableCell>
-                                        <Badge variant="violetLight">{item?.status === 4 ? "Delivered" : ""}</Badge>
+                                        <Badge variant="success">Delivered</Badge>
                                     </TableCell>
                                     <TableCell>
-                                        <Button variant="outline" size="icon">
+                                        <Button variant="outline" size="icon" onClick={() => handleViewOrder(item?.orderId)}>
                                             <Eye className='h-4 w-4' />
                                         </Button>
                                     </TableCell>
