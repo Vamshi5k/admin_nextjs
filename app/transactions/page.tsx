@@ -11,7 +11,7 @@ import Refunded from './components/Refunded';
 const Transactions = () => {
     return (
         <div>
-            <Tabs defaultValue="New" className="w-full">
+            <Tabs defaultValue="Attempted" className="w-full">
                 <div className='flex justify-between items-center mb-4'>
                     <TabsList>
                         <TabsTrigger value="Attempted">Attempted</TabsTrigger>

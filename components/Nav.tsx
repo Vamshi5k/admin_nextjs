@@ -1,36 +1,58 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { LucideIcon } from "lucide-react"
-import { cn } from "@/lib/utils"
-import { buttonVariants } from "@/components/ui/button"
+import { useState } from "react";
+import Link from "next/link";
+import { LucideIcon } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { buttonVariants } from "@/components/ui/button";
 import {
     Tooltip,
     TooltipContent,
     TooltipProvider,
     TooltipTrigger,
-} from "@/components/ui/tooltip"
+} from "@/components/ui/tooltip";
 import Logo from "../img/logo.png";
-import { usePathname } from "next/navigation"
-import Image from "next/image"
+import { usePathname } from "next/navigation";
+import Image from "next/image";
+import { motion } from "framer-motion";
 
 interface NavProps {
-    isCollapsed: boolean
+    isCollapsed: boolean;
     links: {
-        title: string
-        icon: LucideIcon
-        variant: "default" | "ghost"
-        href: string
-    }[]
+        title: string;
+        icon: LucideIcon;
+        variant: "default" | "ghost";
+        href: string;
+        hasDropdown?: boolean;
+        dropdownLinks?: { title: string; href: string }[];
+    }[];
 }
 
 export function Nav({ links, isCollapsed }: NavProps) {
     const pathName = usePathname();
+    const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+    const handleDropdownToggle = (title: string) => {
+        setActiveDropdown(prev => prev === title ? null : title);
+    };
+
+    const toggleSidebar = () => {
+        setIsSidebarOpen(prev => !prev);
+    };
 
     return (
         <TooltipProvider>
             <div className="flex flex-col h-full">
-                <div className="pt-8 pb-5 ps-4 flex gap-3 items-center ">
+                <div className="flex items-center justify-between pt-8 pb-5 px-4">
+                    <button
+                        className="md:hidden p-2"
+                        onClick={toggleSidebar}
+                        aria-label="Toggle Sidebar"
+                    >
+                        <span className="sr-only">Toggle Sidebar</span>
+                        {/* Add an icon for the menu button (e.g., a hamburger icon) */}
+                    </button>
                     <Link href={'/'}>
                         <Image
                             src={Logo}
@@ -43,14 +65,51 @@ export function Nav({ links, isCollapsed }: NavProps) {
                         Among Us
                     </h1>
                 </div>
-                <div className="flex-1 overflow-y-auto">
+                <div className={`flex-1 overflow-y-auto ${isSidebarOpen ? 'block' : 'hidden'} md:block`}>
                     <div
                         data-collapsed={isCollapsed}
                         className="group flex flex-col gap-4 py-2 data-[collapsed=true]:py-2"
                     >
-                        <nav className="grid gap-1 px-2 group-[[data-collapsed=true]]:justify-center group-[[data-collapsed=true]]:px-2">
-                            {links.map((link, index) =>
-                                isCollapsed ? (
+                        <nav className="relative grid gap-1 px-2 group-[[data-collapsed=true]]:justify-center group-[[data-collapsed=true]]:px-2">
+                            {links.map((link, index) => {
+                                if (link.hasDropdown) {
+                                    return (
+                                        <div key={index} className="flex flex-col">
+                                            <button
+                                                onClick={() => handleDropdownToggle(link.title)}
+                                                className={cn(
+                                                    buttonVariants({ variant: link.href === pathName ? 'default' : 'ghost', size: "sm" }),
+                                                    link.variant === "default" &&
+                                                    "dark:bg-muted dark:text-white dark:hover:bg-muted dark:hover:text-white",
+                                                    "flex items-center w-full justify-start"
+                                                )}
+                                            >
+                                                <link.icon className="mr-2 h-4 w-4" />
+                                                {link.title}
+                                            </button>
+                                            <motion.div
+                                                initial={{ height: 0, opacity: 0 }}
+                                                animate={{ height: activeDropdown === link.title ? 'auto' : 0, opacity: activeDropdown === link.title ? 1 : 0 }}
+                                                transition={{ duration: 0.3 }}
+                                                className="overflow-hidden bg-white z-10 mt-1 rounded-md"
+                                            >
+                                                {link.dropdownLinks?.map((dropdownLink, idx) => (
+                                                    <Link
+                                                        key={idx}
+                                                        href={dropdownLink.href}
+                                                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                                    >
+                                                        <ul>
+                                                            <li>{dropdownLink.title}</li>
+                                                        </ul>
+                                                    </Link>
+                                                ))}
+                                            </motion.div>
+                                        </div>
+                                    );
+                                }
+
+                                return isCollapsed ? (
                                     <Tooltip key={index} delayDuration={0}>
                                         <TooltipTrigger asChild>
                                             <Link
@@ -84,12 +143,12 @@ export function Nav({ links, isCollapsed }: NavProps) {
                                         <link.icon className="mr-2 h-4 w-4" />
                                         {link.title}
                                     </Link>
-                                )
-                            )}
+                                );
+                            })}
                         </nav>
                     </div>
                 </div>
             </div>
         </TooltipProvider>
-    )
+    );
 }

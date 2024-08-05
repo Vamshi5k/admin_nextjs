@@ -9,7 +9,6 @@ import { Button } from '@/components/ui/button';
 import {
   Pagination,
   PaginationContent,
-  PaginationEllipsis,
   PaginationItem,
   PaginationLink,
   PaginationNext,
@@ -39,13 +38,14 @@ const Products = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [openDialog, setOpenDialog] = useState<boolean>(false);
   const [selectedProductId, setSelectedProductId] = useState<any>(null);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [itemsPerPage, setItemsPerPage] = useState<number>(5);
   const [error, setError] = useState<string | null>(null);
   const { toast } = useToast();
 
-  // Fetch products
-  const GetProducts = async () => {
+  const getProducts = async () => {
     setLoading(true);
-    setError(null); // Clear previous errors
+    setError(null); 
     try {
       const res = await axiosInstance.get('/products');
       setProducts(res.data);
@@ -57,11 +57,9 @@ const Products = () => {
     }
   };
 
-  // Load products on mount
   useEffect(() => {
-    GetProducts();
+    getProducts();
   }, []);
-
 
   // Delete product
   const handleDeleteConfirm = async () => {
@@ -86,7 +84,6 @@ const Products = () => {
     }
   };
 
-
   const handleDeleteClick = (id: any) => {
     setSelectedProductId(id);
     setOpenDialog(true);
@@ -97,6 +94,16 @@ const Products = () => {
     setSelectedProductId(null);
   };
 
+  // Pagination
+  const indexOfLastProduct = currentPage * itemsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - itemsPerPage;
+  const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
+  const totalPages = Math.ceil(products.length / itemsPerPage);
 
   return (
     <div>
@@ -136,9 +143,9 @@ const Products = () => {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {products.map((item, index) => (
+                {currentProducts.map((item, index) => (
                   <TableRow key={item.id}>
-                    <TableCell>{index + 1}</TableCell>
+                    <TableCell>{indexOfFirstProduct + index + 1}</TableCell>
                     <TableCell className='font-semibold'>
                       <div className='flex items-center gap-2'>
                         <Avatar>
@@ -200,24 +207,42 @@ const Products = () => {
             </Table>
           )}
         </CardContent>
-        <Pagination>-
+      </Card>
+      <div className='mt-3'>
+        <Pagination>
           <PaginationContent>
-            <PaginationItem>
-              <PaginationPrevious href="#" />
+            <PaginationItem aria-disabled={currentPage === 1}>
+              <PaginationPrevious
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (currentPage > 1) handlePageChange(currentPage - 1);
+                }}
+              />
             </PaginationItem>
-            <PaginationItem>
-              <PaginationLink href="#">1</PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationEllipsis />
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationNext href="#" />
+            {[...Array(totalPages)].map((_, index) => (
+              <PaginationItem key={index} aria-current={currentPage === index + 1 ? 'page' : undefined}>
+                <PaginationLink
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handlePageChange(index + 1);
+                  }}
+                >
+                  {index + 1}
+                </PaginationLink>
+              </PaginationItem>
+            ))}
+            <PaginationItem aria-disabled={currentPage === totalPages}>
+              <PaginationNext
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (currentPage < totalPages) handlePageChange(currentPage + 1);
+                }}
+              />
             </PaginationItem>
           </PaginationContent>
         </Pagination>
+      </div>
 
-      </Card>
     </div>
   );
 };

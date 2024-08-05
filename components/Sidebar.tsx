@@ -4,19 +4,16 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
     LayoutDashboard,
-    Newspaper,
-    Folders,
-    CreditCard,
-    Settings,
-    User,
-    ChevronRight,
-    ChevronLeft,
     Users,
     ShoppingBasket,
     Tags,
     DraftingCompass,
     Package,
-    Wallet
+    Wallet,
+    Star,
+    Tag,
+    ChevronLeft,
+    ChevronRight
 } from "lucide-react";
 import { Nav } from "./Nav";
 import { Button } from "./ui/button";
@@ -55,18 +52,22 @@ const Sidebar = () => {
                 </Button>
             </div>
 
-
             <Nav
                 isCollapsed={isCollapsed}
                 links={[
                     { title: "Dashboard", icon: LayoutDashboard, variant: "default", href: '/' },
+                    { title: "Categories", icon: Tags, variant: "ghost", href: '/categories', hasDropdown: true, dropdownLinks: [
+                        { title: "All Categories", href: '/categories' },
+                        { title: "Sub Category", href: '/categories/sub' },
+                        { title: "Child Category", href: '/categories/child' }
+                    ]},
                     { title: "UsersList", icon: Users, variant: "ghost", href: '/userslist' },
                     { title: "Products", icon: ShoppingBasket, variant: "ghost", href: '/products' },
                     { title: "Brands", icon: DraftingCompass, variant: "ghost", href: '/brands' },
                     { title: "Orders", icon: Package, variant: "ghost", href: '/orders' },
+                    { title: "Coupons", icon: Tag, variant: "ghost", href: '/coupons' },
                     { title: "Transactions", icon: Wallet, variant: "ghost", href: '/transactions' },
-                    { title: "Cateogires", icon: Tags, variant: "ghost", href: '/categories' },
-                    { title: "Account Settings", icon: Settings, variant: "ghost", href: '/settings' },
+                    { title: "Reviews", icon: Star, variant: "ghost", href: '/reviews' },
                 ]}
             />
         </motion.div>
