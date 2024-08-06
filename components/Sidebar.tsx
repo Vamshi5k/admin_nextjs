@@ -2,19 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import {
-    LayoutDashboard,
-    Users,
-    ShoppingBasket,
-    Tags,
-    DraftingCompass,
-    Package,
-    Wallet,
-    Star,
-    Tag,
-    ChevronLeft,
-    ChevronRight
-} from "lucide-react";
+import { Package2, Home, ShoppingCart, Package, Users, Tag, Wallet, Hexagon, Pencil, Bell, ChevronLeft, ChevronRight, LayoutDashboard, Tags, ShoppingBasket, DraftingCompass, Star, LucideIcon } from "lucide-react";
+import Link from "next/link";
 import { Nav } from "./Nav";
 import { Button } from "./ui/button";
 
@@ -39,9 +28,36 @@ const Sidebar = () => {
         setIsCollapsed(!isCollapsed);
     };
 
+    const links: {
+        title: string;
+        icon: LucideIcon;
+        variant: "ghost" | "default";
+        href: string;
+        hasDropdown?: boolean;
+        dropdownLinks?: { title: string; href: string; }[];
+        badge?: number;
+    }[] = [
+            { title: "Dashboard", icon: LayoutDashboard, variant: "default", href: '/' },
+            {
+                title: "Categories", icon: Tags, variant: "ghost", href: '/categories', hasDropdown: true, dropdownLinks: [
+                    { title: "All Categories", href: '/categories' },
+                    { title: "Sub Category", href: '/categories/sub' },
+                    // { title: "Child Category", href: '/categories/child' }
+                ]
+            },
+            { title: "UsersList", icon: Users, variant: "ghost", href: '/userslist' },
+            { title: "Products", icon: ShoppingBasket, variant: "ghost", href: '/products' },
+            { title: "Brands", icon: DraftingCompass, variant: "ghost", href: '/brands' },
+            { title: "Orders", icon: Package, variant: "ghost", href: '/orders' },
+            { title: "Coupons", icon: Tag, variant: "ghost", href: '/coupons' },
+            { title: "Transactions", icon: Wallet, variant: "ghost", href: '/transactions' },
+            { title: "Reviews", icon: Star, variant: "ghost", href: '/reviews' },
+        ];
+
+
     return (
         <motion.div
-            className="relative px-3 pb-10"
+            className="relative px-3 pb-10 bg-white"
             initial={{ width: "80px" }}
             animate={{ width: isCollapsed ? "80px" : "250px" }}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
@@ -52,24 +68,18 @@ const Sidebar = () => {
                 </Button>
             </div>
 
-            <Nav
-                isCollapsed={isCollapsed}
-                links={[
-                    { title: "Dashboard", icon: LayoutDashboard, variant: "default", href: '/' },
-                    { title: "Categories", icon: Tags, variant: "ghost", href: '/categories', hasDropdown: true, dropdownLinks: [
-                        { title: "All Categories", href: '/categories' },
-                        { title: "Sub Category", href: '/categories/sub' },
-                        { title: "Child Category", href: '/categories/child' }
-                    ]},
-                    { title: "UsersList", icon: Users, variant: "ghost", href: '/userslist' },
-                    { title: "Products", icon: ShoppingBasket, variant: "ghost", href: '/products' },
-                    { title: "Brands", icon: DraftingCompass, variant: "ghost", href: '/brands' },
-                    { title: "Orders", icon: Package, variant: "ghost", href: '/orders' },
-                    { title: "Coupons", icon: Tag, variant: "ghost", href: '/coupons' },
-                    { title: "Transactions", icon: Wallet, variant: "ghost", href: '/transactions' },
-                    { title: "Reviews", icon: Star, variant: "ghost", href: '/reviews' },
-                ]}
-            />
+            <div className="flex flex-col h-full">
+                <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
+                    <Link href="/" className="flex items-center gap-2 font-semibold">
+                        <Package2 className="h-6 w-6" />
+                        <span className={isCollapsed ? "hidden" : ""}>Among Us</span>
+                    </Link>
+                </div>
+
+                <div className="flex-1 overflow-auto">
+                    <Nav links={links} isCollapsed={isCollapsed} />
+                </div>
+            </div>
         </motion.div>
     );
 };

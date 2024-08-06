@@ -8,7 +8,8 @@ import { Eye } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import axiosInstance from '@/app/Instance';
 import Image from 'next/image';
-import No_Data from "../../../img/data.png";
+import NoDataImage from "../../../img/data.png";
+import { Skeleton } from '@/components/ui/skeleton'; // Assuming you have this component
 
 interface Order {
     id: string;
@@ -22,18 +23,20 @@ interface Order {
 }
 
 const Shipping = () => {
-    const [neworders, setOrders] = useState<Order[]>([]);
+    const [orders, setOrders] = useState<Order[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
     const router = useRouter();
 
-    const GetNewOrders = async () => {
+    // Fetch new orders with status 'Shipping'
+    const getOrders = async () => {
         setLoading(true);
+        setError(null);
         try {
-            const res = await axiosInstance.get('/neworders');
-            if (res?.data) {
-                const orders = res.data.filter((item: Order) => item?.status === 2);
-                setOrders(orders);
+            const response = await axiosInstance.get('/neworders');
+            if (response?.data) {
+                const filteredOrders = response.data.filter((order: Order) => order.status === 2);
+                setOrders(filteredOrders);
             }
         } catch (error: any) {
             setError('Error fetching new orders. Please try again later.');
@@ -44,15 +47,12 @@ const Shipping = () => {
     };
 
     useEffect(() => {
-        GetNewOrders();
+        getOrders();
     }, []);
 
-    const HandleViewOrder = (orderId: number) => {
-        router.push(`/orders/${orderId}`)
-    }
-
-    if (loading) return <div>Loading...</div>;
-    if (error) return <div className='text-red-500'>{error}</div>;
+    const handleViewOrder = (orderId: number) => {
+        router.push(`/orders/${orderId}`);
+    };
 
     return (
         <Card className='mt-10'>
@@ -60,7 +60,7 @@ const Shipping = () => {
                 <CardTitle>Shipping Orders</CardTitle>
             </CardHeader>
             <CardContent>
-                {neworders.length > 0 ? (
+                {loading ? (
                     <Table>
                         <TableHeader>
                             <TableRow>
@@ -74,20 +74,53 @@ const Shipping = () => {
                             </TableRow>
                         </TableHeader>
                         <TableBody>
-                            {neworders.map((item: Order, index: number) => (
-                                <TableRow key={item.id}>
+                            {[...Array(5)].map((_, index) => (
+                                <TableRow key={index}>
+                                    <TableCell><Skeleton className="h-6 w-10" /></TableCell>
+                                    <TableCell><Skeleton className="h-6 w-24" /></TableCell>
+                                    <TableCell><Skeleton className="h-6 w-40" /></TableCell>
+                                    <TableCell><Skeleton className="h-6 w-20" /></TableCell>
+                                    <TableCell><Skeleton className="h-6 w-32" /></TableCell>
+                                    <TableCell><Skeleton className="h-6 w-20" /></TableCell>
+                                    <TableCell><Skeleton className="h-6 w-12" /></TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                ) : error ? (
+                    <div className='text-red-500 text-center'>{error}</div>
+                ) : orders.length > 0 ? (
+                    <Table>
+                        <TableHeader>
+                            <TableRow>
+                                <TableHead className='text-black font-semibold'>S.NO</TableHead>
+                                <TableHead className='text-black font-semibold'>ORDER ID</TableHead>
+                                <TableHead className='text-black font-semibold'>CUSTOMER</TableHead>
+                                <TableHead className='text-black font-semibold'>NO OF PRODUCTS</TableHead>
+                                <TableHead className='text-black font-semibold'>AMOUNT</TableHead>
+                                <TableHead className='text-black font-semibold'>STATUS</TableHead>
+                                <TableHead className='text-black font-semibold'>ACTION</TableHead>
+                            </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                            {orders.map((order: Order, index: number) => (
+                                <TableRow key={order.id}>
                                     <TableCell>{index + 1}</TableCell>
-                                    <TableCell className='font-bold'>#{item.orderId}</TableCell>
-                                    <TableCell>{item.customerDetails.name}</TableCell>
+                                    <TableCell className='font-bold'>#{order.orderId}</TableCell>
+                                    <TableCell>{order.customerDetails.name}</TableCell>
                                     <TableCell>
-                                        <Badge variant="outline">{item.products.length}</Badge>
+                                        <Badge variant="outline">{order.products.length}</Badge>
                                     </TableCell>
-                                    <TableCell>₹ {item.totalCost}</TableCell>
+                                    <TableCell>₹ {order.totalCost.toFixed(2)}</TableCell>
                                     <TableCell>
                                         <Badge variant="secondary">Shipping</Badge>
                                     </TableCell>
                                     <TableCell>
-                                        <Button variant="outline" size="icon" onClick={() => HandleViewOrder(item?.orderId)}>
+                                        <Button
+                                            variant="outline"
+                                            size="icon"
+                                            onClick={() => handleViewOrder(order.orderId)}
+                                        >
                                             <Eye className='h-4 w-4' />
                                         </Button>
                                     </TableCell>
@@ -97,7 +130,7 @@ const Shipping = () => {
                     </Table>
                 ) : (
                     <div className='flex justify-center items-center h-[calc(60vh-4rem)]'>
-                        <Image src={No_Data} width={500} alt='No Data' />
+                        <Image src={NoDataImage} width={500} alt='No Data' />
                     </div>
                 )}
             </CardContent>

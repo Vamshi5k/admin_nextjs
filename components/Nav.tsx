@@ -5,16 +5,12 @@ import Link from "next/link";
 import { LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
-import {
-    Tooltip,
-    TooltipContent,
-    TooltipProvider,
-    TooltipTrigger,
-} from "@/components/ui/tooltip";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import Logo from "../img/logo.png";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { Badge } from "./ui/badge";
 
 interface NavProps {
     isCollapsed: boolean;
@@ -25,6 +21,7 @@ interface NavProps {
         href: string;
         hasDropdown?: boolean;
         dropdownLinks?: { title: string; href: string }[];
+        badge?: number;
     }[];
 }
 
@@ -44,27 +41,6 @@ export function Nav({ links, isCollapsed }: NavProps) {
     return (
         <TooltipProvider>
             <div className="flex flex-col h-full">
-                <div className="flex items-center justify-between pt-8 pb-5 px-4">
-                    <button
-                        className="md:hidden p-2"
-                        onClick={toggleSidebar}
-                        aria-label="Toggle Sidebar"
-                    >
-                        <span className="sr-only">Toggle Sidebar</span>
-                        {/* Add an icon for the menu button (e.g., a hamburger icon) */}
-                    </button>
-                    <Link href={'/'}>
-                        <Image
-                            src={Logo}
-                            width={30}
-                            alt="Logo"
-                            className={cn("w-6 h-6", { "hidden md:block": isCollapsed })}
-                        />
-                    </Link>
-                    <h1 className={cn("text-md md:text-2xl text-black font-bold", { "hidden md:hidden": isCollapsed })}>
-                        Among Us
-                    </h1>
-                </div>
                 <div className={`flex-1 overflow-y-auto ${isSidebarOpen ? 'block' : 'hidden'} md:block`}>
                     <div
                         data-collapsed={isCollapsed}
@@ -86,6 +62,11 @@ export function Nav({ links, isCollapsed }: NavProps) {
                                             >
                                                 <link.icon className="mr-2 h-4 w-4" />
                                                 {link.title}
+                                                {link.badge && (
+                                                    <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
+                                                        {link.badge}
+                                                    </Badge>
+                                                )}
                                             </button>
                                             <motion.div
                                                 initial={{ height: 0, opacity: 0 }}
@@ -99,9 +80,7 @@ export function Nav({ links, isCollapsed }: NavProps) {
                                                         href={dropdownLink.href}
                                                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                                                     >
-                                                        <ul>
-                                                            <li>{dropdownLink.title}</li>
-                                                        </ul>
+                                                        {dropdownLink.title}
                                                     </Link>
                                                 ))}
                                             </motion.div>

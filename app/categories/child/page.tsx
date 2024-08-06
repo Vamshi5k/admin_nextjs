@@ -4,31 +4,44 @@ import React, { useState, useEffect } from 'react';
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from '@/components/ui/pagination';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger
+} from '@/components/ui/alert-dialog';
 import { useToast } from '@/components/ui/use-toast';
 import { Skeleton } from '@/components/ui/skeleton';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Plus } from 'lucide-react';
+import { Pencil, Plus, Trash } from 'lucide-react';
 import axiosInstance from '@/app/Instance';
 
 const ChildCategory = () => {
   const [childCategory, setChildCategory] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [openDialog, setOpenDialog] = useState<boolean>(false);
+  const [selectedChild, setSelectedChild] = useState<number | string | null>(null);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [itemsPerPage] = useState<number>(10);
   const { toast } = useToast();
 
-  const GetChildCategory = async () => {
+  const fetchChildCategories = async () => {
     setLoading(true);
     try {
       const response = await axiosInstance.get('/childCategories');
-      setChildCategory(response?.data);
+      setChildCategory(response.data);
     } catch (error) {
-      console.error('Error fetching subcategories:', error);
-      setError('Error fetching subcategories.');
+      console.error('Error fetching child categories:', error);
+      setError('Error fetching child categories.');
       toast({
-        description: 'Error fetching subcategories.',
+        description: 'Error fetching child categories.',
         variant: 'destructive',
       });
     } finally {
@@ -37,20 +50,50 @@ const ChildCategory = () => {
   };
 
   useEffect(() => {
-    GetChildCategory();
+    fetchChildCategories();
   }, []);
 
-  // Pagination 
   const totalCategories = childCategory.length;
   const totalPages = Math.ceil(totalCategories / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const currentCategories = childCategory?.slice(startIndex, startIndex + itemsPerPage);
+  const currentCategories = childCategory.slice(startIndex, startIndex + itemsPerPage);
 
-  // Handle page change
   const handlePageChange = (page: number) => {
     if (page > 0 && page <= totalPages) {
       setCurrentPage(page);
     }
+  };
+
+  const handleDeleteClick = async () => {
+    if (selectedChild) {
+      try {
+        await axiosInstance.delete(`/childCategories/${selectedChild}`);
+        toast({
+          description: 'Child category deleted successfully.',
+          variant: 'success',
+        });
+        fetchChildCategories(); 
+      } catch (error) {
+        console.error('Error deleting child category:', error);
+        toast({
+          description: 'Error deleting child category.',
+          variant: 'destructive',
+        });
+      } finally {
+        setOpenDialog(false);
+        setSelectedChild(null);
+      }
+    }
+  };
+
+  const handleDeleteOpen = (id: number | string) => {
+    setSelectedChild(id);
+    setOpenDialog(true);
+  };
+
+  const handleDeleteCancel = () => {
+    setOpenDialog(false);
+    setSelectedChild(null);
   };
 
   return (
@@ -63,7 +106,7 @@ const ChildCategory = () => {
               <CardDescription className='text-xs mt-1'>Overall {totalCategories} categories</CardDescription>
             </div>
             <div>
-              <Link href='/categories/add'>
+              <Link href='/categories/addchild'>
                 <Button>
                   <Plus className="mr-2 h-4 w-4" /> Child Category
                 </Button>
@@ -79,6 +122,7 @@ const ChildCategory = () => {
                 <TableHead className='text-black font-semibold'>CATEGORY ID</TableHead>
                 <TableHead className='text-black font-semibold'>NAME</TableHead>
                 <TableHead className='text-black font-semibold'>DESCRIPTION</TableHead>
+                <TableHead className='text-black font-semibold'>ACTIONS</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -88,26 +132,54 @@ const ChildCategory = () => {
                     <TableCell><Skeleton className="h-6 w-8" /></TableCell>
                     <TableCell><Skeleton className="h-6 w-24" /></TableCell>
                     <TableCell><Skeleton className="h-6 w-32" /></TableCell>
+                    <TableCell><Skeleton className="h-6 w-24" /></TableCell>
+                    <TableCell />
                   </TableRow>
                 ))
               ) : error ? (
                 <TableRow>
-                  <TableCell colSpan={3} className='text-center text-red-500'>
+                  <TableCell colSpan={5} className='text-center text-red-500'>
                     {error}
                   </TableCell>
                 </TableRow>
               ) : currentCategories.length > 0 ? (
-                currentCategories.map((item: any, index) => (
+                currentCategories.map((item: any) => (
                   <TableRow key={item.id}>
-                    <TableCell className='font-semibold'>{item?.ID}</TableCell>
-                    <TableCell className='font-semibold'>{item?.SubcategoryID}</TableCell>
-                    <TableCell className='font-semibold'>{item?.Name}</TableCell>
-                    <TableCell className='font-semibold'>{item?.Description}</TableCell>
+                    <TableCell className='font-semibold'>{item.id}</TableCell>
+                    <TableCell className='font-semibold'>{item.subcategoryid}</TableCell>
+                    <TableCell className='font-semibold'>{item.name}</TableCell>
+                    <TableCell className='font-semibold'>{item.description}</TableCell>
+                    <TableCell>
+                      <Link href={`/categories/editchild/${item.id}`}>
+                        <Button variant="outline" size="icon" className='me-3'>
+                          <Pencil className='h-4 w-4' />
+                        </Button>
+                      </Link>
+                      <AlertDialog>
+                        <AlertDialogTrigger asChild>
+                          <Button variant="outline" size="icon" onClick={() => handleDeleteOpen(item.id)}>
+                            <Trash className='h-4 w-4' />
+                          </Button>
+                        </AlertDialogTrigger>
+                        <AlertDialogContent>
+                          <AlertDialogHeader>
+                            <AlertDialogTitle>Confirm Delete</AlertDialogTitle>
+                            <AlertDialogDescription>
+                              Are you sure you want to delete this category? This action cannot be undone.
+                            </AlertDialogDescription>
+                          </AlertDialogHeader>
+                          <AlertDialogFooter>
+                            <AlertDialogCancel onClick={handleDeleteCancel}>Cancel</AlertDialogCancel>
+                            <AlertDialogAction onClick={handleDeleteClick}>Yes, Delete</AlertDialogAction>
+                          </AlertDialogFooter>
+                        </AlertDialogContent>
+                      </AlertDialog>
+                    </TableCell>
                   </TableRow>
                 ))
               ) : (
                 <TableRow>
-                  <TableCell colSpan={3} className='text-center'>
+                  <TableCell colSpan={5} className='text-center'>
                     No Child Categories
                   </TableCell>
                 </TableRow>

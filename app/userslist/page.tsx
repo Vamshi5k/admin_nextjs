@@ -7,6 +7,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@radix-ui/react-avatar';
 import axiosInstance from '../Instance';
 import { Eye, EyeOff } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
+import { Skeleton } from '@/components/ui/skeleton';
 
 interface User {
   id: number;
@@ -63,7 +64,52 @@ const UserList = () => {
         </CardHeader>
         <CardContent>
           {loading ? (
-            <p className="text-lg md:text-xl font-semibold">Loading users...</p>
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead className='text-black font-semibold'>S.NO</TableHead>
+                  <TableHead className='text-black font-semibold'>NAME</TableHead>
+                  <TableHead className='text-black font-semibold'>EMAIL</TableHead>
+                  <TableHead className='text-black font-semibold'>MOBILE</TableHead>
+                  <TableHead className='text-black font-semibold'>STATUS</TableHead>
+                  <TableHead className='text-black font-semibold'>DATE OF JOINING</TableHead>
+                  <TableHead className='text-black font-semibold'>ACTIONS</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {[...Array(10)].map((_, index) => (
+                  <TableRow key={index}>
+                    <TableCell>
+                      <Skeleton className="h-6 w-10" />
+                    </TableCell>
+                    <TableCell>
+                      <div className='flex items-center gap-2'>
+                        <Skeleton className="h-10 w-10 rounded-full" />
+                        <div className='space-y-2'>
+                          <Skeleton className="h-6 w-32" />
+                          <Skeleton className="h-4 w-24" />
+                        </div>
+                      </div>
+                    </TableCell>
+                    <TableCell>
+                      <Skeleton className="h-6 w-48" />
+                    </TableCell>
+                    <TableCell>
+                      <Skeleton className="h-6 w-32" />
+                    </TableCell>
+                    <TableCell>
+                      <Skeleton className="h-6 w-24" />
+                    </TableCell>
+                    <TableCell>
+                      <Skeleton className="h-6 w-40" />
+                    </TableCell>
+                    <TableCell>
+                      <Skeleton className="h-6 w-12" />
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
           ) : error ? (
             <p className="text-red-500">Error: {error}</p>
           ) : (

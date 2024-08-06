@@ -57,12 +57,13 @@ const AddProduct = () => {
     const form = useForm({
         resolver: zodResolver(formSchema),
         defaultValues: {
+            image: "",
             productname: "",
             price: "",
             saleprice: "",
             qty: "",
             type: "Mattress",
-            status: "0", // Ensure the default value matches the Select component's value
+            status: "0", 
         },
     });
 
@@ -79,6 +80,8 @@ const AddProduct = () => {
             await axiosInstance.post('/products', formattedData, {
                 headers: { 'Content-Type': 'application/json' },
             });
+
+            console.log(data);
 
             toast({
                 title: "Product Added",
@@ -122,10 +125,10 @@ const AddProduct = () => {
                             <div className="grid grid-cols-2 gap-4">
                                 {/* Column 0 */}
                                 {/* Uncomment if image upload is needed */}
-                                {/* <div className="col-span-2 md:col-span-1">
+                                <div className="col-span-2 md:col-span-1">
                                     <FormField
                                         control={form.control}
-                                        name="productImage"
+                                        name="image"
                                         render={({ field }) => (
                                             <FormItem>
                                                 <FormLabel>Product Image</FormLabel>
@@ -136,7 +139,7 @@ const AddProduct = () => {
                                             </FormItem>
                                         )}
                                     />
-                                </div> */}
+                                </div>
                                 {/* Column 1 */}
                                 <div className="col-span-2 md:col-span-1">
                                     <FormField

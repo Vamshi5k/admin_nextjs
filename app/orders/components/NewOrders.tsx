@@ -4,10 +4,10 @@ import { useRouter } from 'next/navigation';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
-import { Eye } from 'lucide-react';
+import { Eye, Pencil } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import axiosInstance from '@/app/Instance';
-import Link from 'next/link';
+import { Skeleton } from '@/components/ui/skeleton';
 
 interface Order {
     id: number;
@@ -45,9 +45,9 @@ const NewOrders: React.FC = () => {
         getNewOrders();
     }, []);
 
-    const HandleViewOrder = (orderId: number) => {
-        router.push(`/orders/${orderId}`)
-    }
+    const handleViewOrder = (orderId: number) => {
+        router.push(`/orders/${orderId}`);
+    };
 
     return (
         <Card className='mt-10'>
@@ -56,7 +56,32 @@ const NewOrders: React.FC = () => {
             </CardHeader>
             <CardContent>
                 {loading ? (
-                    <div className="text-center">Loading...</div>
+                    <Table>
+                        <TableHeader>
+                            <TableRow>
+                                <TableHead className='text-black font-semibold'>S.NO</TableHead>
+                                <TableHead className='text-black font-semibold'>ORDER ID</TableHead>
+                                <TableHead className='text-black font-semibold'>CUSTOMER</TableHead>
+                                <TableHead className='text-black font-semibold'>NO OF PRODUCTS</TableHead>
+                                <TableHead className='text-black font-semibold'>AMOUNT</TableHead>
+                                <TableHead className='text-black font-semibold'>STATUS</TableHead>
+                                <TableHead className='text-black font-semibold'>ACTION</TableHead>
+                            </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                            {[...Array(5)].map((_, index) => (
+                                <TableRow key={index}>
+                                    <TableCell><Skeleton className="h-6 w-10" /></TableCell>
+                                    <TableCell><Skeleton className="h-6 w-24" /></TableCell>
+                                    <TableCell><Skeleton className="h-6 w-40" /></TableCell>
+                                    <TableCell><Skeleton className="h-6 w-20" /></TableCell>
+                                    <TableCell><Skeleton className="h-6 w-32" /></TableCell>
+                                    <TableCell><Skeleton className="h-6 w-20" /></TableCell>
+                                    <TableCell><Skeleton className="h-6 w-12" /></TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
                 ) : error ? (
                     <div className="text-center text-red-500">{error}</div>
                 ) : (
@@ -86,13 +111,20 @@ const NewOrders: React.FC = () => {
                                         <TableCell>
                                             <Badge variant="warning">Pending</Badge>
                                         </TableCell>
-                                        <TableCell>
-                                            <Link href={`/orders/${item?.orderId}`}>
-                                                <Button variant="outline" size="icon" onClick={() => HandleViewOrder(item?.orderId)}>
-                                                    <Eye className='h-4 w-4' />
-                                                </Button>
-                                            </Link>
-
+                                        <TableCell className='flex items-center gap-3'>
+                                            <Button
+                                                variant="outline"
+                                                size="icon"
+                                            >
+                                                <Pencil className='h-4 w-4' />
+                                            </Button>
+                                            <Button
+                                                variant="outline"
+                                                size="icon"
+                                                onClick={() => handleViewOrder(item.orderId)}
+                                            >
+                                                <Eye className='h-4 w-4' />
+                                            </Button>
                                         </TableCell>
                                     </TableRow>
                                 ))

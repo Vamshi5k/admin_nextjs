@@ -3,10 +3,11 @@ import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
-import { Eye, Trash } from 'lucide-react';
+import { Eye } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import axiosInstance from '@/app/Instance';
 import { useRouter } from 'next/navigation';
+import { Skeleton } from '@/components/ui/skeleton';
 
 // Define TypeScript interfaces for order data
 interface Product {
@@ -29,25 +30,31 @@ interface Order {
 }
 
 const ProcessOrder: React.FC = () => {
-    const [newOrders, setOrders] = useState<Order[]>([]);
+    const [orders, setOrders] = useState<Order[]>([]);
+    const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
     const router = useRouter();
 
-    const getNewOrders = async () => {
+    // Fetch new orders from the API
+    const getOrders = async () => {
+        setLoading(true);
+        setError(null);
         try {
             const res = await axiosInstance.get('/neworders');
             if (res?.data) {
-                const orders = res.data.filter((item: Order) => item?.status === 1);
-                setOrders(orders);
+                const filteredOrders = res.data.filter((item: Order) => item.status === 1);
+                setOrders(filteredOrders);
             }
         } catch (error) {
             console.error('Error fetching new orders:', error);
             setError('Failed to load new orders. Please try again later.');
+        } finally {
+            setLoading(false);
         }
     };
 
     useEffect(() => {
-        getNewOrders();
+        getOrders();
     }, []);
 
     const handleViewOrder = (orderId: number) => {
@@ -57,52 +64,86 @@ const ProcessOrder: React.FC = () => {
     return (
         <Card className='mt-10'>
             <CardHeader>
-                <CardTitle>New Orders</CardTitle>
+                <CardTitle>Processing Orders</CardTitle>
             </CardHeader>
             <CardContent>
-                {error && <div className="text-red-600">{error}</div>}
-                <Table>
-                    <TableHeader>
-                        <TableRow>
-                            <TableHead className='text-black font-semibold'>S.NO</TableHead>
-                            <TableHead className='text-black font-semibold'>ORDER ID</TableHead>
-                            <TableHead className='text-black font-semibold'>CUSTOMER</TableHead>
-                            <TableHead className='text-black font-semibold'>NO OF PRODUCTS</TableHead>
-                            <TableHead className='text-black font-semibold'>AMOUNT</TableHead>
-                            <TableHead className='text-black font-semibold'>STATUS</TableHead>
-                            <TableHead className='text-black font-semibold'>ACTION</TableHead>
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                        {newOrders.length > 0 ? (
-                            newOrders.map((item, index) => (
-                                <TableRow key={item?.id}>
-                                    <TableCell>{index + 1}</TableCell>
-                                    <TableCell className='font-bold'>#{item?.orderId}</TableCell>
-                                    <TableCell>{item?.customerDetails?.name}</TableCell>
-                                    <TableCell>
-                                        <Badge variant="outline">{item?.products?.length}</Badge>
-                                    </TableCell>
-                                    <TableCell>₹ {item?.totalCost}</TableCell>
-                                    <TableCell>
-                                        <Badge variant="violetLight">Processing</Badge>
-                                    </TableCell>
-                                    <TableCell>
-                                        <Button variant="outline" size="icon" onClick={() => handleViewOrder(item.orderId)}>
-                                            <Eye className='h-4 w-4' />
-                                        </Button>
+                {loading ? (
+                    <Table>
+                        <TableHeader>
+                            <TableRow>
+                                <TableHead className='text-black font-semibold'>S.NO</TableHead>
+                                <TableHead className='text-black font-semibold'>ORDER ID</TableHead>
+                                <TableHead className='text-black font-semibold'>CUSTOMER</TableHead>
+                                <TableHead className='text-black font-semibold'>NO OF PRODUCTS</TableHead>
+                                <TableHead className='text-black font-semibold'>AMOUNT</TableHead>
+                                <TableHead className='text-black font-semibold'>STATUS</TableHead>
+                                <TableHead className='text-black font-semibold'>ACTION</TableHead>
+                            </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                            {[...Array(5)].map((_, index) => (
+                                <TableRow key={index}>
+                                    <TableCell><Skeleton className="h-6 w-10" /></TableCell>
+                                    <TableCell><Skeleton className="h-6 w-24" /></TableCell>
+                                    <TableCell><Skeleton className="h-6 w-40" /></TableCell>
+                                    <TableCell><Skeleton className="h-6 w-20" /></TableCell>
+                                    <TableCell><Skeleton className="h-6 w-32" /></TableCell>
+                                    <TableCell><Skeleton className="h-6 w-20" /></TableCell>
+                                    <TableCell><Skeleton className="h-6 w-12" /></TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                ) : error ? (
+                    <div className="text-center text-red-600">{error}</div>
+                ) : (
+                    <Table>
+                        <TableHeader>
+                            <TableRow>
+                                <TableHead className='text-black font-semibold'>S.NO</TableHead>
+                                <TableHead className='text-black font-semibold'>ORDER ID</TableHead>
+                                <TableHead className='text-black font-semibold'>CUSTOMER</TableHead>
+                                <TableHead className='text-black font-semibold'>NO OF PRODUCTS</TableHead>
+                                <TableHead className='text-black font-semibold'>AMOUNT</TableHead>
+                                <TableHead className='text-black font-semibold'>STATUS</TableHead>
+                                <TableHead className='text-black font-semibold'>ACTION</TableHead>
+                            </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                            {orders.length > 0 ? (
+                                orders.map((item, index) => (
+                                    <TableRow key={item.id}>
+                                        <TableCell>{index + 1}</TableCell>
+                                        <TableCell className='font-bold'>#{item.orderId}</TableCell>
+                                        <TableCell>{item.customerDetails.name}</TableCell>
+                                        <TableCell>
+                                            <Badge variant="outline">{item.products.length}</Badge>
+                                        </TableCell>
+                                        <TableCell>₹ {item.totalCost.toFixed(2)}</TableCell>
+                                        <TableCell>
+                                            <Badge variant="violetLight">Processing</Badge>
+                                        </TableCell>
+                                        <TableCell>
+                                            <Button
+                                                variant="outline"
+                                                size="icon"
+                                                onClick={() => handleViewOrder(item.orderId)}
+                                            >
+                                                <Eye className='h-4 w-4' />
+                                            </Button>
+                                        </TableCell>
+                                    </TableRow>
+                                ))
+                            ) : (
+                                <TableRow>
+                                    <TableCell colSpan={7} className='text-center'>
+                                        No new orders
                                     </TableCell>
                                 </TableRow>
-                            ))
-                        ) : (
-                            <TableRow>
-                                <TableCell colSpan={7} className='text-center'>
-                                    No new orders
-                                </TableCell>
-                            </TableRow>
-                        )}
-                    </TableBody>
-                </Table>
+                            )}
+                        </TableBody>
+                    </Table>
+                )}
             </CardContent>
         </Card>
     );
