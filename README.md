@@ -1,6 +1,6 @@
-# Next Admin
+# Next JS Admin
 
-Welcome to **Next Admin**, a cutting-edge admin dashboard application built with Next.js, React, and TypeScript. This app combines modern technologies to deliver a powerful, scalable solution for managing administrative tasks efficiently.
+Welcome to **Next JS Admin**, a cutting-edge admin dashboard application built with Next.js, React, and TypeScript. This app combines modern technologies to deliver a powerful, scalable solution for managing administrative tasks efficiently.
 
 ![Next Admin](https://via.placeholder.com/1200x600?text=Next+Admin)
 
