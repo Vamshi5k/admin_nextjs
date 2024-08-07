@@ -1,5 +1,5 @@
 "use client";
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Card,
   CardContent,
@@ -9,26 +9,84 @@ import {
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableFooter,
   TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { useParams } from "next/navigation";
 import { Separator } from '@/components/ui/separator';
 import { Badge } from '@/components/ui/badge';
+import axiosInstance from '@/app/Instance';
 
-interface Params {
-  id: string;
+// Define interfaces for the order data
+interface Product {
+  productName: string;
+  quantity: number;
+  price: number;
 }
 
-const SingleOrder = ({ params }: { params: Params }) => {
+interface CustomerDetails {
+  name: string;
+  phone: string;
+  email: string;
+  orderType: string;
+}
+
+interface DeliveryAddress {
+  addressLine: string;
+  buildingName?: string;
+  streetNo?: string;
+  postalCode: string;
+}
+
+interface Order {
+  id: string;
+  orderId: string;
+  orderDate: string;
+  orderTime: string;
+  subTotal: number;
+  deliveryFee: number;
+  totalCost: number;
+  status: number;
+  products: Product[];
+  customerDetails: CustomerDetails;
+  deliveryAddress: DeliveryAddress;
+  billingAddress: string;
+}
+
+const SingleOrder = ({params}: {params : any}) => {
+  const [order, setOrder] = useState<Order | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchOrderData = async () => {
+      try {
+        const response = await axiosInstance.get(`/neworders/${params?.id}`);
+        setOrder(response.data);
+        setLoading(false);
+      } catch (err) {
+        setError('Failed to fetch order data');
+        setLoading(false);
+      }
+    };
+
+    fetchOrderData();
+  }, [params.id]);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>{error}</p>;
+  if (!order) return <p>No order found</p>;
+
   return (
     <div className="p-6">
       <div className="mb-8">
-        <span className='text-lg md:text-4xl font-semibold'>Order Number: </span>
-        <span className='text-lg md:text-4xl font-extrabold text-red-600'>#{params.id}</span>
+        <div>
+          <span className='text-lg md:text-4xl font-semibold'>Order Number: </span>
+          <span className='text-lg md:text-4xl font-extrabold text-red-600'>#{order?.orderId}</span>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-8">
@@ -47,39 +105,20 @@ const SingleOrder = ({ params }: { params: Params }) => {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  <TableRow>
-                    <TableCell className='font-medium text-sm'>1</TableCell>
-                    <TableCell className='font-medium text-sm'>Foam Mattress</TableCell>
-                    <TableCell className='font-medium text-sm'>x 1</TableCell>
-                    <TableCell className='font-medium text-sm text-center'>₹ 15,000</TableCell>
-                    <TableCell className='font-bold text-sm text-end'>₹ 15,000</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className='font-medium text-sm'>2</TableCell>
-                    <TableCell className='font-medium text-sm'>Foam Mattress</TableCell>
-                    <TableCell className='font-medium text-sm'>x 1</TableCell>
-                    <TableCell className='font-medium text-sm text-center'>₹ 15,000</TableCell>
-                    <TableCell className='font-bold text-sm text-end'>₹ 15,000</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className='font-medium text-sm'>3</TableCell>
-                    <TableCell className='font-medium text-sm'>Foam Mattress</TableCell>
-                    <TableCell className='font-medium text-sm'>x 1</TableCell>
-                    <TableCell className='font-medium text-sm text-center'>₹ 15,000</TableCell>
-                    <TableCell className='font-bold text-sm text-end'>₹ 15,000</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className='font-medium text-sm'>4</TableCell>
-                    <TableCell className='font-medium text-sm'>Foam Mattress</TableCell>
-                    <TableCell className='font-medium text-sm'>x 1</TableCell>
-                    <TableCell className='font-medium text-sm text-center'>₹ 15,000</TableCell>
-                    <TableCell className='font-bold text-sm text-end'>₹ 15,000</TableCell>
-                  </TableRow>
+                  {order.products.map((product, index) => (
+                    <TableRow key={index}>
+                      <TableCell className='font-medium text-sm'>{index + 1}</TableCell>
+                      <TableCell className='font-medium text-sm'>{product?.productName}</TableCell>
+                      <TableCell className='font-medium text-sm'>x {product?.quantity}</TableCell>
+                      <TableCell className='font-medium text-sm text-center'>₹ {product?.price}</TableCell>
+                      <TableCell className='font-bold text-sm text-end'>₹ {product?.price * product?.quantity}</TableCell>
+                    </TableRow>
+                  ))}
                 </TableBody>
                 <TableFooter>
                   <TableRow>
                     <TableCell colSpan={4} className='font-bold text-sm'>Total</TableCell>
-                    <TableCell className="text-right font-extrabold text-sm">₹ 60,000</TableCell>
+                    <TableCell className="text-right font-extrabold text-sm">₹ {order?.totalCost}</TableCell>
                   </TableRow>
                 </TableFooter>
               </Table>
@@ -90,7 +129,19 @@ const SingleOrder = ({ params }: { params: Params }) => {
             <CardHeader>
               <div className='flex justify-between items-center'>
                 <CardTitle className='text-lg'>Order Summary</CardTitle>
-                <Badge variant={"success"} className='text-xs'>Out For Delivery</Badge>
+                <Badge
+                  variant={
+                    order?.status === 0 ? "warning" :
+                      order?.status === 1 ? "violetLight" :
+                        order?.status === 2 ? "secondary" :
+                          order?.status === 3 ? "success" :
+                            order?.status === 4 ? "lightOrange" :
+                              order?.status === 5 ? "error" :
+                                "default"
+                  }
+                  className='text-xs'
+                >                  {order.status === 0 ? 'Pending' : order.status === 1 ? 'Processing' : order?.status === 2 ? "Shipping" : order?.status === 3 ? "Delivered" : order?.status === 4 ? "Return / Replacement" : order?.status === 5 ? "Cancelled" : "Pending"}
+                </Badge>
               </div>
             </CardHeader>
             <CardContent className='py-4'>
@@ -98,27 +149,24 @@ const SingleOrder = ({ params }: { params: Params }) => {
                 <ul className="grid gap-4">
                   <li className="flex items-center justify-between text-sm">
                     <span className="text-gray-800 font-semibold">Order Created:</span>
-                    <span className="text-gray-800 font-semibold">Thurs, Sep 2, 2024</span>
+                    <span className="text-gray-800 font-semibold">{order?.orderDate}</span>
                   </li>
-                  <Separator className="my-2" />
                   <li className="flex items-center justify-between text-sm">
                     <span className="text-gray-800 font-semibold">Order Time:</span>
-                    <span className="text-gray-800 font-semibold">12:07 PM</span>
+                    <span className="text-gray-800 font-semibold">{order?.orderTime}</span>
                   </li>
-                  <Separator className="my-2" />
                   <li className="flex items-center justify-between text-sm">
                     <span className="text-gray-800 font-semibold">Sub Total:</span>
-                    <span className="text-gray-800 font-semibold">₹ 60,000</span>
+                    <span className="text-gray-800 font-semibold">₹ {order?.subTotal}</span>
                   </li>
-                  <Separator className="my-2" />
                   <li className="flex items-center justify-between text-sm">
                     <span className="text-gray-800 font-semibold">Delivery Fee:</span>
-                    <span className="text-gray-800 font-semibold">₹ 325</span>
+                    <span className="text-gray-800 font-semibold">₹ {order?.deliveryFee}</span>
                   </li>
                   <Separator className="my-2" />
                   <li className="flex items-center justify-between text-sm">
                     <span className="text-gray-800 font-semibold">Total:</span>
-                    <span className="text-gray-800 font-semibold">₹ 60,325</span>
+                    <span className="text-gray-800 font-semibold">₹ {order?.totalCost}</span>
                   </li>
                 </ul>
               </div>
@@ -138,22 +186,19 @@ const SingleOrder = ({ params }: { params: Params }) => {
                 <ul className="grid gap-4">
                   <li className="flex items-center justify-between text-sm">
                     <span className="text-gray-800 font-semibold">Customer Name:</span>
-                    <span className="text-gray-800 font-semibold">Vamshi Animela</span>
+                    <span className="text-gray-800 font-semibold">{order?.customerDetails?.name}</span>
                   </li>
-                  {/* <Separator className="my-2" /> */}
                   <li className="flex items-center justify-between text-sm">
                     <span className="text-gray-800 font-semibold">Phone Number:</span>
-                    <span className="text-gray-800 font-semibold">+91 7995541707</span>
+                    <span className="text-gray-800 font-semibold">{order?.customerDetails?.phone}</span>
                   </li>
-                  {/* <Separator className="my-2" /> */}
                   <li className="flex items-center justify-between text-sm">
                     <span className="text-gray-800 font-semibold">Email:</span>
-                    <span className='text-gray-800 font-semibold'>Vamshianimela@spackdigi.com</span>
+                    <span className='text-gray-800 font-semibold'>{order?.customerDetails?.email}</span>
                   </li>
-                  {/* <Separator className="my-2" /> */}
                   <li className="flex items-center justify-between text-sm">
                     <span className="text-gray-800 font-semibold">Order Type:</span>
-                    <span className='text-gray-800 font-semibold'>Cash On Delivery</span>
+                    <span className='text-gray-800 font-semibold'>{order?.customerDetails?.orderType}</span>
                   </li>
                 </ul>
               </div>
@@ -168,19 +213,19 @@ const SingleOrder = ({ params }: { params: Params }) => {
               <ul className='grid gap-4'>
                 <li className='flex items-center justify-between text-sm'>
                   <span className="text-gray-800">Address Line:</span>
-                  <span className="text-gray-800">14 Angray Road</span>
+                  <span className="text-gray-800">{order?.deliveryAddress?.addressLine}</span>
                 </li>
                 <li className='flex items-center justify-between text-sm'>
                   <span className="text-gray-800">Flat / Building Name:</span>
-                  <span className="text-gray-800">Varuna Towers</span>
+                  <span className="text-gray-800">{order?.deliveryAddress?.buildingName || 'N/A'}</span>
                 </li>
                 <li className='flex items-center justify-between text-sm'>
                   <span className="text-gray-800">Street No:</span>
-                  <span className="text-gray-800">21</span>
+                  <span className="text-gray-800">{order?.deliveryAddress?.streetNo || 'N/A'}</span>
                 </li>
                 <li className='flex items-center justify-between text-sm'>
                   <span className="text-gray-800">Postal Code:</span>
-                  <span className="text-gray-800">52145</span>
+                  <span className="text-gray-800">{order?.deliveryAddress?.postalCode}</span>
                 </li>
               </ul>
             </CardContent>
@@ -191,7 +236,7 @@ const SingleOrder = ({ params }: { params: Params }) => {
               <CardTitle className='text-xl font-bold'>Billing Address</CardTitle>
             </CardHeader>
             <CardContent className='py-4'>
-              <span className="text-gray-800">Same As Shipping Address</span>
+              <p className="text-gray-800">{order?.billingAddress}</p>
             </CardContent>
           </Card>
         </div>

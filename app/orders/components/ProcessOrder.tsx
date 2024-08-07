@@ -3,11 +3,28 @@ import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
-import { Eye } from 'lucide-react';
+import { Eye, Pencil } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import axiosInstance from '@/app/Instance';
 import { useRouter } from 'next/navigation';
 import { Skeleton } from '@/components/ui/skeleton';
+import { toast, useToast } from '@/components/ui/use-toast';
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "@/components/ui/dialog";
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select";
 
 // Define TypeScript interfaces for order data
 interface Product {
@@ -33,16 +50,19 @@ const ProcessOrder: React.FC = () => {
     const [orders, setOrders] = useState<Order[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
-    const router = useRouter();
+    const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
+    const [selectedStatus, setSelectedStatus] = useState<number | null>(null);
 
-    // Fetch new orders from the API
+    const router = useRouter();
+    const { toast } = useToast();
+
     const getOrders = async () => {
         setLoading(true);
         setError(null);
         try {
             const res = await axiosInstance.get('/neworders');
             if (res?.data) {
-                const filteredOrders = res.data.filter((item: Order) => item.status === 1);
+                const filteredOrders = res.data.filter((item: Order) => item?.status === 1);
                 setOrders(filteredOrders);
             }
         } catch (error) {
@@ -52,6 +72,29 @@ const ProcessOrder: React.FC = () => {
             setLoading(false);
         }
     };
+
+    const UpdateStatusHandler = async () => {
+        if (selectedOrder && selectedStatus !== null) {
+            try {
+                await axiosInstance.patch(`/neworders/${selectedOrder.id}`, {
+                    status: selectedStatus,
+                })
+                toast({
+                    description: "Status Updated SucessFully",
+                    variant: "success",
+                })
+
+                getOrders();
+
+            } catch (error) {
+                console.log(error);
+                toast({
+                    description: "Error Updating The Status",
+                    variant: 'destructive',
+                })
+            }
+        }
+    }
 
     useEffect(() => {
         getOrders();
@@ -112,22 +155,66 @@ const ProcessOrder: React.FC = () => {
                         <TableBody>
                             {orders.length > 0 ? (
                                 orders.map((item, index) => (
-                                    <TableRow key={item.id}>
+                                    <TableRow key={item?.id}>
                                         <TableCell>{index + 1}</TableCell>
-                                        <TableCell className='font-bold'>#{item.orderId}</TableCell>
-                                        <TableCell>{item.customerDetails.name}</TableCell>
+                                        <TableCell className='font-bold'>#{item?.orderId}</TableCell>
+                                        <TableCell>{item?.customerDetails?.name}</TableCell>
                                         <TableCell>
-                                            <Badge variant="outline">{item.products.length}</Badge>
+                                            <Badge variant="outline">{item?.products?.length}</Badge>
                                         </TableCell>
-                                        <TableCell>₹ {item.totalCost.toFixed(2)}</TableCell>
+                                        <TableCell>₹ {item?.totalCost?.toFixed(2)}</TableCell>
                                         <TableCell>
                                             <Badge variant="violetLight">Processing</Badge>
                                         </TableCell>
-                                        <TableCell>
+                                        <TableCell className="flex items-center gap-3">
+                                            <Dialog>
+                                                <DialogTrigger asChild>
+                                                    <Button
+                                                        variant="outline"
+                                                        size="icon"
+                                                        onClick={() => {
+                                                            setSelectedOrder(item);
+                                                            setSelectedStatus(item?.status);
+                                                        }}
+                                                    >
+                                                        <Pencil className='h-4 w-4' />
+                                                    </Button>
+                                                </DialogTrigger>
+                                                <DialogContent className="sm:max-w-96">
+                                                    <DialogHeader>
+                                                        <DialogTitle>Edit Status</DialogTitle>
+                                                        <DialogDescription>
+                                                            Make changes to your Status here. Click save when you're done.
+                                                        </DialogDescription>
+                                                    </DialogHeader>
+                                                    <div className="grid gap-4 py-4">
+                                                        <Select
+                                                            value={selectedStatus?.toString()}
+                                                            onValueChange={(value) => setSelectedStatus(+value)}
+                                                        >
+                                                            <SelectTrigger className="w-full">
+                                                                <SelectValue placeholder="Select Status" />
+                                                            </SelectTrigger>
+                                                            <SelectContent>
+                                                                <SelectItem value="0">Pending</SelectItem>
+                                                                <SelectItem value="1">Processing</SelectItem>
+                                                                <SelectItem value="2">Shipping</SelectItem>
+                                                                <SelectItem value="3">Delivered</SelectItem>
+                                                                <SelectItem value="4">Return / Replacement</SelectItem>
+                                                                <SelectItem value="5">Cancelled</SelectItem>
+                                                            </SelectContent>
+                                                        </Select>
+                                                    </div>
+                                                    <DialogFooter>
+                                                        <Button type="button" onClick={UpdateStatusHandler}>Update</Button>
+                                                        <Button variant={"outline"}>Cancel</Button>
+                                                    </DialogFooter>
+                                                </DialogContent>
+                                            </Dialog>
                                             <Button
                                                 variant="outline"
                                                 size="icon"
-                                                onClick={() => handleViewOrder(item.orderId)}
+                                                onClick={() => handleViewOrder(item?.orderId)}
                                             >
                                                 <Eye className='h-4 w-4' />
                                             </Button>

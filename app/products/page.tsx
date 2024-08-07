@@ -123,8 +123,8 @@ const Products = () => {
                 {item.productname}
               </div>
             </TableCell>
-            <TableCell>₹ {item.price.toFixed(2)}</TableCell>
-            <TableCell>₹ {item.saleprice.toFixed(2)}</TableCell>
+            <TableCell>₹ {item?.price}</TableCell>
+            <TableCell>₹ {item?.saleprice}</TableCell>
             <TableCell><Badge variant="outline">{item.qty}</Badge></TableCell>
             <TableCell>
               <Badge variant={item.type === "Mattress" ? "success" : "warning"}>{item.type}</Badge>
