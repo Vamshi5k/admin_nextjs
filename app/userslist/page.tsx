@@ -8,6 +8,7 @@ import axiosInstance from '../Instance';
 import { Eye, EyeOff } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 import { Skeleton } from '@/components/ui/skeleton';
+import Link from 'next/link';
 
 interface User {
   id: number;
@@ -130,18 +131,21 @@ const UserList = () => {
                   <TableRow key={item.id}>
                     <TableCell>{index + 1}</TableCell>
                     <TableCell className='font-semibold'>
-                      <div className='flex items-center gap-2'>
-                        <Avatar>
-                          {item.profilePic ? (
-                            <AvatarImage src={item.profilePic} width={40} className='rounded-lg' />
-                          ) : (
-                            <AvatarFallback className='flex items-center justify-center w-10 h-10 bg-gray-200 text-gray-700 rounded-lg text-lg'>
-                              {item.name[0]}
-                            </AvatarFallback>
-                          )}
-                        </Avatar>
-                        {item.name}
-                      </div>
+                      <Link href={`/userslist/singleuser/${item?.id}`}>
+                        <div className='flex items-center gap-2'>
+                          <Avatar>
+                            {item.profilePic ? (
+                              <AvatarImage src={item.profilePic} width={40} className='rounded-lg' />
+                            ) : (
+                              <AvatarFallback className='flex items-center justify-center w-10 h-10 bg-gray-200 text-gray-700 rounded-lg text-lg'>
+                                {item.name[0]}
+                              </AvatarFallback>
+                            )}
+                          </Avatar>
+                          {item.name}
+                        </div>
+                      </Link>
+
                     </TableCell>
                     <TableCell>{item.email}</TableCell>
                     <TableCell>{item.mobile}</TableCell>

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Package2, Home, ShoppingCart, Package, Users, Tag, Wallet, Hexagon, Pencil, Bell, ChevronLeft, ChevronRight, LayoutDashboard, Tags, ShoppingBasket, DraftingCompass, Star, LucideIcon } from "lucide-react";
+import { Package2, Home, ShoppingCart, Package, Users, Tag, Wallet, Hexagon, Pencil, Bell, ChevronLeft, ChevronRight, LayoutDashboard, Tags, ShoppingBasket, DraftingCompass, Star, LucideIcon, Headset } from "lucide-react";
 import Link from "next/link";
 import { Nav } from "./Nav";
 import { Button } from "./ui/button";
@@ -52,6 +52,7 @@ const Sidebar = () => {
             { title: "Coupons", icon: Tag, variant: "ghost", href: '/coupons' },
             { title: "Transactions", icon: Wallet, variant: "ghost", href: '/transactions' },
             { title: "Reviews", icon: Star, variant: "ghost", href: '/reviews' },
+            { title: "Support", icon: Headset, variant: "ghost", href: '/support' },
         ];
 
 

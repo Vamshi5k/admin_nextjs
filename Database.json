@@ -111,42 +111,6 @@
       "category": "2",
       "subcategory": "e54a",
       "description": "Hey"
-    },
-    {
-      "id": "c08c",
-      "productname": "Premium Pillow",
-      "price": "120",
-      "saleprice": "100",
-      "qty": "20",
-      "type": "Mattress",
-      "status": "0",
-      "category": "2",
-      "subcategory": "e54a",
-      "description": "Hey"
-    },
-    {
-      "id": "18b6",
-      "productname": "HEY",
-      "price": "120",
-      "saleprice": "120",
-      "qty": "120",
-      "type": "Mattress",
-      "status": "0",
-      "category": "2",
-      "subcategory": "e54a",
-      "description": "hE3Y"
-    },
-    {
-      "id": "649c",
-      "productname": "Premium Pillow",
-      "price": "120",
-      "saleprice": "120",
-      "qty": "120",
-      "type": "Pillow",
-      "status": "1",
-      "category": "3",
-      "subcategory": "i12j",
-      "description": "Hey"
     }
   ],
   "categories": [
@@ -1766,6 +1730,176 @@
       "id": "1",
       "username": "Vamshianimela@spackdigi.com",
       "password": "Vamshi_2k"
+    }
+  ],
+  "support": [
+    {
+      "ticket_id": "TICKET-004",
+      "subject": "Mattress Spring Issues",
+      "priority": "high",
+      "type": "technical",
+      "client": "Ravi Kumar",
+      "requested_date": "2024-08-04"
+    },
+    {
+      "ticket_id": "TICKET-005",
+      "subject": "Pillow Too Firm",
+      "priority": "medium",
+      "type": "product",
+      "client": "Sneha Patel",
+      "requested_date": "2024-08-05"
+    },
+    {
+      "ticket_id": "TICKET-006",
+      "subject": "Mattress Sagging After 6 Months",
+      "priority": "high",
+      "type": "technical",
+      "client": "Amit Sharma",
+      "requested_date": "2024-08-06"
+    },
+    {
+      "ticket_id": "TICKET-007",
+      "subject": "Need Replacement Pillow Case",
+      "priority": "low",
+      "type": "product",
+      "client": "Priya Singh",
+      "requested_date": "2024-08-07"
+    },
+    {
+      "ticket_id": "TICKET-008",
+      "subject": "Mattress Delivery Delay",
+      "priority": "medium",
+      "type": "logistics",
+      "client": "Vikram Reddy",
+      "requested_date": "2024-08-08"
+    },
+    {
+      "ticket_id": "TICKET-009",
+      "subject": "Pillow Cover Stain",
+      "priority": "low",
+      "type": "product",
+      "client": "Aisha Khan",
+      "requested_date": "2024-08-09"
+    },
+    {
+      "ticket_id": "TICKET-010",
+      "subject": "Mattress Unboxing Instructions Missing",
+      "priority": "medium",
+      "type": "technical",
+      "client": "Sandeep Joshi",
+      "requested_date": "2024-08-10"
+    },
+    {
+      "ticket_id": "TICKET-011",
+      "subject": "Pillow Odor Issue",
+      "priority": "medium",
+      "type": "product",
+      "client": "Neha Agarwal",
+      "requested_date": "2024-08-11"
+    },
+    {
+      "ticket_id": "TICKET-012",
+      "subject": "Mattress Firmness Adjustment Request",
+      "priority": "high",
+      "type": "product",
+      "client": "Arjun Mehta",
+      "requested_date": "2024-08-12"
+    },
+    {
+      "ticket_id": "TICKET-013",
+      "subject": "Pillow Size Mismatch",
+      "priority": "low",
+      "type": "product",
+      "client": "Simran Bhardwaj",
+      "requested_date": "2024-08-13"
+    },
+    {
+      "ticket_id": "TICKET-014",
+      "subject": "Mattress Repair Inquiry",
+      "priority": "high",
+      "type": "technical",
+      "client": "Karan Kapoor",
+      "requested_date": "2024-08-14"
+    },
+    {
+      "ticket_id": "TICKET-015",
+      "subject": "Pillow Allergy Reaction",
+      "priority": "medium",
+      "type": "product",
+      "client": "Ritika Choudhury",
+      "requested_date": "2024-08-15"
+    },
+    {
+      "ticket_id": "TICKET-016",
+      "subject": "Mattress Smell After Unboxing",
+      "priority": "medium",
+      "type": "product",
+      "client": "Rajesh Verma",
+      "requested_date": "2024-08-16"
+    },
+    {
+      "ticket_id": "TICKET-017",
+      "subject": "Pillow Stuffing Adjustment Needed",
+      "priority": "low",
+      "type": "product",
+      "client": "Anjali Rao",
+      "requested_date": "2024-08-17"
+    },
+    {
+      "ticket_id": "TICKET-018",
+      "subject": "Mattress Size Error",
+      "priority": "medium",
+      "type": "product",
+      "client": "Manish Gupta",
+      "requested_date": "2024-08-18"
+    },
+    {
+      "ticket_id": "TICKET-019",
+      "subject": "Pillow Case Zipper Broken",
+      "priority": "low",
+      "type": "product",
+      "client": "Pooja Sharma",
+      "requested_date": "2024-08-19"
+    },
+    {
+      "ticket_id": "TICKET-020",
+      "subject": "Mattress Replacement Request",
+      "priority": "high",
+      "type": "product",
+      "client": "Vivek Nair",
+      "requested_date": "2024-08-20"
+    },
+    {
+      "ticket_id": "TICKET-021",
+      "subject": "Pillow Design Feedback",
+      "priority": "low",
+      "type": "feature",
+      "client": "Nisha Sethi",
+      "requested_date": "2024-08-21"
+    },
+    {
+      "ticket_id": "TICKET-022",
+      "subject": "Mattress Warranty Claim",
+      "priority": "high",
+      "type": "warranty",
+      "client": "Kritika Patel",
+      "requested_date": "2024-08-22"
+    },
+    {
+      "ticket_id": "TICKET-023",
+      "subject": "Pillow Heat Retention Issue",
+      "priority": "medium",
+      "type": "product",
+      "client": "Rajiv Agarwal",
+      "requested_date": "2024-08-23"
+    },
+    {
+      "ticket_id": "TICKET-024",
+      "subject": "Mattress Edge Support Problem",
+      "priority": "high",
+      "type": "technical",
+      "client": "Sonia Rani",
+      "requested_date": "2024-08-24"
     }
   ]
 }
