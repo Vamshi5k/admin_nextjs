@@ -8,8 +8,7 @@
     "dev:next": "next dev",
     "dev:api": "json-server --watch Database.json --port 3000",
     "start": "next start",
-    "lint": "next lint",
-    "postinstall": "concurrently \"npm run dev:next\" \"npm run dev:api\""
+    "lint": "next lint"
   },
   "dependencies": {
     "@headlessui/react": "^2.1.2",
