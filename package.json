@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "concurrently \"npm run dev:next\" \"npm run dev:api\"",
+    "build": "next build",
     "dev:next": "next dev",
     "dev:api": "json-server --watch Database.json --port 5000",
     "start": "next start",
