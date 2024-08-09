@@ -11,17 +11,25 @@ import No_Data from "../../../img/data.png";
 import { useRouter } from 'next/navigation';
 import { Skeleton } from '@/components/ui/skeleton'; 
 
+
+interface Product {
+    id: any;
+    name: string;
+    quantity: number;
+}
+
+interface CustomerDetails {
+    name: string;
+}
+
 interface Order {
-    id: string;
-    orderId: any;
-    customerDetails: {
-        name: string;
-    };
-    products: any[]; 
+    id: any;
+    orderId: number;
+    customerDetails: CustomerDetails;
+    products: Product[];
     totalCost: number;
     status: number;
 }
-
 const Return = () => {
     const [orders, setOrders] = useState<Order[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
@@ -112,7 +120,7 @@ const Return = () => {
                                         <Badge variant="lightOrange">Return / Replacement</Badge>
                                     </TableCell>
                                     <TableCell>
-                                        <Button variant="outline" size="icon" onClick={() => handleViewOrder(item.orderId)}>
+                                        <Button variant="outline" size="icon" onClick={() => handleViewOrder(item.id)}>
                                             <Eye className='h-4 w-4' />
                                         </Button>
                                     </TableCell>

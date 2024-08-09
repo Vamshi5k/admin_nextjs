@@ -5,27 +5,32 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import axiosInstance from '../Instance';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Plus, Trash } from 'lucide-react';
-import { Badge } from '@/components/ui/badge';
-import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog';
+import { Pencil, Plus, Trash } from 'lucide-react';
+import { 
+  AlertDialog, 
+  AlertDialogAction, 
+  AlertDialogCancel, 
+  AlertDialogContent, 
+  AlertDialogDescription, 
+  AlertDialogFooter, 
+  AlertDialogHeader, 
+  AlertDialogTitle, 
+  AlertDialogTrigger 
+} from '@/components/ui/alert-dialog';
 import { useToast } from '@/components/ui/use-toast';
-import { Skeleton } from '@/components/ui/skeleton'; // Import your Skeleton component
+import { Skeleton } from '@/components/ui/skeleton';
+import Image from 'next/image';
 
 interface Brand {
-  id: string;  // Assuming id is a string; adjust if it's a number
+  id: string;
   brandName: string;
   description: string;
-  category: string;
-  logo?: string;
-  status: number;
-  dateAdded: string;
+  logo: string;
 }
 
 const Brands: React.FC = () => {
   const [brands, setBrands] = useState<Brand[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
-  const [openDialog, setOpenDialog] = useState<boolean>(false);
   const [selectedBrandId, setSelectedBrandId] = useState<string | null>(null);
   const { toast } = useToast();
 
@@ -38,7 +43,6 @@ const Brands: React.FC = () => {
       }
     } catch (error) {
       console.error("Error fetching brands:", error);
-      setError('Error fetching brands');
       toast({
         description: 'Error Fetching The Brand Data',
         variant: 'destructive',
@@ -54,7 +58,6 @@ const Brands: React.FC = () => {
 
   const handleDeleteClick = (id: string) => {
     setSelectedBrandId(id);
-    setOpenDialog(true);
   };
 
   const handleDeleteConfirm = async () => {
@@ -73,14 +76,12 @@ const Brands: React.FC = () => {
           variant: 'destructive',
         });
       } finally {
-        setOpenDialog(false);
         setSelectedBrandId(null);
       }
     }
   };
 
   const handleDeleteCancel = () => {
-    setOpenDialog(false);
     setSelectedBrandId(null);
   };
 
@@ -110,9 +111,6 @@ const Brands: React.FC = () => {
                   <TableHead className='text-black font-semibold'>S.NO</TableHead>
                   <TableHead className='text-black font-semibold'>BRAND NAME</TableHead>
                   <TableHead className='text-black font-semibold'>DESCRIPTION</TableHead>
-                  <TableHead className='text-black font-semibold'>CATEGORY</TableHead>
-                  <TableHead className='text-black font-semibold'>STATUS</TableHead>
-                  <TableHead className='text-black font-semibold'>DATE ADDED</TableHead>
                   <TableHead className='text-black font-semibold'>ACTIONS</TableHead>
                 </TableRow>
               </TableHeader>
@@ -122,67 +120,57 @@ const Brands: React.FC = () => {
                     <TableCell><Skeleton className="h-6 w-10" /></TableCell>
                     <TableCell><Skeleton className="h-6 w-40" /></TableCell>
                     <TableCell><Skeleton className="h-6 w-80" /></TableCell>
-                    <TableCell><Skeleton className="h-6 w-32" /></TableCell>
-                    <TableCell><Skeleton className="h-6 w-32" /></TableCell>
-                    <TableCell><Skeleton className="h-6 w-32" /></TableCell>
                     <TableCell><Skeleton className="h-6 w-24" /></TableCell>
                   </TableRow>
                 ))}
               </TableBody>
             </Table>
-          ) : error ? (
-            <p className='text-red-500'>Error: {error}</p>
           ) : (
             <Table>
               <TableHeader>
                 <TableRow>
                   <TableHead className='text-black font-semibold'>S.NO</TableHead>
+                  <TableHead className='text-black font-semibold'>LOGO</TableHead>
                   <TableHead className='text-black font-semibold'>BRAND NAME</TableHead>
                   <TableHead className='text-black font-semibold'>DESCRIPTION</TableHead>
-                  <TableHead className='text-black font-semibold'>CATEGORY</TableHead>
-                  <TableHead className='text-black font-semibold'>STATUS</TableHead>
-                  <TableHead className='text-black font-semibold'>DATE ADDED</TableHead>
-                  <TableHead className='text-black font-semibold'>ACTIONS</TableHead>
+                  <TableHead className='text-black font-semibold text-end'>ACTIONS</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {brands.map((brand, index) => (
-                  <TableRow key={brand.id}>
+                {brands.map((item, index) => (
+                  <TableRow key={item.id}>
                     <TableCell>{index + 1}</TableCell>
-                    <TableCell className='font-semibold'>{brand.brandName}</TableCell>
-                    <TableCell className='w-80'>{brand.description}</TableCell>
                     <TableCell>
-                      <Badge variant={brand.category === "Pillows" ? "secondary" : "warning"}>
-                        {brand.category}
-                      </Badge>
+                      <Image src={item.logo} width={40} height={20} alt='brand_logo' className='rounded-full' />
                     </TableCell>
-                    <TableCell>
-                      <Badge variant={brand.status === 0 ? "success" : "error"}>
-                        {brand.status === 0 ? "Active" : "Inactive"}
-                      </Badge>
-                    </TableCell>
-                    <TableCell>{brand.dateAdded}</TableCell>
-                    <TableCell>
-                      <AlertDialog>
+                    <TableCell className='font-semibold'>{item.brandName}</TableCell>
+                    <TableCell className='w-80'>{item.description}</TableCell>
+                    <TableCell className='text-end'>
+                      <Link href={`/brands/editbrand/${item.id}`}>
+                        <Button variant="outline" size="icon" className='me-3'>
+                          <Pencil className='h-4 w-4' />
+                        </Button>
+                      </Link>
+                      <AlertDialog open={!!selectedBrandId} onOpenChange={() => setSelectedBrandId(null)}>
                         <AlertDialogTrigger asChild>
                           <Button
                             variant="outline"
                             size="icon"
-                            onClick={() => handleDeleteClick(brand.id)}
+                            onClick={() => handleDeleteClick(item.id)}
                           >
                             <Trash className='h-4 w-4' />
                           </Button>
                         </AlertDialogTrigger>
                         <AlertDialogContent>
                           <AlertDialogHeader>
-                            <AlertDialogTitle>Confirm Delete</AlertDialogTitle>
+                            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
                             <AlertDialogDescription>
-                              Are you sure you want to delete this brand? This action cannot be undone.
+                              This action will delete the brand and it cannot be undone.
                             </AlertDialogDescription>
                           </AlertDialogHeader>
                           <AlertDialogFooter>
                             <AlertDialogCancel onClick={handleDeleteCancel}>Cancel</AlertDialogCancel>
-                            <AlertDialogAction onClick={handleDeleteConfirm}>Yes, Delete</AlertDialogAction>
+                            <AlertDialogAction onClick={handleDeleteConfirm}>Delete</AlertDialogAction>
                           </AlertDialogFooter>
                         </AlertDialogContent>
                       </AlertDialog>

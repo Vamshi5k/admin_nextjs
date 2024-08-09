@@ -214,7 +214,7 @@ const ProcessOrder: React.FC = () => {
                                             <Button
                                                 variant="outline"
                                                 size="icon"
-                                                onClick={() => handleViewOrder(item?.orderId)}
+                                                onClick={() => handleViewOrder(item?.id)}
                                             >
                                                 <Eye className='h-4 w-4' />
                                             </Button>

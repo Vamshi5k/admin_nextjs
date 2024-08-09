@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState, ChangeEvent } from "react";
+import React, { useEffect, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
@@ -7,16 +7,16 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Input } from "@/components/ui/input";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import { AxiosError } from 'axios';
 import axiosInstance from "@/app/Instance";
 import { useRouter } from "next/navigation";
 import { Textarea } from "@/components/ui/textarea";
-import Image from "next/image";
 
 interface ProductFormInputs {
+    id: string;
     productname: string;
     price: string;
     saleprice: string;
@@ -26,7 +26,8 @@ interface ProductFormInputs {
     category: string;
     subcategory: string;
     description?: string;
-    image: any
+    brands: string;
+    image: any,
 }
 
 const AddProduct: React.FC = () => {
@@ -34,18 +35,8 @@ const AddProduct: React.FC = () => {
     const [brands, setBrands] = useState<any[]>([]);
     const [categories, setCategories] = useState<any[]>([]);
     const [subCategory, setSubCategory] = useState<any[]>([]);
-    const [file, setFile] = useState<string | undefined>();
     const { toast } = useToast();
     const router = useRouter();
-
-    const handleChangeImage = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files?.[0];
-        if (file) {
-            console.log("Selected file:", file); 
-            setFile(URL.createObjectURL(file)); 
-        }
-    };
-    
 
     const formSchema = z.object({
         productname: z.string().min(2, {
@@ -58,6 +49,7 @@ const AddProduct: React.FC = () => {
         status: z.string().min(1, "Status is required."),
         category: z.string().min(1, "Category is required."),
         subcategory: z.string().min(1, "Sub Category is required."),
+        brands: z.string().min(1, "Brand is required."),
         description: z.string().optional(),
     });
 
@@ -71,15 +63,17 @@ const AddProduct: React.FC = () => {
             qty: "",
             type: "Mattress",
             status: "0",
-            category: "0",
-            subcategory: "0",
+            category: "",
+            subcategory: "",
+            brands: "",
+            image: null,
         },
     });
 
     const GetBrands = async () => {
         try {
             const res = await axiosInstance.get('/brands');
-            setBrands(res?.data || []);
+            setBrands(res?.data);
         } catch (error) {
             console.error("Error Fetching Brands", error);
         }
@@ -88,7 +82,7 @@ const AddProduct: React.FC = () => {
     const GetCategories = async () => {
         try {
             const res = await axiosInstance.get('/categories');
-            setCategories(res?.data || []);
+            setCategories(res?.data);
         } catch (error) {
             console.error("Error Fetching Categories", error);
         }
@@ -97,7 +91,7 @@ const AddProduct: React.FC = () => {
     const GetSubCategories = async () => {
         try {
             const res = await axiosInstance.get('/subcategories');
-            setSubCategory(res?.data || []);
+            setSubCategory(res?.data);
         } catch (error) {
             console.error("Error Fetching Sub Categories", error);
         }
@@ -112,27 +106,22 @@ const AddProduct: React.FC = () => {
     const onSubmit: SubmitHandler<ProductFormInputs> = async (data) => {
         setLoading(true);
 
-        const formData = new FormData();
-        if (file) {
-            formData.append('file', file);
-            formData.append('fileName', file.split('/').pop() || '');
-        }
-
-        Object.keys(data).forEach(key => {
-            formData.append(key, data[key as keyof ProductFormInputs]);
-        });
-
         try {
-            await axiosInstance.post('/products', formData, {
+            // Log form data to console
+            console.log("Form data:", data);
+
+            await axiosInstance.post('/products', data, {
                 headers: {
-                    'Content-Type': 'multipart/form-data',
+                    'Content-Type': 'application/json',
                 },
             });
+
             toast({
                 title: "Product Added",
                 description: "Product added successfully!",
                 variant: 'success'
             });
+
             router.push('/products');
         } catch (error) {
             if (error instanceof AxiosError) {
@@ -148,6 +137,7 @@ const AddProduct: React.FC = () => {
             setLoading(false);
         }
     };
+
 
     return (
         <div className="p-4">
@@ -190,6 +180,38 @@ const AddProduct: React.FC = () => {
                                 <div className="col-span-2 md:col-span-1">
                                     <FormField
                                         control={form.control}
+                                        name="brands"
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <FormLabel>Brand</FormLabel>
+                                                <FormControl>
+                                                    <Select
+                                                        value={field.value}
+                                                        onValueChange={field.onChange}
+                                                    >
+                                                        <SelectTrigger className="w-full">
+                                                            <SelectValue placeholder="Select Brand" />
+                                                        </SelectTrigger>
+                                                        <SelectContent>
+                                                            <SelectGroup>
+                                                                {brands?.map((item: { id: string, brandName: string }) => (
+                                                                    <SelectItem key={item?.id} value={item?.id}>
+                                                                        {item?.brandName}
+                                                                    </SelectItem>
+                                                                ))}
+                                                            </SelectGroup>
+                                                        </SelectContent>
+                                                    </Select>
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+                                </div>
+
+                                <div className="col-span-2 md:col-span-1">
+                                    <FormField
+                                        control={form.control}
                                         name="category"
                                         render={({ field }) => (
                                             <FormItem>
@@ -203,11 +225,11 @@ const AddProduct: React.FC = () => {
                                                             <SelectValue placeholder="Select Category" />
                                                         </SelectTrigger>
                                                         <SelectContent>
-                                                            {categories?.map((item: any) => (
-                                                                <SelectGroup key={item?.id}>
-                                                                    <SelectItem value={item?.id}>{item?.name}</SelectItem>
-                                                                </SelectGroup>
-                                                            ))}
+                                                            <SelectGroup>
+                                                                {categories?.map((item: any) => (
+                                                                    <SelectItem key={item?.id} value={item?.id}>{item?.name}</SelectItem>
+                                                                ))}
+                                                            </SelectGroup>
                                                         </SelectContent>
                                                     </Select>
                                                 </FormControl>
@@ -216,7 +238,41 @@ const AddProduct: React.FC = () => {
                                         )}
                                     />
                                 </div>
+
                                 <div className="col-span-2 md:col-span-1">
+                                    <FormField
+                                        control={form.control}
+                                        name="subcategory"
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <FormLabel>Sub Category</FormLabel>
+                                                <FormControl>
+                                                    <Select
+                                                        value={field.value || ''}
+                                                        onValueChange={field.onChange}
+                                                    >
+                                                        <SelectTrigger className="w-full">
+                                                            <SelectValue placeholder="Select Sub Category" />
+                                                        </SelectTrigger>
+                                                        <SelectContent>
+                                                            <SelectGroup>
+                                                                {subCategory?.map((item: any) => (
+                                                                    <SelectItem key={item?.id} value={item?.id}>
+                                                                        {item?.subcategory}
+                                                                    </SelectItem>
+                                                                ))}
+                                                            </SelectGroup>
+                                                        </SelectContent>
+                                                    </Select>
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+                                </div>
+
+
+                                <div className="col-span-2">
                                     <FormField
                                         control={form.control}
                                         name="image"
@@ -228,51 +284,7 @@ const AddProduct: React.FC = () => {
                                                         accept="image/*"
                                                         type="file"
                                                         {...field}
-                                                        onChange={handleChangeImage}
                                                     />
-                                                </FormControl>
-                                                <FormMessage />
-                                            </FormItem>
-                                        )}
-                                    />
-                                </div>
-
-                                {/* Image Preview */}
-                                {file && (
-                                    <div className="col-span-2">
-                                        <Image
-                                            src={file}
-                                            width={250}
-                                            height={250}
-                                            alt="Product Preview"
-                                            className="object-cover"
-                                        />
-                                    </div>
-                                )}
-
-                                <div className="col-span-2 md:col-span-1">
-                                    <FormField
-                                        control={form.control}
-                                        name="subcategory"
-                                        render={({ field }) => (
-                                            <FormItem>
-                                                <FormLabel>Sub Category</FormLabel>
-                                                <FormControl>
-                                                    <Select
-                                                        value={field.value}
-                                                        onValueChange={field.onChange}
-                                                    >
-                                                        <SelectTrigger className="w-full">
-                                                            <SelectValue placeholder="Select Sub Category" />
-                                                        </SelectTrigger>
-                                                        <SelectContent>
-                                                            {subCategory?.map((item: any) => (
-                                                                <SelectGroup key={item?.id}>
-                                                                    <SelectItem value={item?.id}>{item?.subcategory}</SelectItem>
-                                                                </SelectGroup>
-                                                            ))}
-                                                        </SelectContent>
-                                                    </Select>
                                                 </FormControl>
                                                 <FormMessage />
                                             </FormItem>
@@ -378,7 +390,6 @@ const AddProduct: React.FC = () => {
                                                         </SelectTrigger>
                                                         <SelectContent>
                                                             <SelectGroup>
-                                                                <SelectLabel>Select Type</SelectLabel>
                                                                 <SelectItem value="Mattress">Mattress</SelectItem>
                                                                 <SelectItem value="Pillow">Pillow</SelectItem>
                                                             </SelectGroup>
@@ -408,7 +419,6 @@ const AddProduct: React.FC = () => {
                                                         </SelectTrigger>
                                                         <SelectContent>
                                                             <SelectGroup>
-                                                                <SelectLabel>Select Status</SelectLabel>
                                                                 <SelectItem value="0">In Stock</SelectItem>
                                                                 <SelectItem value="1">Out Of Stock</SelectItem>
                                                             </SelectGroup>

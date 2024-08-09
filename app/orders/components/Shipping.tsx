@@ -11,13 +11,21 @@ import Image from 'next/image';
 import NoDataImage from "../../../img/data.png";
 import { Skeleton } from '@/components/ui/skeleton'; // Assuming you have this component
 
+interface Product {
+    id: number;
+    name: string;
+    quantity: number;
+}
+
+interface CustomerDetails {
+    name: string;
+}
+
 interface Order {
-    id: string;
-    orderId: any;
-    customerDetails: {
-        name: string;
-    };
-    products: any[];
+    id: number;
+    orderId: number;
+    customerDetails: CustomerDetails;
+    products: Product[];
     totalCost: number;
     status: number;
 }
@@ -119,7 +127,7 @@ const Shipping = () => {
                                         <Button
                                             variant="outline"
                                             size="icon"
-                                            onClick={() => handleViewOrder(order.orderId)}
+                                            onClick={() => handleViewOrder(order.id)}
                                         >
                                             <Eye className='h-4 w-4' />
                                         </Button>

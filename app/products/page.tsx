@@ -39,7 +39,7 @@ const Products = () => {
   const [openDialog, setOpenDialog] = useState<boolean>(false);
   const [selectedProductId, setSelectedProductId] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [itemsPerPage] = useState<number>(5);
+  const [itemsPerPage] = useState<number>(7);
   const [error, setError] = useState<string | null>(null);
   const { toast } = useToast();
 

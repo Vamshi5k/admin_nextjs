@@ -15,12 +15,19 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
 import { useParams } from "next/navigation";
 import { Separator } from '@/components/ui/separator';
 import { Badge } from '@/components/ui/badge';
 import axiosInstance from '@/app/Instance';
 
-// Define interfaces for the order data
 interface Product {
   productName: string;
   quantity: number;
@@ -56,15 +63,18 @@ interface Order {
   billingAddress: string;
 }
 
-const SingleOrder = ({params}: {params : any}) => {
+const SingleOrder = () => {
+  const { id } = useParams();
   const [order, setOrder] = useState<Order | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [itemsPerPage, setItemsPerPage] = useState<number>(4);
 
   useEffect(() => {
     const fetchOrderData = async () => {
       try {
-        const response = await axiosInstance.get(`/neworders/${params?.id}`);
+        const response = await axiosInstance.get(`/neworders/${id}`);
         setOrder(response.data);
         setLoading(false);
       } catch (err) {
@@ -74,11 +84,19 @@ const SingleOrder = ({params}: {params : any}) => {
     };
 
     fetchOrderData();
-  }, [params.id]);
+  }, [id]);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
   if (!order) return <p>No order found</p>;
+
+  // Pagination Logic
+  const totalPages = Math.ceil(order.products.length / itemsPerPage);
+  const currentProducts = order.products.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
   return (
     <div className="p-6">
@@ -105,9 +123,9 @@ const SingleOrder = ({params}: {params : any}) => {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {order.products.map((product, index) => (
+                  {currentProducts.map((product, index) => (
                     <TableRow key={index}>
-                      <TableCell className='font-medium text-sm'>{index + 1}</TableCell>
+                      <TableCell className='font-medium text-sm'>{index + 1 + (currentPage - 1) * itemsPerPage}</TableCell>
                       <TableCell className='font-medium text-sm'>{product?.productName}</TableCell>
                       <TableCell className='font-medium text-sm'>x {product?.quantity}</TableCell>
                       <TableCell className='font-medium text-sm text-center'>₹ {product?.price}</TableCell>
@@ -124,6 +142,40 @@ const SingleOrder = ({params}: {params : any}) => {
               </Table>
             </CardContent>
           </Card>
+          <div>
+            <Pagination>
+              <PaginationContent>
+                <PaginationItem aria-disabled={currentPage === 1}>
+                  <PaginationPrevious
+                    onClick={(e) => {
+                      e.preventDefault();
+                      if (currentPage > 1) handlePageChange(currentPage - 1);
+                    }}
+                  />
+                </PaginationItem>
+                {[...Array(totalPages)].map((_, index) => (
+                  <PaginationItem key={index} aria-current={currentPage === index + 1 ? 'page' : undefined}>
+                    <PaginationLink
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handlePageChange(index + 1);
+                      }}
+                    >
+                      {index + 1}
+                    </PaginationLink>
+                  </PaginationItem>
+                ))}
+                <PaginationItem aria-disabled={currentPage === totalPages}>
+                  <PaginationNext
+                    onClick={(e) => {
+                      e.preventDefault();
+                      if (currentPage < totalPages) handlePageChange(currentPage + 1);
+                    }}
+                  />
+                </PaginationItem>
+              </PaginationContent>
+            </Pagination>
+          </div>
 
           <Card>
             <CardHeader>
@@ -140,7 +192,8 @@ const SingleOrder = ({params}: {params : any}) => {
                                 "default"
                   }
                   className='text-xs'
-                >                  {order.status === 0 ? 'Pending' : order.status === 1 ? 'Processing' : order?.status === 2 ? "Shipping" : order?.status === 3 ? "Delivered" : order?.status === 4 ? "Return / Replacement" : order?.status === 5 ? "Cancelled" : "Pending"}
+                >
+                  {order.status === 0 ? 'Pending' : order.status === 1 ? 'Processing' : order?.status === 2 ? "Shipping" : order?.status === 3 ? "Delivered" : order?.status === 4 ? "Return / Replacement" : order?.status === 5 ? "Cancelled" : "Pending"}
                 </Badge>
               </div>
             </CardHeader>

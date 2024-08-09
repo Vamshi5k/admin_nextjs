@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -15,37 +15,28 @@ import {
     FormLabel,
     FormMessage,
 } from "@/components/ui/form";
-import {
-    Select,
-    SelectContent,
-    SelectGroup,
-    SelectItem,
-    SelectLabel,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import { AxiosError } from 'axios';
 import axiosInstance from "@/app/Instance";
-import { useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 
-const AddCoupon = () => {
+// Define form schema with correct validation
+const formSchema = z.object({
+    amount_of_discount: z.string().regex(/^\d+(,\d{3})*$/, "Amount of discount must be a number with."),
+    percent_of_discount: z.string().regex(/^\d+%$/, "Percent of discount must be in percentage format."),
+    number_of_coupons: z.string().regex(/^\d+$/, "Number of coupons must be a positive integer."),
+    minimum_order_amount: z.string().regex(/^\d+(,\d{3})*$/, "Minimum order amount must be a number with commas."),
+    maximum_discount: z.string().regex(/^\d+(,\d{3})*$/, "Maximum discount must be a number with commas."),
+});
+
+const EditCoupon = () => {
     const [loading, setLoading] = useState(false);
+    const [coupon, setCoupon] = useState(null);
     const { toast } = useToast();
     const router = useRouter();
+    const { id } = useParams();
 
-    // Update the form validation schema
-    const formSchema = z.object({
-        // image: z.string().optional(),
-        amount_of_discount: z.string().regex(/^\d+$/, "Amount of discount must be a number."),
-        percent_of_discount: z.string().regex(/^\d+%$/, "Percent of discount must be in percentage format."),
-        number_of_coupons: z.string().regex(/^\d+$/, "Number of coupons must be a positive integer."),
-        minimum_order_amount: z.string().regex(/^\d+(,\d{3})*$/, "Minimum order amount must be a number with commas."),
-        maximum_discount: z.string().regex(/^\d+(,\d{3})*$/, "Maximum discount must be a number with commas."),
-    });
-
-    // Set default values for the form
     const form = useForm({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -58,6 +49,37 @@ const AddCoupon = () => {
         },
     });
 
+    useEffect(() => {
+        if (id) {
+            const getCouponById = async () => {
+                setLoading(true);
+                try {
+                    const res = await axiosInstance.get(`/coupons/${id}`);
+                    setCoupon(res?.data);
+                    form.reset({
+                        image: "",
+                        amount_of_discount: String(res?.data.amount_of_discount) || "",
+                        percent_of_discount: String(res?.data.percent_of_discount) || "",
+                        number_of_coupons: String(res?.data.number_of_coupons) || "",
+                        minimum_order_amount: String(res?.data.minimum_order_amount) || "",
+                        maximum_discount: String(res?.data.maximum_discount) || "",
+                    });
+                } catch (error) {
+                    console.error("Error fetching Coupon:", error);
+                    toast({
+                        title: "Fetch Error",
+                        description: "There was an error fetching the Coupon details.",
+                        variant: 'destructive'
+                    });
+                } finally {
+                    setLoading(false);
+                }
+            };
+
+            getCouponById();
+        }
+    }, [id, form, toast]);
+
     const onSubmit = async (data: z.infer<typeof formSchema>) => {
         setLoading(true);
         const formattedData = {
@@ -69,26 +91,31 @@ const AddCoupon = () => {
         };
 
         try {
-            await axiosInstance.post('/coupons', formattedData, {
+            await axiosInstance.put(`/coupons/${id}`, formattedData, {
                 headers: { 'Content-Type': 'application/json' },
             });
 
             toast({
-                title: "Coupon Added",
-                description: "Coupon added successfully!",
+                title: "Coupon Updated",
+                description: "Coupon updated successfully!",
                 variant: 'success'
             });
             router.push('/coupons');
         } catch (error) {
             if (error instanceof AxiosError) {
-                console.error("Error submitting the form:", error.response?.data || error.message);
+                console.error("Error updating the coupon:", error.response?.data || error.message);
                 toast({
-                    title: "Submission Error",
-                    description: `There was an error submitting the form: ${error.response?.data?.error || error.message}`,
+                    title: "Update Error",
+                    description: `There was an error updating the coupon: ${error.response?.data?.error || error.message}`,
                     variant: 'destructive'
                 });
             } else {
                 console.error("Unexpected error:", error);
+                toast({
+                    title: "Update Error",
+                    description: "There was an unexpected error updating the coupon.",
+                    variant: 'destructive'
+                });
             }
         } finally {
             setLoading(false);
@@ -97,13 +124,13 @@ const AddCoupon = () => {
 
     return (
         <div className="p-4">
-            <Card >
+            <Card>
                 <CardHeader>
                     <div className="space-y-6 p-5 pb-2">
                         <div className="space-y-0.5">
-                            <h2 className="text-2xl font-bold tracking-tight">Add Coupon</h2>
+                            <h2 className="text-2xl font-bold tracking-tight">Edit Coupon</h2>
                             <p className="text-gray-400 text-sm">
-                                Fill the form and add the coupon to your list.
+                                Update the details of the coupon below.
                             </p>
                         </div>
                         <Separator className="my-6" />
@@ -122,33 +149,15 @@ const AddCoupon = () => {
                                             <FormItem>
                                                 <FormLabel>Coupon Image</FormLabel>
                                                 <FormControl>
-                                                    <Input id="image" type="file" {...field} />
+                                                    <Input id="image" type="file" disabled={loading} {...field} />
                                                 </FormControl>
                                                 <FormMessage />
                                             </FormItem>
                                         )}
                                     />
                                 </div>
-                                
+
                                 {/* Column 1 */}
-                                {/* <div className="col-span-2 md:col-span-1">
-                                    <FormField
-                                        control={form.control}
-                                        name="coupon_id"
-                                        render={({ field }) => (
-                                            <FormItem>
-                                                <FormLabel>Coupon ID</FormLabel>
-                                                <FormControl>
-                                                    <Input
-                                                        placeholder="Enter Coupon ID (e.g., CUP008)"
-                                                        {...field}
-                                                    />
-                                                </FormControl>
-                                                <FormMessage />
-                                            </FormItem>
-                                        )}
-                                    />
-                                </div> */}
                                 <div className="col-span-2 md:col-span-1">
                                     <FormField
                                         control={form.control}
@@ -160,6 +169,7 @@ const AddCoupon = () => {
                                                     <Input
                                                         type="text"
                                                         placeholder="Enter Amount of Discount (e.g., 900)"
+                                                        disabled={loading}
                                                         {...field}
                                                     />
                                                 </FormControl>
@@ -179,6 +189,7 @@ const AddCoupon = () => {
                                                     <Input
                                                         type="text"
                                                         placeholder="Enter Percent of Discount (e.g., 10%)"
+                                                        disabled={loading}
                                                         {...field}
                                                     />
                                                 </FormControl>
@@ -198,6 +209,7 @@ const AddCoupon = () => {
                                                     <Input
                                                         type="text"
                                                         placeholder="Enter Number of Coupons (e.g., 55)"
+                                                        disabled={loading}
                                                         {...field}
                                                     />
                                                 </FormControl>
@@ -217,6 +229,7 @@ const AddCoupon = () => {
                                                     <Input
                                                         type="text"
                                                         placeholder="Enter Minimum Order Amount (e.g., 5,000)"
+                                                        disabled={loading}
                                                         {...field}
                                                     />
                                                 </FormControl>
@@ -236,6 +249,7 @@ const AddCoupon = () => {
                                                     <Input
                                                         type="text"
                                                         placeholder="Enter Maximum Discount (e.g., 1,125)"
+                                                        disabled={loading}
                                                         {...field}
                                                     />
                                                 </FormControl>
@@ -258,4 +272,4 @@ const AddCoupon = () => {
     );
 };
 
-export default AddCoupon;
+export default EditCoupon;

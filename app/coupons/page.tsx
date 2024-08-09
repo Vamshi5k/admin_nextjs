@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from '@/components/ui/pagination';
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog';
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import axiosInstance from '../Instance';
@@ -11,16 +13,16 @@ import Image from 'next/image';
 import couponFallback from '../../img/coupon.png';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Plus } from 'lucide-react';
+import { Pencil, Plus, Trash } from 'lucide-react';
 
 interface Coupon {
-    coupon_id: string;
-    image: string;
-    amount_of_discount: string;
-    percent_of_discount: string;
-    number_of_coupons: number;
-    minimum_order_amount: string;
-    maximum_discount: string;
+    id: any;
+    image: any;
+    amount_of_discount: any;
+    percent_of_discount: any;
+    number_of_coupons: any;
+    minimum_order_amount: any;
+    maximum_discount: any;
 }
 
 const Coupons = () => {
@@ -28,6 +30,8 @@ const Coupons = () => {
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
     const [currentPage, setCurrentPage] = useState<number>(1);
+    const [openDialog, setOpenDialog] = useState<boolean>(false);
+    const [selectedCouponId, setselectedCouponId] = useState<string | null>(null);
     const [itemsPerPage] = useState<number>(5);
     const { toast } = useToast();
 
@@ -62,6 +66,21 @@ const Coupons = () => {
         }
     };
 
+    const handleDeleteConfirm = async () => {
+        if (selectedCouponId) {
+            try {
+                await axiosInstance.delete(`/coupons/${selectedCouponId}`);
+                setCoupons(prevProducts => prevProducts.filter(coupoun => coupoun.id !== selectedCouponId));
+                toast({ description: 'Coupon deleted successfully', variant: 'success' });
+            } catch {
+                toast({ description: 'Error deleting the product', variant: 'destructive' });
+            } finally {
+                setOpenDialog(false);
+                setselectedCouponId(null);
+            }
+        }
+    };
+
     return (
         <div className='mt-10'>
             <Card>
@@ -91,6 +110,7 @@ const Coupons = () => {
                                 <TableHead className='text-black font-semibold'>NO OF COUPONS</TableHead>
                                 <TableHead className='text-black font-semibold'>MINIMUM ORDER AMT</TableHead>
                                 <TableHead className='text-black font-semibold'>MAXIMUM DISCOUNT</TableHead>
+                                <TableHead className='text-black font-semibold'>ACTIONS</TableHead>
                             </TableRow>
                         </TableHeader>
                         <TableBody>
@@ -100,6 +120,7 @@ const Coupons = () => {
                                         <TableCell><Skeleton className="h-6 w-8" /></TableCell>
                                         <TableCell><Skeleton className="h-6 w-24" /></TableCell>
                                         <TableCell><Skeleton className="h-6 w-32" /></TableCell>
+                                        <TableCell><Skeleton className="h-6 w-24" /></TableCell>
                                         <TableCell><Skeleton className="h-6 w-24" /></TableCell>
                                         <TableCell><Skeleton className="h-6 w-24" /></TableCell>
                                         <TableCell><Skeleton className="h-6 w-24" /></TableCell>
@@ -114,7 +135,7 @@ const Coupons = () => {
                                 </TableRow>
                             ) : currentCoupons.length > 0 ? (
                                 currentCoupons.map((item, index) => (
-                                    <TableRow key={item?.coupon_id}>
+                                    <TableRow key={item?.id}>
                                         <TableCell className='font-semibold'>{indexOfFirstCoupon + index + 1}</TableCell>
                                         <TableCell>
                                             <Image
@@ -130,6 +151,38 @@ const Coupons = () => {
                                         <TableCell className='font-semibold'>{item?.number_of_coupons}</TableCell>
                                         <TableCell className='font-semibold'>₹ {item?.minimum_order_amount}</TableCell>
                                         <TableCell className='font-semibold'>₹ {item?.maximum_discount}</TableCell>
+                                        <TableCell>
+                                            <Link href={`/coupons/editcoupoun/${item?.id}`}>
+                                                <Button variant="outline" size="icon" className='me-3'>
+                                                    <Pencil className='h-4 w-4' />
+                                                </Button>
+                                            </Link>
+                                            <AlertDialog>
+                                                <AlertDialogTrigger asChild>
+                                                    <Button variant="outline" size="icon" onClick={() => {
+                                                        setselectedCouponId(item?.id);
+                                                        setOpenDialog(true);
+                                                    }}>
+                                                        <Trash className='h-4 w-4' />
+                                                    </Button>
+                                                </AlertDialogTrigger>
+                                                <AlertDialogContent>
+                                                    <AlertDialogHeader>
+                                                        <AlertDialogTitle>Confirm Delete</AlertDialogTitle>
+                                                        <AlertDialogDescription>
+                                                            Are you sure you want to delete this coupon? This action cannot be undone.
+                                                        </AlertDialogDescription>
+                                                    </AlertDialogHeader>
+                                                    <AlertDialogFooter>
+                                                        <AlertDialogCancel onClick={() => {
+                                                            setOpenDialog(false);
+                                                            setselectedCouponId(null);
+                                                        }}>Cancel</AlertDialogCancel>
+                                                        <AlertDialogAction onClick={handleDeleteConfirm}>Yes, Delete</AlertDialogAction>
+                                                    </AlertDialogFooter>
+                                                </AlertDialogContent>
+                                            </AlertDialog>
+                                        </TableCell>
                                     </TableRow>
                                 ))
                             ) : (

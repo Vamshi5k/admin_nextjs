@@ -36,7 +36,7 @@ const Orders = () => {
                         <TabsTrigger value="Cancelled">Cancelled</TabsTrigger>
                     </TabsList>
 
-                    <DropdownMenu>
+                    {/* <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                             <Button
                                 variant="outline"
@@ -70,7 +70,7 @@ const Orders = () => {
                                 Panel
                             </DropdownMenuCheckboxItem>
                         </DropdownMenuContent>
-                    </DropdownMenu>
+                    </DropdownMenu> */}
                 </div>
 
                 <TabsContent value="New">

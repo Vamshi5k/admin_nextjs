@@ -101,15 +101,16 @@
       "image": "https://m.media-amazon.com/images/I/81xdmqm3QyS.__AC_SX300_SY300_QL70_FMwebp_.jpg"
     },
     {
-      "id": "fd78",
-      "productname": "Premium Pillow",
-      "price": "200",
-      "saleprice": "150",
-      "qty": "20",
+      "id": "ca68",
+      "productname": "Preminum Pillow",
+      "price": "120",
+      "saleprice": "100",
+      "qty": "50",
       "type": "Pillow",
       "status": "1",
       "category": "2",
       "subcategory": "e54a",
+      "brands": "2",
       "description": "Hey"
     }
   ],
@@ -575,64 +576,37 @@
       "id": "1",
       "brandName": "LuxSleep",
       "description": "Offers luxurious mattresses and sleep products that combine comfort with high-end design.",
-      "category": "Mattresses",
-      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmG8gS0z1B3eyJ9Y1a7F6jXxYH5K8V-wrY2Q&s",
-      "status": 1,
-      "dateAdded": "2024-07-01"
+      "logo": "https://images.unsplash.com/photo-1622542796157-af7cb80b5a62?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     },
     {
       "id": "2",
       "brandName": "SleepEssentials",
       "description": "Provides essential sleep products, including mattresses and pillows designed for comfort and support.",
-      "category": "Mattresses",
-      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQG9RIzLPZcC-FtGybqS_JYfC_dPy1dR2W2gg&s",
-      "status": 1,
-      "dateAdded": "2024-07-10"
-    },
-    {
-      "id": "3",
-      "brandName": "SnoozePlus",
-      "description": "Specializes in high-quality mattresses and sleep accessories for a perfect night's rest.",
-      "category": "Mattresses",
-      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2K2V4iTQBFTRb_a_VmqPbnF2HHwlOMXt9aA&s",
-      "status": 0,
-      "dateAdded": "2024-06-15"
+      "image": ""
     },
     {
       "id": "4",
       "brandName": "Restful Nights",
       "description": "Known for innovative sleep solutions and premium quality mattresses that ensure a restful night.",
-      "category": "Mattresses",
-      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQG9RIzLPZcC-FtGybqS_JYfC_dPy1dR2W2gg&s",
-      "status": 1,
-      "dateAdded": "2024-06-25"
+      "logo": "https://images.unsplash.com/photo-1622542796157-af7cb80b5a62?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     },
     {
       "id": "5",
       "brandName": "CozyCloud",
       "description": "Offers a range of comfortable pillows and bedding products designed to enhance sleep quality.",
-      "category": "Pillows",
-      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCSAk1WgiYXLXZJcS7zvT3tqtKRRilDzeRfQ&s",
-      "status": 1,
-      "dateAdded": "2024-05-01"
+      "logo": "https://images.unsplash.com/photo-1622542796157-af7cb80b5a62?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     },
     {
       "id": "6",
       "brandName": "DreamySleep",
       "description": "Focuses on providing high-quality sleep products, including ergonomic pillows and supportive mattresses.",
-      "category": "Pillows",
-      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyyxPgVQmJ8zrEgIWXW57LDP9cvZrHByAkJg&s",
-      "status": 0,
-      "dateAdded": "2024-05-10"
+      "logo": "https://images.unsplash.com/photo-1622542796157-af7cb80b5a62?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     },
     {
       "id": "7",
       "brandName": "PerfectRest",
       "description": "Specializes in creating the perfect sleep environment with its range of premium pillows and bedding products.",
-      "category": "Pillows",
-      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQn3qKwnr1SAF7fh2pRX0OMbnS9P9Cnn2Rwbw&s",
-      "status": 1,
-      "dateAdded": "2024-04-15"
+      "logo": "https://images.unsplash.com/photo-1622542796157-af7cb80b5a62?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     }
   ],
   "neworders": [
@@ -656,12 +630,17 @@
           "productName": "Memory Foam Pillow",
           "quantity": 2,
           "price": 2000
+        },
+        {
+          "productName": "Bed Sheet Set",
+          "quantity": 1,
+          "price": 1200
         }
       ],
-      "totalCost": 17000,
-      "subTotal": 15000,
-      "deliveryFee": 2000,
-      "status": 5,
+      "totalCost": 18200,
+      "subTotal": 17000,
+      "deliveryFee": 1200,
+      "status": 2,
       "orderDate": "Mon, Aug 5, 2024",
       "orderTime": "10:30 AM",
       "deliveryAddress": {
@@ -692,11 +671,21 @@
           "productName": "Gel Pillow",
           "quantity": 1,
           "price": 1200
+        },
+        {
+          "productName": "Mattress Protector",
+          "quantity": 1,
+          "price": 800
+        },
+        {
+          "productName": "Bedside Lamp",
+          "quantity": 2,
+          "price": 600
         }
       ],
-      "totalCost": 14200,
+      "totalCost": 14800,
       "subTotal": 13000,
-      "deliveryFee": 1200,
+      "deliveryFee": 1800,
       "status": 4,
       "orderDate": "Mon, Aug 12, 2024",
       "orderTime": "5:00 PM",
@@ -728,11 +717,36 @@
           "productName": "Memory Foam Pillow",
           "quantity": 1,
           "price": 1000
+        },
+        {
+          "productName": "Mattress Cover",
+          "quantity": 1,
+          "price": 1500
+        },
+        {
+          "productName": "Bedside Table",
+          "quantity": 2,
+          "price": 1800
+        },
+        {
+          "productName": "Reading Lamp",
+          "quantity": 1,
+          "price": 900
+        },
+        {
+          "productName": "Comforter",
+          "quantity": 2,
+          "price": 2200
+        },
+        {
+          "productName": "Blanket",
+          "quantity": 1,
+          "price": 1200
         }
       ],
-      "totalCost": 19000,
+      "totalCost": 24000,
       "subTotal": 18000,
-      "deliveryFee": 1000,
+      "deliveryFee": 6000,
       "status": 3,
       "orderDate": "Sat, Aug 10, 2024",
       "orderTime": "3:00 PM",
@@ -764,11 +778,51 @@
           "productName": "Feather Pillow",
           "quantity": 1,
           "price": 900
+        },
+        {
+          "productName": "Mattress Protector",
+          "quantity": 1,
+          "price": 1500
+        },
+        {
+          "productName": "Bedspread",
+          "quantity": 1,
+          "price": 2500
+        },
+        {
+          "productName": "Decorative Cushion",
+          "quantity": 4,
+          "price": 400
+        },
+        {
+          "productName": "Blanket",
+          "quantity": 1,
+          "price": 1500
+        },
+        {
+          "productName": "Bedside Table",
+          "quantity": 1,
+          "price": 2000
+        },
+        {
+          "productName": "Wall Art",
+          "quantity": 2,
+          "price": 800
+        },
+        {
+          "productName": "Table Lamp",
+          "quantity": 1,
+          "price": 900
+        },
+        {
+          "productName": "Mattress Topper",
+          "quantity": 1,
+          "price": 2000
         }
       ],
-      "totalCost": 26900,
+      "totalCost": 38000,
       "subTotal": 26000,
-      "deliveryFee": 900,
+      "deliveryFee": 12000,
       "status": 2,
       "orderDate": "Tue, Aug 13, 2024",
       "orderTime": "6:00 PM",
@@ -836,12 +890,17 @@
           "productName": "Cotton Pillow",
           "quantity": 2,
           "price": 600
+        },
+        {
+          "productName": "Mattress Protector",
+          "quantity": 1,
+          "price": 1200
         }
       ],
       "totalCost": 8200,
       "subTotal": 7000,
       "deliveryFee": 1200,
-      "status": 1,
+      "status": 0,
       "orderDate": "Sun, Aug 11, 2024",
       "orderTime": "4:00 PM",
       "deliveryAddress": {
@@ -872,6 +931,11 @@
           "productName": "Memory Foam Pillow",
           "quantity": 1,
           "price": 1000
+        },
+        {
+          "productName": "Bedspread",
+          "quantity": 1,
+          "price": 2500
         }
       ],
       "totalCost": 16000,
@@ -908,11 +972,26 @@
           "productName": "Feather Pillow",
           "quantity": 2,
           "price": 900
+        },
+        {
+          "productName": "Mattress Topper",
+          "quantity": 1,
+          "price": 2000
+        },
+        {
+          "productName": "Bedside Table",
+          "quantity": 1,
+          "price": 2000
+        },
+        {
+          "productName": "Comforter",
+          "quantity": 2,
+          "price": 2200
         }
       ],
-      "totalCost": 27800,
+      "totalCost": 31900,
       "subTotal": 26000,
-      "deliveryFee": 1800,
+      "deliveryFee": 5900,
       "status": 2,
       "orderDate": "Thu, Aug 8, 2024",
       "orderTime": "12:00 PM",
@@ -944,11 +1023,26 @@
           "productName": "Memory Foam Pillow",
           "quantity": 2,
           "price": 2000
+        },
+        {
+          "productName": "Mattress Protector",
+          "quantity": 1,
+          "price": 1500
+        },
+        {
+          "productName": "Bedside Table",
+          "quantity": 1,
+          "price": 1800
+        },
+        {
+          "productName": "Decorative Cushion",
+          "quantity": 2,
+          "price": 400
         }
       ],
-      "totalCost": 20000,
+      "totalCost": 23600,
       "subTotal": 18000,
-      "deliveryFee": 2000,
+      "deliveryFee": 5600,
       "status": 2,
       "orderDate": "Sun, Aug 11, 2024",
       "orderTime": "7:00 PM",
@@ -980,6 +1074,46 @@
           "productName": "Cotton Pillow",
           "quantity": 2,
           "price": 600
+        },
+        {
+          "productName": "Bedspread",
+          "quantity": 1,
+          "price": 2500
+        },
+        {
+          "productName": "Comforter",
+          "quantity": 1,
+          "price": 1800
+        },
+        {
+          "productName": "Mattress Topper",
+          "quantity": 1,
+          "price": 2000
+        },
+        {
+          "productName": "Decorative Pillow",
+          "quantity": 3,
+          "price": 300
+        },
+        {
+          "productName": "Bedside Lamp",
+          "quantity": 1,
+          "price": 600
+        },
+        {
+          "productName": "Wall Art",
+          "quantity": 1,
+          "price": 800
+        },
+        {
+          "productName": "Reading Lamp",
+          "quantity": 1,
+          "price": 900
+        },
+        {
+          "productName": "Mattress Cover",
+          "quantity": 1,
+          "price": 1200
         }
       ],
       "totalCost": 8200,
@@ -1052,11 +1186,51 @@
           "productName": "Feather Pillow",
           "quantity": 1,
           "price": 900
+        },
+        {
+          "productName": "Mattress Protector",
+          "quantity": 1,
+          "price": 1500
+        },
+        {
+          "productName": "Bedside Lamp",
+          "quantity": 1,
+          "price": 600
+        },
+        {
+          "productName": "Comforter",
+          "quantity": 2,
+          "price": 1800
+        },
+        {
+          "productName": "Decorative Cushion",
+          "quantity": 2,
+          "price": 400
+        },
+        {
+          "productName": "Bedspread",
+          "quantity": 1,
+          "price": 2500
+        },
+        {
+          "productName": "Wall Art",
+          "quantity": 1,
+          "price": 800
+        },
+        {
+          "productName": "Reading Lamp",
+          "quantity": 1,
+          "price": 900
+        },
+        {
+          "productName": "Mattress Cover",
+          "quantity": 1,
+          "price": 1200
         }
       ],
-      "totalCost": 26900,
+      "totalCost": 33000,
       "subTotal": 26000,
-      "deliveryFee": 900,
+      "deliveryFee": 7000,
       "status": 3,
       "orderDate": "Thu, Aug 8, 2024",
       "orderTime": "3:00 PM",
@@ -1065,114 +1239,6 @@
         "buildingName": "",
         "streetNo": "",
         "postalCode": "462001"
-      },
-      "billingAddress": "Same as Shipping Address"
-    },
-    {
-      "id": "i2j3",
-      "orderId": "ORD013",
-      "customerDetails": {
-        "name": "Amit Sharma",
-        "address": "123 MG Road, Mumbai, Maharashtra, 400001",
-        "phone": "+91-9876543210",
-        "email": "amit.sharma@example.com",
-        "orderType": "Online Payment"
-      },
-      "products": [
-        {
-          "productName": "King Size Mattress",
-          "quantity": 1,
-          "price": 15000
-        },
-        {
-          "productName": "Memory Foam Pillow",
-          "quantity": 2,
-          "price": 2000
-        }
-      ],
-      "totalCost": 17000,
-      "subTotal": 15000,
-      "deliveryFee": 2000,
-      "status": 2,
-      "orderDate": "Fri, Aug 9, 2024",
-      "orderTime": "9:00 AM",
-      "deliveryAddress": {
-        "addressLine": "123 MG Road",
-        "buildingName": "",
-        "streetNo": "",
-        "postalCode": "400001"
-      },
-      "billingAddress": "Same as Shipping Address"
-    },
-    {
-      "id": "k4l5",
-      "orderId": "ORD014",
-      "customerDetails": {
-        "name": "Neha Arora",
-        "address": "135 Birch Street, Pune, Maharashtra, 411001",
-        "phone": "+91-9876543212",
-        "email": "neha.arora@example.com",
-        "orderType": "Online Payment"
-      },
-      "products": [
-        {
-          "productName": "Single Size Mattress",
-          "quantity": 1,
-          "price": 7000
-        },
-        {
-          "productName": "Cotton Pillow",
-          "quantity": 2,
-          "price": 600
-        }
-      ],
-      "totalCost": 8200,
-      "subTotal": 7000,
-      "deliveryFee": 1200,
-      "status": 4,
-      "orderDate": "Sat, Aug 10, 2024",
-      "orderTime": "2:00 PM",
-      "deliveryAddress": {
-        "addressLine": "135 Birch Street",
-        "buildingName": "",
-        "streetNo": "",
-        "postalCode": "411001"
-      },
-      "billingAddress": "Same as Shipping Address"
-    },
-    {
-      "id": "m6n7",
-      "orderId": "ORD015",
-      "customerDetails": {
-        "name": "Ravi Mehta",
-        "address": "246 Cedar Road, Ahmedabad, Gujarat, 380001",
-        "phone": "+91-9123456782",
-        "email": "ravi.mehta@example.com",
-        "orderType": "Cash On Delivery"
-      },
-      "products": [
-        {
-          "productName": "Queen Size Mattress",
-          "quantity": 1,
-          "price": 13000
-        },
-        {
-          "productName": "Gel Pillow",
-          "quantity": 1,
-          "price": 1200
-        }
-      ],
-      "totalCost": 14200,
-      "subTotal": 13000,
-      "deliveryFee": 1200,
-      "status": 0,
-      "orderDate": "Mon, Aug 12, 2024",
-      "orderTime": "6:00 PM",
-      "deliveryAddress": {
-        "addressLine": "246 Cedar Road",
-        "buildingName": "",
-        "streetNo": "",
-        "postalCode": "380001"
       },
       "billingAddress": "Same as Shipping Address"
     }
@@ -1593,16 +1659,6 @@
   ],
   "coupons": [
     {
-      "coupon_id": "CUP001",
-      "image": "",
-      "amount_of_discount": "750",
-      "percent_of_discount": "10%",
-      "number_of_coupons": 50,
-      "minimum_order_amount": "4,000",
-      "maximum_discount": "1,000",
-      "id": "21ff"
-    },
-    {
       "coupon_id": "CUP002",
       "image": "",
       "amount_of_discount": "1,500",
@@ -1633,13 +1689,11 @@
       "id": "75f1"
     },
     {
-      "coupon_id": "CUP005",
-      "image": "",
-      "amount_of_discount": "1,125",
+      "amount_of_discount": 100,
       "percent_of_discount": "12%",
       "number_of_coupons": 40,
-      "minimum_order_amount": "5,000",
-      "maximum_discount": "1,500",
+      "minimum_order_amount": "5000",
+      "maximum_discount": "1500",
       "id": "507e"
     },
     {
@@ -1715,14 +1769,6 @@
       "number_of_coupons": 30,
       "minimum_order_amount": "1200",
       "maximum_discount": "1500"
-    },
-    {
-      "id": "a92d",
-      "amount_of_discount": 150,
-      "percent_of_discount": "20%",
-      "number_of_coupons": 20,
-      "minimum_order_amount": "200",
-      "maximum_discount": "1522"
     }
   ],
   "logins": [
@@ -1739,7 +1785,8 @@
       "priority": "high",
       "type": "technical",
       "client": "Ravi Kumar",
-      "requested_date": "2024-08-04"
+      "requested_date": "2024-08-04",
+      "id": "e043"
     },
     {
       "ticket_id": "TICKET-005",
@@ -1747,7 +1794,8 @@
       "priority": "medium",
       "type": "product",
       "client": "Sneha Patel",
-      "requested_date": "2024-08-05"
+      "requested_date": "2024-08-05",
+      "id": "6f52"
     },
     {
       "ticket_id": "TICKET-006",
@@ -1755,7 +1803,8 @@
       "priority": "high",
       "type": "technical",
       "client": "Amit Sharma",
-      "requested_date": "2024-08-06"
+      "requested_date": "2024-08-06",
+      "id": "5160"
     },
     {
       "ticket_id": "TICKET-007",
@@ -1763,7 +1812,8 @@
       "priority": "low",
       "type": "product",
       "client": "Priya Singh",
-      "requested_date": "2024-08-07"
+      "requested_date": "2024-08-07",
+      "id": "cba6"
     },
     {
       "ticket_id": "TICKET-008",
@@ -1771,7 +1821,8 @@
       "priority": "medium",
       "type": "logistics",
       "client": "Vikram Reddy",
-      "requested_date": "2024-08-08"
+      "requested_date": "2024-08-08",
+      "id": "bcc4"
     },
     {
       "ticket_id": "TICKET-009",
@@ -1779,7 +1830,8 @@
       "priority": "low",
       "type": "product",
       "client": "Aisha Khan",
-      "requested_date": "2024-08-09"
+      "requested_date": "2024-08-09",
+      "id": "29f0"
     },
     {
       "ticket_id": "TICKET-010",
@@ -1787,7 +1839,8 @@
       "priority": "medium",
       "type": "technical",
       "client": "Sandeep Joshi",
-      "requested_date": "2024-08-10"
+      "requested_date": "2024-08-10",
+      "id": "e59d"
     },
     {
       "ticket_id": "TICKET-011",
@@ -1795,7 +1848,8 @@
       "priority": "medium",
       "type": "product",
       "client": "Neha Agarwal",
-      "requested_date": "2024-08-11"
+      "requested_date": "2024-08-11",
+      "id": "5eea"
     },
     {
       "ticket_id": "TICKET-012",
@@ -1803,7 +1857,8 @@
       "priority": "high",
       "type": "product",
       "client": "Arjun Mehta",
-      "requested_date": "2024-08-12"
+      "requested_date": "2024-08-12",
+      "id": "63ee"
     },
     {
       "ticket_id": "TICKET-013",
@@ -1811,7 +1866,8 @@
       "priority": "low",
       "type": "product",
       "client": "Simran Bhardwaj",
-      "requested_date": "2024-08-13"
+      "requested_date": "2024-08-13",
+      "id": "15f3"
     },
     {
       "ticket_id": "TICKET-014",
@@ -1819,7 +1875,8 @@
       "priority": "high",
       "type": "technical",
       "client": "Karan Kapoor",
-      "requested_date": "2024-08-14"
+      "requested_date": "2024-08-14",
+      "id": "96e5"
     },
     {
       "ticket_id": "TICKET-015",
@@ -1827,7 +1884,8 @@
       "priority": "medium",
       "type": "product",
       "client": "Ritika Choudhury",
-      "requested_date": "2024-08-15"
+      "requested_date": "2024-08-15",
+      "id": "a258"
     },
     {
       "ticket_id": "TICKET-016",
@@ -1835,7 +1893,8 @@
       "priority": "medium",
       "type": "product",
       "client": "Rajesh Verma",
-      "requested_date": "2024-08-16"
+      "requested_date": "2024-08-16",
+      "id": "2eeb"
     },
     {
       "ticket_id": "TICKET-017",
@@ -1843,7 +1902,8 @@
       "priority": "low",
       "type": "product",
       "client": "Anjali Rao",
-      "requested_date": "2024-08-17"
+      "requested_date": "2024-08-17",
+      "id": "d3f7"
     },
     {
       "ticket_id": "TICKET-018",
@@ -1851,7 +1911,8 @@
       "priority": "medium",
       "type": "product",
       "client": "Manish Gupta",
-      "requested_date": "2024-08-18"
+      "requested_date": "2024-08-18",
+      "id": "b210"
     },
     {
       "ticket_id": "TICKET-019",
@@ -1859,7 +1920,8 @@
       "priority": "low",
       "type": "product",
       "client": "Pooja Sharma",
-      "requested_date": "2024-08-19"
+      "requested_date": "2024-08-19",
+      "id": "7ef8"
     },
     {
       "ticket_id": "TICKET-020",
@@ -1867,7 +1929,8 @@
       "priority": "high",
       "type": "product",
       "client": "Vivek Nair",
-      "requested_date": "2024-08-20"
+      "requested_date": "2024-08-20",
+      "id": "c046"
     },
     {
       "ticket_id": "TICKET-021",
@@ -1875,7 +1938,8 @@
       "priority": "low",
       "type": "feature",
       "client": "Nisha Sethi",
-      "requested_date": "2024-08-21"
+      "requested_date": "2024-08-21",
+      "id": "ae22"
     },
     {
       "ticket_id": "TICKET-022",
@@ -1883,7 +1947,8 @@
       "priority": "high",
       "type": "warranty",
       "client": "Kritika Patel",
-      "requested_date": "2024-08-22"
+      "requested_date": "2024-08-22",
+      "id": "ae45"
     },
     {
       "ticket_id": "TICKET-023",
@@ -1891,7 +1956,8 @@
       "priority": "medium",
       "type": "product",
       "client": "Rajiv Agarwal",
-      "requested_date": "2024-08-23"
+      "requested_date": "2024-08-23",
+      "id": "d7c1"
     },
     {
       "ticket_id": "TICKET-024",
@@ -1899,7 +1965,8 @@
       "priority": "high",
       "type": "technical",
       "client": "Sonia Rani",
-      "requested_date": "2024-08-24"
+      "requested_date": "2024-08-24",
+      "id": "2e04"
     }
   ]
 }

@@ -11,13 +11,21 @@ import No_Data from "../../../img/data.png";
 import { useRouter } from 'next/navigation';
 import { Skeleton } from '@/components/ui/skeleton'; // Adjust the import path as needed
 
+interface Product {
+    id: any;
+    name: string;
+    quantity: number;
+}
+
+interface CustomerDetails {
+    name: string;
+}
+
 interface Order {
-    id: string;
-    orderId: string;
-    customerDetails: {
-        name: string;
-    };
-    products: any[]; 
+    id: any;
+    orderId: number;
+    customerDetails: CustomerDetails;
+    products: Product[];
     totalCost: number;
     status: number;
 }
@@ -114,7 +122,7 @@ const Delivered = () => {
                                         <Badge variant="success">Delivered</Badge>
                                     </TableCell>
                                     <TableCell>
-                                        <Button variant="outline" size="icon" onClick={() => handleViewOrder(item.orderId)}>
+                                        <Button variant="outline" size="icon" onClick={() => handleViewOrder(item?.id)}>
                                             <Eye className='h-4 w-4' />
                                         </Button>
                                     </TableCell>
