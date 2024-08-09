@@ -6,7 +6,7 @@
     "dev": "concurrently \"npm run dev:next\" \"npm run dev:api\"",
     "build": "next build",
     "dev:next": "next dev",
-    "dev:api": "json-server --watch Database.json --port 5000",
+    "dev:api": "json-server --watch Database.json --port 3000",
     "start": "next start",
     "lint": "next lint",
     "postinstall": "concurrently \"npm run dev:next\" \"npm run dev:api\""
