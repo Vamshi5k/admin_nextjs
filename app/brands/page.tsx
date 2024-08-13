@@ -6,20 +6,21 @@ import axiosInstance from '../Instance';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Pencil, Plus, Trash } from 'lucide-react';
-import { 
-  AlertDialog, 
-  AlertDialogAction, 
-  AlertDialogCancel, 
-  AlertDialogContent, 
-  AlertDialogDescription, 
-  AlertDialogFooter, 
-  AlertDialogHeader, 
-  AlertDialogTitle, 
-  AlertDialogTrigger 
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger
 } from '@/components/ui/alert-dialog';
 import { useToast } from '@/components/ui/use-toast';
 import { Skeleton } from '@/components/ui/skeleton';
 import Image from 'next/image';
+import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from '@/components/ui/pagination';
 
 interface Brand {
   id: string;
@@ -32,6 +33,8 @@ const Brands: React.FC = () => {
   const [brands, setBrands] = useState<Brand[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [selectedBrandId, setSelectedBrandId] = useState<string | null>(null);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const itemsPerPage = 5;
   const { toast } = useToast();
 
   const fetchBrands = async () => {
@@ -85,6 +88,14 @@ const Brands: React.FC = () => {
     setSelectedBrandId(null);
   };
 
+  const handlePageView = (page: number) => {
+    setCurrentPage(page);
+  }
+
+  const totalPages = Math.ceil(brands.length / itemsPerPage);
+
+  const currentbrandList = brands.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
+
   return (
     <div className='mt-10 mb-10'>
       <Card>
@@ -137,9 +148,9 @@ const Brands: React.FC = () => {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {brands.map((item, index) => (
+                {currentbrandList.map((item, index) => (
                   <TableRow key={item.id}>
-                    <TableCell>{index + 1}</TableCell>
+                    <TableCell>{(currentPage - 1) * itemsPerPage + index + 1}</TableCell>
                     <TableCell>
                       <Image src={item.logo} width={40} height={20} alt='brand_logo' className='rounded-full' />
                     </TableCell>
@@ -182,6 +193,42 @@ const Brands: React.FC = () => {
           )}
         </CardContent>
       </Card>
+      <div className='mt-3'>
+        <Pagination>
+          <PaginationContent>
+            <PaginationItem aria-disabled={currentPage === 1}>
+              <PaginationPrevious onClick={(e) => {
+                e.preventDefault();
+                if (currentPage > 1) handlePageView(currentPage - 1)
+              }}
+                arial-label="Previous Page"
+              />
+            </PaginationItem>
+            {[...Array(totalPages)].map((_, index) => (
+              <PaginationItem key={index} aria-current={currentPage === index + 1 ? 'page' : undefined}>
+                <PaginationLink
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handlePageView(index + 1);
+                  }}
+                >
+                  {index + 1}
+                </PaginationLink>
+              </PaginationItem>
+            ))}
+            <PaginationItem aria-disabled={currentPage === totalPages}>
+              <PaginationNext
+                onClick={(e) => {
+                  e.preventDefault();
+                  if(currentPage > totalPages) handlePageView(currentPage + 1)
+                }}
+              arial-label="Next Page"
+              />
+            </PaginationItem>
+
+          </PaginationContent>
+        </Pagination>
+      </div>
     </div>
   );
 };

@@ -3,62 +3,52 @@ import axiosInstance from '@/app/Instance';
 import { useToast } from '@/components/ui/use-toast';
 import { useParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
-import Image from "next/image"
-import Link from "next/link"
-import {
-  ChevronLeft,
-  ChevronRight,
-  Copy,
-  CreditCard,
-  File,
-  Home,
-  LineChart,
-  ListFilter,
-  MoreVertical,
-  Package,
-  Package2,
-  PanelLeft,
-  Search,
-  Settings,
-  ShoppingCart,
-  Truck,
-  Users2,
-} from "lucide-react"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
+import Image from "next/image";
+import Welcome from "../../../../img/hey.svg";
+import { Badge } from '@/components/ui/badge';
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
+} from "@/components/ui/card";
 import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import {
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-} from "@/components/ui/pagination"
-import { Separator } from "@/components/ui/separator"
+  Table, TableHead, TableRow, TableHeader, TableCell, TableBody
+} from "@/components/ui/table";
+import Human from "../../../../img/human.png";
 
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@/components/ui/tabs"
+// Define interfaces for types
+interface Address {
+  houseNo: string;
+  area: string;
+  city: string;
+  state: string;
+  pincode: string;
+}
 
-import { Progress } from '@/components/ui/progress';
-import UserOrders from '../components/userorder';
+interface OrderedAmount {
+  completedOrders: number;
+  pending: number;
+}
+
+interface AdditionalInfo {
+  dob: string;
+  phone: string;
+  address: Address;
+  orderedAmount: OrderedAmount;
+  userId: string;
+  emailVerify: string;
+  registerAt: string;
+}
+
+interface RecentOrder {
+  sNo: number;
+  orderId: string;
+  noOfProducts: number;
+  amount: number;
+  status: number;
+}
 
 interface User {
   id: number;
@@ -68,6 +58,8 @@ interface User {
   status: number;
   dateOfJoining: string;
   profilePic: string;
+  additionalInfo: AdditionalInfo;
+  recentOrders: RecentOrder[];
 }
 
 const SingleUser = () => {
@@ -81,9 +73,8 @@ const SingleUser = () => {
     if (id) {
       const fetchUser = async () => {
         try {
-          const response = await axiosInstance.get(`/userslist/${id}`);
+          const response = await axiosInstance.get(`/singleUser/${id}`);
           setUser(response?.data);
-          console.log(response?.data);
         } catch (error) {
           setError('Error fetching user data');
         } finally {
@@ -95,11 +86,9 @@ const SingleUser = () => {
     }
   }, [id]);
 
-
-
-  if (!user) return <div>
-    No User Data
-  </div>;
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
+  if (!user) return <div>No User Data</div>;
 
   return (
     <div className="flex min-h-screen w-full flex-col">
@@ -107,215 +96,193 @@ const SingleUser = () => {
         <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8 lg:grid-cols-3 xl:grid-cols-3">
           <div className="grid auto-rows-max items-start gap-4 md:gap-8 lg:col-span-2">
             <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4">
-              <Card
-                className="sm:col-span-2" x-chunk="dashboard-05-chunk-0"
-              >
-                <CardHeader className="pb-3">
-                  <CardTitle>Your Orders</CardTitle>
-                  <CardDescription className="max-w-lg text-balance leading-relaxed">
-                    Introducing Our Dynamic Orders Dashboard for Seamless
-                    Management and Insightful Analysis.
-                  </CardDescription>
+              <Card className="sm:col-span-2" x-chunk="dashboard-05-chunk-0">
+                <CardHeader className="flex flex-row justify-between items-start">
+                  <div className="flex flex-col gap-y-2">
+                    <CardTitle>Hey {user.name} !!</CardTitle>
+                    <CardDescription className="max-w-lg text-balance leading-relaxed">
+                      Your Orders Data Analysis
+                    </CardDescription>
+                  </div>
+                  <div>
+                    <Image src={Welcome} alt='Image' width={100} />
+                  </div>
                 </CardHeader>
-                <CardFooter>
-                  <Button>Create New Order</Button>
-                </CardFooter>
               </Card>
+
+              {/* This Month Orders */}
               <Card x-chunk="dashboard-05-chunk-1">
                 <CardHeader className="pb-2">
-                  <CardDescription>This Week</CardDescription>
-                  <CardTitle className="text-4xl">$1,329</CardTitle>
+                  <CardDescription>This Month Orders</CardDescription>
+                  <CardTitle className="flex items-center">
+                    <span className='text-4xl'>{user.recentOrders.length}</span>
+                  </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="text-xs text-muted-foreground">
-                    +25% from last week
+                    +40% from last month
                   </div>
                 </CardContent>
-                <CardFooter>
-                  <Progress value={25} aria-label="25% increase" />
-                </CardFooter>
               </Card>
+
+              {/* Total Amount Transacted */}
               <Card x-chunk="dashboard-05-chunk-2">
                 <CardHeader className="pb-2">
-                  <CardDescription>This Month</CardDescription>
-                  <CardTitle className="text-4xl">$5,329</CardTitle>
+                  <CardDescription>Total Amount Transacted</CardDescription>
+                  <CardTitle className="text-4xl">
+                    ₹ {user.recentOrders.reduce((acc, order) => acc + order.amount, 0)}
+                  </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="text-xs text-muted-foreground">
-                    +10% from last month
+                    +20% from last month
                   </div>
                 </CardContent>
-                <CardFooter>
-                  <Progress value={12} aria-label="12% increase" />
-                </CardFooter>
               </Card>
             </div>
-            <Tabs defaultValue="orders">
-              <div className="flex items-center">
-                <TabsList>
-                  <TabsTrigger value="week">Week</TabsTrigger>
-                  <TabsTrigger value="month">Month</TabsTrigger>
-                  <TabsTrigger value="year">Year</TabsTrigger>
-                </TabsList>
-              </div>
-              <TabsContent value="week">
-                  <UserOrders />
-              </TabsContent>
-            </Tabs>
+
+            {/* Orders Table */}
+            <div>
+              <Card className='mt-5'>
+                <CardHeader className="px-7">
+                  <CardTitle>Orders</CardTitle>
+                  <CardDescription>
+                    Recent orders from your store.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>S.NO</TableHead>
+                        <TableHead className="hidden sm:table-cell">ORDER ID</TableHead>
+                        <TableHead className="hidden md:table-cell">NO OF PRODUCTS</TableHead>
+                        <TableHead className="text-right">AMOUNT</TableHead>
+                        <TableHead className="text-right">STATUS</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {user.recentOrders.map(order => (
+                        <TableRow key={order.orderId}>
+                          <TableCell className='text-medium'>{order.sNo}</TableCell>
+                          <TableCell className="hidden sm:table-cell">{order.orderId}</TableCell>
+                          <TableCell>
+                            <Badge variant={"outline"}>{order.noOfProducts}</Badge>
+                          </TableCell>
+                          <TableCell className="text-right">₹ {order.amount}</TableCell>
+                          <TableCell className="text-right">
+                            <Badge variant={order.status === 0 ? "warning" : "success"}>
+                              {order.status === 0 ? "Pending" : "Completed"}
+                            </Badge>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </CardContent>
+              </Card>
+            </div>
           </div>
+
+          {/* User Profile Information */}
           <div>
-            <Card
-              className="overflow-hidden" x-chunk="dashboard-05-chunk-4"
-            >
-              <CardHeader className="flex flex-row items-start bg-muted/50">
-                <div className="grid gap-0.5">
-                  <CardTitle className="group flex items-center gap-2 text-lg">
-                    Order Oe31b70H
-                    <Button
-                      size="icon"
-                      variant="outline"
-                      className="h-6 w-6 opacity-0 transition-opacity group-hover:opacity-100"
-                    >
-                      <Copy className="h-3 w-3" />
-                      <span className="sr-only">Copy Order ID</span>
-                    </Button>
-                  </CardTitle>
-                  <CardDescription>Date: November 23, 2023</CardDescription>
-                </div>
-                <div className="ml-auto flex items-center gap-1">
-                  <Button size="sm" variant="outline" className="h-8 gap-1">
-                    <Truck className="h-3.5 w-3.5" />
-                    <span className="lg:sr-only xl:not-sr-only xl:whitespace-nowrap">
-                      Track Order
-                    </span>
-                  </Button>
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button size="icon" variant="outline" className="h-8 w-8">
-                        <MoreVertical className="h-3.5 w-3.5" />
-                        <span className="sr-only">More</span>
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                      <DropdownMenuItem>Edit</DropdownMenuItem>
-                      <DropdownMenuItem>Export</DropdownMenuItem>
-                      <DropdownMenuSeparator />
-                      <DropdownMenuItem>Trash</DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </div>
-              </CardHeader>
-              <CardContent className="p-6 text-sm">
-                <div className="grid gap-3">
-                  <div className="font-semibold">Order Details</div>
-                  <ul className="grid gap-3">
-                    <li className="flex items-center justify-between">
-                      <span className="text-muted-foreground">
-                        Glimmer Lamps x <span>2</span>
-                      </span>
-                      <span>$250.00</span>
-                    </li>
-                    <li className="flex items-center justify-between">
-                      <span className="text-muted-foreground">
-                        Aqua Filters x <span>1</span>
-                      </span>
-                      <span>$49.00</span>
-                    </li>
-                  </ul>
-                  <Separator className="my-2" />
-                  <ul className="grid gap-3">
-                    <li className="flex items-center justify-between">
-                      <span className="text-muted-foreground">Subtotal</span>
-                      <span>$299.00</span>
-                    </li>
-                    <li className="flex items-center justify-between">
-                      <span className="text-muted-foreground">Shipping</span>
-                      <span>$5.00</span>
-                    </li>
-                    <li className="flex items-center justify-between">
-                      <span className="text-muted-foreground">Tax</span>
-                      <span>$25.00</span>
-                    </li>
-                    <li className="flex items-center justify-between font-semibold">
-                      <span className="text-muted-foreground">Total</span>
-                      <span>$329.00</span>
-                    </li>
-                  </ul>
-                </div>
-                <Separator className="my-4" />
-                <div className="grid grid-cols-2 gap-4">
+            <Card className="overflow-hidden" x-chunk="dashboard-05-chunk-4">
+              <div className="border-b border-muted">
+                <CardContent className="p-6 text-sm">
                   <div className="grid gap-3">
-                    <div className="font-semibold">Shipping Information</div>
-                    <address className="grid gap-0.5 not-italic text-muted-foreground">
-                      <span>Liam Johnson</span>
-                      <span>1234 Main St.</span>
-                      <span>Anytown, CA 12345</span>
-                    </address>
+                    <div className="mx-auto px-3 py-3 bg-black rounded-full">
+                      <Image src={Human} alt='User_Image' width={70} height={50} />
+                    </div>
+                    <div className='flex flex-col justify-center items-center gap-y-3'>
+                      <Badge variant={"outline"}> User</Badge>
+                      <h1 className='text-xl md:text-3xl font-semibold'>{user.name}</h1>
+                      <h5 className='font-medium'>{user.email}</h5>
+                    </div>
+                    <dl className="grid gap-3 mt-3">
+                      <div className="flex items-center justify-between">
+                        <dt className="text-muted-foreground">DOB</dt>
+                        <dd>{user.additionalInfo.dob}</dd>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <dt className="text-muted-foreground">Phone</dt>
+                        <dd><a href={`tel:${user.additionalInfo.phone}`}>{user.additionalInfo.phone}</a></dd>
+                      </div>
+                    </dl>
                   </div>
-                  <div className="grid auto-rows-max gap-3">
-                    <div className="font-semibold">Billing Information</div>
-                    <div className="text-muted-foreground">
-                      Same as shipping address
-                    </div>
+                </CardContent>
+              </div>
+
+              <div className="border-b border-muted">
+                <CardContent className="p-6 text-sm">
+                  <div className="grid gap-3">
+                    <div className="font-semibold">Address</div>
+                    <dl className="grid gap-3 mt-3">
+                      <div className="flex items-center justify-between">
+                        <dt className="text-muted-foreground">House No :</dt>
+                        <dd className='text-black font-bold'>{user.additionalInfo.address.houseNo}</dd>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <dt className="text-muted-foreground">Area</dt>
+                        <dd className='text-black font-bold'>{user.additionalInfo.address.area}</dd>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <dt className="text-muted-foreground">City</dt>
+                        <dd className='text-black font-bold'>{user.additionalInfo.address.city}</dd>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <dt className="text-muted-foreground">State</dt>
+                        <dd className='text-black font-bold'>{user.additionalInfo.address.state}</dd>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <dt className="text-muted-foreground">Pincode</dt>
+                        <dd className='text-black font-bold'>{user.additionalInfo.address.pincode}</dd>
+                      </div>
+                    </dl>
                   </div>
-                </div>
-                <Separator className="my-4" />
-                <div className="grid gap-3">
-                  <div className="font-semibold">Customer Information</div>
-                  <dl className="grid gap-3">
-                    <div className="flex items-center justify-between">
-                      <dt className="text-muted-foreground">Customer</dt>
-                      <dd>Liam Johnson</dd>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <dt className="text-muted-foreground">Email</dt>
-                      <dd>
-                        <a href="mailto:">liam@acme.com</a>
-                      </dd>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <dt className="text-muted-foreground">Phone</dt>
-                      <dd>
-                        <a href="tel:">+1 234 567 890</a>
-                      </dd>
-                    </div>
-                  </dl>
-                </div>
-                <Separator className="my-4" />
-                <div className="grid gap-3">
-                  <div className="font-semibold">Payment Information</div>
-                  <dl className="grid gap-3">
-                    <div className="flex items-center justify-between">
-                      <dt className="flex items-center gap-1 text-muted-foreground">
-                        <CreditCard className="h-4 w-4" />
-                        Visa
-                      </dt>
-                      <dd>**** **** **** 4532</dd>
-                    </div>
-                  </dl>
-                </div>
-              </CardContent>
-              <CardFooter className="flex flex-row items-center border-t bg-muted/50 px-6 py-3">
-                <div className="text-xs text-muted-foreground">
-                  Updated <time dateTime="2023-11-23">November 23, 2023</time>
-                </div>
-                <Pagination className="ml-auto mr-0 w-auto">
-                  <PaginationContent>
-                    <PaginationItem>
-                      <Button size="icon" variant="outline" className="h-6 w-6">
-                        <ChevronLeft className="h-3.5 w-3.5" />
-                        <span className="sr-only">Previous Order</span>
-                      </Button>
-                    </PaginationItem>
-                    <PaginationItem>
-                      <Button size="icon" variant="outline" className="h-6 w-6">
-                        <ChevronRight className="h-3.5 w-3.5" />
-                        <span className="sr-only">Next Order</span>
-                      </Button>
-                    </PaginationItem>
-                  </PaginationContent>
-                </Pagination>
-              </CardFooter>
+                </CardContent>
+              </div>
+
+              <div className="border-b border-muted">
+                <CardContent className="p-6 text-sm">
+                  <div className="grid gap-3">
+                    <div className="font-semibold">Ordered Amount</div>
+                    <dl className="grid gap-3 mt-3">
+                      <div className="flex items-center justify-between">
+                        <dt className="text-muted-foreground">Completed Orders</dt>
+                        <dd className='text-black font-bold'>₹ {user.additionalInfo.orderedAmount.completedOrders}</dd>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <dt className="text-muted-foreground">Pending</dt>
+                        <dd className='text-black font-bold'>₹ {user.additionalInfo.orderedAmount.pending}</dd>
+                      </div>
+                    </dl>
+                  </div>
+                </CardContent>
+              </div>
+
+              <div className="border-b border-muted">
+                <CardContent className="p-6 text-sm">
+                  <div className="grid gap-3">
+                    <div className="font-semibold">Additional Information</div>
+                    <dl className="grid gap-3 mt-3">
+                      <div className="flex items-center justify-between">
+                        <dt className="text-muted-foreground">User Id:</dt>
+                        <dd className='text-black'>{user.additionalInfo.userId}</dd>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <dt className="text-muted-foreground">Email Verify:</dt>
+                        <dd className={`text-${user?.additionalInfo?.emailVerify === 'Verified' ? 'green-500' : 'red-500'} font-bold`}>
+                          {user.additionalInfo.emailVerify}
+                        </dd>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <dt className="text-muted-foreground">Register At:</dt>
+                        <dd className='text-black'>{user.additionalInfo.registerAt}</dd>
+                      </div>
+                    </dl>
+                  </div>
+                </CardContent>
+              </div>
             </Card>
           </div>
         </main>

@@ -51,7 +51,6 @@ const ProcessOrder: React.FC = () => {
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
     const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
-    const [selectedStatus, setSelectedStatus] = useState<number | null>(null);
 
     const router = useRouter();
     const { toast } = useToast();
@@ -73,28 +72,7 @@ const ProcessOrder: React.FC = () => {
         }
     };
 
-    const UpdateStatusHandler = async () => {
-        if (selectedOrder && selectedStatus !== null) {
-            try {
-                await axiosInstance.patch(`/neworders/${selectedOrder.id}`, {
-                    status: selectedStatus,
-                })
-                toast({
-                    description: "Status Updated SucessFully",
-                    variant: "success",
-                })
 
-                getOrders();
-
-            } catch (error) {
-                console.log(error);
-                toast({
-                    description: "Error Updating The Status",
-                    variant: 'destructive',
-                })
-            }
-        }
-    }
 
     useEffect(() => {
         getOrders();
@@ -167,50 +145,6 @@ const ProcessOrder: React.FC = () => {
                                             <Badge variant="violetLight">Processing</Badge>
                                         </TableCell>
                                         <TableCell className="flex items-center gap-3">
-                                            <Dialog>
-                                                <DialogTrigger asChild>
-                                                    <Button
-                                                        variant="outline"
-                                                        size="icon"
-                                                        onClick={() => {
-                                                            setSelectedOrder(item);
-                                                            setSelectedStatus(item?.status);
-                                                        }}
-                                                    >
-                                                        <Pencil className='h-4 w-4' />
-                                                    </Button>
-                                                </DialogTrigger>
-                                                <DialogContent className="sm:max-w-96">
-                                                    <DialogHeader>
-                                                        <DialogTitle>Edit Status</DialogTitle>
-                                                        <DialogDescription>
-                                                            Make changes to your Status here. Click save when youre done.
-                                                        </DialogDescription>
-                                                    </DialogHeader>
-                                                    <div className="grid gap-4 py-4">
-                                                        <Select
-                                                            value={selectedStatus?.toString()}
-                                                            onValueChange={(value) => setSelectedStatus(+value)}
-                                                        >
-                                                            <SelectTrigger className="w-full">
-                                                                <SelectValue placeholder="Select Status" />
-                                                            </SelectTrigger>
-                                                            <SelectContent>
-                                                                <SelectItem value="0">Pending</SelectItem>
-                                                                <SelectItem value="1">Processing</SelectItem>
-                                                                <SelectItem value="2">Shipping</SelectItem>
-                                                                <SelectItem value="3">Delivered</SelectItem>
-                                                                <SelectItem value="4">Return / Replacement</SelectItem>
-                                                                <SelectItem value="5">Cancelled</SelectItem>
-                                                            </SelectContent>
-                                                        </Select>
-                                                    </div>
-                                                    <DialogFooter>
-                                                        <Button type="button" onClick={UpdateStatusHandler}>Update</Button>
-                                                        <Button variant={"outline"}>Cancel</Button>
-                                                    </DialogFooter>
-                                                </DialogContent>
-                                            </Dialog>
                                             <Button
                                                 variant="outline"
                                                 size="icon"

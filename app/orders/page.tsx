@@ -1,16 +1,6 @@
 "use client";
 import React, { useState } from 'react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Button } from "@/components/ui/button"
-import {
-    DropdownMenu,
-    DropdownMenuCheckboxItem,
-    DropdownMenuContent,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { ListFilter } from 'lucide-react';
 import NewOrders from './components/NewOrders';
 import ProcessOrder from './components/ProcessOrder';
 import Shipping from './components/Shipping';
@@ -19,10 +9,6 @@ import Return from './components/Return';
 import Cancelled from './components/Cancelled';
 
 const Orders = () => {
-    const [showStatusBar, setShowStatusBar] = useState(true);
-    const [showActivityBar, setShowActivityBar] = useState(false);
-    const [showPanel, setShowPanel] = useState(false);
-
     return (
         <div>
             <Tabs defaultValue="New" className="w-full">

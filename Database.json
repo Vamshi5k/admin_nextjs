@@ -8,7 +8,8 @@
       "saleprice": 12000,
       "status": "1",
       "type": "Mattress",
-      "image": "https://rukminim2.flixcart.com/image/416/416/xif0q/bed-mattress/x/x/h/normal-top-single-5-35-78-shapesense-orthopedic-classic-memory-original-imah2fdmp4tsphmr.jpeg?q=70&crop=false"
+      "image": "https://rukminim2.flixcart.com/image/416/416/xif0q/bed-mattress/x/x/h/normal-top-single-5-35-78-shapesense-orthopedic-classic-memory-original-imah2fdmp4tsphmr.jpeg?q=70&crop=false",
+      "isActive": 0
     },
     {
       "id": "2",
@@ -18,7 +19,8 @@
       "saleprice": 18000,
       "status": "0",
       "type": "Mattress",
-      "image": "https://rukminim2.flixcart.com/image/416/416/xif0q/bed-mattress/u/n/4/normal-top-single-4-35-72-spine-master-with-nff-tech-bonded-foam-original-imahfxnw9fjufkzg.jpeg?q=70&crop=false"
+      "image": "https://rukminim2.flixcart.com/image/416/416/xif0q/bed-mattress/u/n/4/normal-top-single-4-35-72-spine-master-with-nff-tech-bonded-foam-original-imahfxnw9fjufkzg.jpeg?q=70&crop=false",
+      "isActive": 1
     },
     {
       "id": "3",
@@ -28,7 +30,8 @@
       "saleprice": 23000,
       "status": "1",
       "type": "Mattress",
-      "image": "https://rukminim2.flixcart.com/image/832/832/xif0q/bed-mattress/r/2/l/normal-top-king-5-72-78-aircell-series-dual-ortho-reversible-original-imah2v297p3fcf93.jpeg?q=70&crop=false"
+      "image": "https://rukminim2.flixcart.com/image/832/832/xif0q/bed-mattress/r/2/l/normal-top-king-5-72-78-aircell-series-dual-ortho-reversible-original-imah2v297p3fcf93.jpeg?q=70&crop=false",
+      "isActive": 0
     },
     {
       "id": "4",
@@ -38,7 +41,8 @@
       "saleprice": 2500,
       "status": "1",
       "type": "Pillow",
-      "image": "https://m.media-amazon.com/images/I/61+w9mB919L._AC_SY300_SX300_.jpg"
+      "image": "https://m.media-amazon.com/images/I/61+w9mB919L._AC_SY300_SX300_.jpg",
+      "isActive": 1
     },
     {
       "id": "5",
@@ -48,7 +52,8 @@
       "saleprice": 3000,
       "status": "1",
       "type": "Pillow",
-      "image": "https://m.media-amazon.com/images/I/71HAEoBbUYL.__AC_SX300_SY300_QL70_FMwebp_.jpg"
+      "image": "https://m.media-amazon.com/images/I/71HAEoBbUYL.__AC_SX300_SY300_QL70_FMwebp_.jpg",
+      "isActive": 1
     },
     {
       "id": "6",
@@ -58,7 +63,8 @@
       "saleprice": 20000,
       "status": "0",
       "type": "Mattress",
-      "image": "https://m.media-amazon.com/images/I/9188-lChosL.__AC_SY300_SX300_QL70_FMwebp_.jpg"
+      "image": "https://m.media-amazon.com/images/I/9188-lChosL.__AC_SY300_SX300_QL70_FMwebp_.jpg",
+      "isActive": 0
     },
     {
       "id": "7",
@@ -68,7 +74,8 @@
       "saleprice": 2000,
       "status": "1",
       "type": "Pillow",
-      "image": "https://m.media-amazon.com/images/I/51ergTbpNlL.__AC_SX300_SY300_QL70_FMwebp_.jpg"
+      "image": "https://m.media-amazon.com/images/I/51ergTbpNlL.__AC_SX300_SY300_QL70_FMwebp_.jpg",
+      "isActive": 0
     },
     {
       "id": "8",
@@ -78,7 +85,8 @@
       "saleprice": 28000,
       "status": "1",
       "type": "Mattress",
-      "image": "https://m.media-amazon.com/images/I/913FrlOZF-L.__AC_SX300_SY300_QL70_FMwebp_.jpg"
+      "image": "https://m.media-amazon.com/images/I/913FrlOZF-L.__AC_SX300_SY300_QL70_FMwebp_.jpg",
+      "isActive": 1
     },
     {
       "id": "9",
@@ -88,7 +96,8 @@
       "saleprice": 3500,
       "status": "0",
       "type": "Pillow",
-      "image": "https://m.media-amazon.com/images/I/81OsnIAMFbL.__AC_SX300_SY300_QL70_FMwebp_.jpg"
+      "image": "https://m.media-amazon.com/images/I/81OsnIAMFbL.__AC_SX300_SY300_QL70_FMwebp_.jpg",
+      "isActive": 0
     },
     {
       "id": "10",
@@ -98,11 +107,12 @@
       "saleprice": 10000,
       "status": "1",
       "type": "Mattress",
-      "image": "https://m.media-amazon.com/images/I/81xdmqm3QyS.__AC_SX300_SY300_QL70_FMwebp_.jpg"
+      "image": "https://m.media-amazon.com/images/I/81xdmqm3QyS.__AC_SX300_SY300_QL70_FMwebp_.jpg",
+      "isActive": 1
     },
     {
       "id": "ca68",
-      "productname": "Preminum Pillow",
+      "productname": "Premium Pillow",
       "price": "120",
       "saleprice": "100",
       "qty": "50",
@@ -111,7 +121,8 @@
       "category": "2",
       "subcategory": "e54a",
       "brands": "2",
-      "description": "Hey"
+      "description": "Hey",
+      "isActive": 1
     }
   ],
   "categories": [
@@ -139,6 +150,11 @@
       "id": "5",
       "name": "protectors",
       "description": "protectors for mattresses and pillows."
+    },
+    {
+      "id": "8fab",
+      "name": "hery",
+      "description": "asklaldfsb"
     }
   ],
   "subcategories": [
@@ -261,6 +277,12 @@
       "subcategory": "Tempur-Pedic Mattress",
       "description": "Mattresses using Tempur material for superior comfort and support.",
       "parentCategoryId": "3"
+    },
+    {
+      "id": "c033",
+      "subcategory": "hery-1",
+      "description": "Heyabfakjsbfkjasdbfkj",
+      "parentCategoryId": "8fab"
     }
   ],
   "childCategories": [
@@ -460,7 +482,8 @@
       "mobile": "+91 7995541707",
       "status": 1,
       "dateOfJoining": "31-07-2024",
-      "profilePic": "https://randomuser.me/api/portraits/men/1.jpg"
+      "profilePic": "https://randomuser.me/api/portraits/men/1.jpg",
+      "isActive": 1
     },
     {
       "id": "2",
@@ -469,7 +492,8 @@
       "mobile": "+91 9876543210",
       "status": 0,
       "dateOfJoining": "28-06-2024",
-      "profilePic": ""
+      "profilePic": "",
+      "isActive": 0
     },
     {
       "id": "3",
@@ -478,7 +502,8 @@
       "mobile": "+91 8765432109",
       "status": 1,
       "dateOfJoining": "15-05-2024",
-      "profilePic": "https://randomuser.me/api/portraits/men/2.jpg"
+      "profilePic": "https://randomuser.me/api/portraits/men/2.jpg",
+      "isActive": 1
     },
     {
       "id": "4",
@@ -487,7 +512,8 @@
       "mobile": "+91 7654321098",
       "status": 0,
       "dateOfJoining": "12-04-2024",
-      "profilePic": ""
+      "profilePic": "",
+      "isActive": 0
     },
     {
       "id": "5",
@@ -496,7 +522,330 @@
       "mobile": "+91 6543210987",
       "status": 1,
       "dateOfJoining": "01-03-2024",
-      "profilePic": "https://randomuser.me/api/portraits/men/3.jpg"
+      "profilePic": "https://randomuser.me/api/portraits/men/3.jpg",
+      "isActive": 1
+    }
+  ],
+  "singleUser": [
+    {
+      "id": "1",
+      "name": "Vamshi",
+      "email": "Vamshianimela@spackdigi.com",
+      "mobile": "+91 7995541707",
+      "status": 1,
+      "dateOfJoining": "31-07-2024",
+      "profilePic": "https://randomuser.me/api/portraits/men/1.jpg",
+      "additionalInfo": {
+        "dob": "13 March, 2000",
+        "phone": "+91 7995541707",
+        "address": {
+          "houseNo": "2-1-1/2A",
+          "area": "Charylane, Nallakunta",
+          "city": "Hyderabad",
+          "state": "Telangana",
+          "pincode": "500044"
+        },
+        "orderedAmount": {
+          "completedOrders": 50000,
+          "pending": 50000
+        },
+        "userId": "#UD003054",
+        "emailVerify": "Verified",
+        "registerAt": "Aug 21, 2023"
+      },
+      "recentOrders": [
+        {
+          "sNo": 1,
+          "orderId": "#ORD001",
+          "noOfProducts": 3,
+          "amount": 1500,
+          "status": 1
+        },
+        {
+          "sNo": 2,
+          "orderId": "#ORD002",
+          "noOfProducts": 5,
+          "amount": 2500,
+          "status": 2
+        },
+        {
+          "sNo": 3,
+          "orderId": "#ORD003",
+          "noOfProducts": 2,
+          "amount": 800,
+          "status": 3
+        },
+        {
+          "sNo": 4,
+          "orderId": "#ORD004",
+          "noOfProducts": 4,
+          "amount": 1800,
+          "status": 4
+        },
+        {
+          "sNo": 5,
+          "orderId": "#ORD005",
+          "noOfProducts": 1,
+          "amount": 500,
+          "status": 5
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "name": "K. Anisha",
+      "email": "AnishaK@spackdigi.com",
+      "mobile": "+91 9876543210",
+      "status": 0,
+      "dateOfJoining": "28-06-2024",
+      "profilePic": "",
+      "additionalInfo": {
+        "dob": "22 July, 1995",
+        "phone": "+91 9876543210",
+        "address": {
+          "houseNo": "5-2-123",
+          "area": "Kukatpally",
+          "city": "Hyderabad",
+          "state": "Telangana",
+          "pincode": "500072"
+        },
+        "orderedAmount": {
+          "completedOrders": 15000,
+          "pending": 3000
+        },
+        "userId": "#UD003055",
+        "emailVerify": "Verified",
+        "registerAt": "Jan 15, 2024"
+      },
+      "recentOrders": [
+        {
+          "sNo": 1,
+          "orderId": "#ORD006",
+          "noOfProducts": 2,
+          "amount": 1200,
+          "status": 1
+        },
+        {
+          "sNo": 2,
+          "orderId": "#ORD007",
+          "noOfProducts": 4,
+          "amount": 1800,
+          "status": 2
+        },
+        {
+          "sNo": 3,
+          "orderId": "#ORD008",
+          "noOfProducts": 1,
+          "amount": 500,
+          "status": 3
+        },
+        {
+          "sNo": 4,
+          "orderId": "#ORD009",
+          "noOfProducts": 3,
+          "amount": 1500,
+          "status": 4
+        },
+        {
+          "sNo": 5,
+          "orderId": "#ORD010",
+          "noOfProducts": 5,
+          "amount": 2500,
+          "status": 5
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "name": "Ravi",
+      "email": "RaviS@spackdigi.com",
+      "mobile": "+91 8765432109",
+      "status": 1,
+      "dateOfJoining": "15-05-2024",
+      "profilePic": "https://randomuser.me/api/portraits/men/2.jpg",
+      "additionalInfo": {
+        "dob": "9 November, 1988",
+        "phone": "+91 8765432109",
+        "address": {
+          "houseNo": "3-1-456",
+          "area": "Banjara Hills",
+          "city": "Hyderabad",
+          "state": "Telangana",
+          "pincode": "500034"
+        },
+        "orderedAmount": {
+          "completedOrders": 75000,
+          "pending": 20000
+        },
+        "userId": "#UD003056",
+        "emailVerify": "Verified",
+        "registerAt": "Jun 10, 2023"
+      },
+      "recentOrders": [
+        {
+          "sNo": 1,
+          "orderId": "#ORD011",
+          "noOfProducts": 4,
+          "amount": 1600,
+          "status": 1
+        },
+        {
+          "sNo": 2,
+          "orderId": "#ORD012",
+          "noOfProducts": 2,
+          "amount": 800,
+          "status": 2
+        },
+        {
+          "sNo": 3,
+          "orderId": "#ORD013",
+          "noOfProducts": 5,
+          "amount": 2500,
+          "status": 3
+        },
+        {
+          "sNo": 4,
+          "orderId": "#ORD014",
+          "noOfProducts": 3,
+          "amount": 1500,
+          "status": 4
+        },
+        {
+          "sNo": 5,
+          "orderId": "#ORD015",
+          "noOfProducts": 1,
+          "amount": 500,
+          "status": 5
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "name": "Priya",
+      "email": "PriyaN@spackdigi.com",
+      "mobile": "+91 7654321098",
+      "status": 0,
+      "dateOfJoining": "12-04-2024",
+      "profilePic": "",
+      "additionalInfo": {
+        "dob": "2 February, 1992",
+        "phone": "+91 7654321098",
+        "address": {
+          "houseNo": "4-2-789",
+          "area": "Jubilee Hills",
+          "city": "Hyderabad",
+          "state": "Telangana",
+          "pincode": "500033"
+        },
+        "orderedAmount": {
+          "completedOrders": 20000,
+          "pending": 7000
+        },
+        "userId": "#UD003057",
+        "emailVerify": "Verified",
+        "registerAt": "Mar 05, 2024"
+      },
+      "recentOrders": [
+        {
+          "sNo": 1,
+          "orderId": "#ORD016",
+          "noOfProducts": 3,
+          "amount": 1200,
+          "status": 1
+        },
+        {
+          "sNo": 2,
+          "orderId": "#ORD017",
+          "noOfProducts": 1,
+          "amount": 500,
+          "status": 2
+        },
+        {
+          "sNo": 3,
+          "orderId": "#ORD018",
+          "noOfProducts": 6,
+          "amount": 3000,
+          "status": 3
+        },
+        {
+          "sNo": 4,
+          "orderId": "#ORD019",
+          "noOfProducts": 2,
+          "amount": 800,
+          "status": 4
+        },
+        {
+          "sNo": 5,
+          "orderId": "#ORD020",
+          "noOfProducts": 4,
+          "amount": 1600,
+          "status": 5
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "name": "M. Arjun",
+      "email": "ArjunM@spackdigi.com",
+      "mobile": "+91 6543210987",
+      "status": 1,
+      "dateOfJoining": "01-03-2024",
+      "profilePic": "https://randomuser.me/api/portraits/men/3.jpg",
+      "additionalInfo": {
+        "dob": "18 September, 1985",
+        "phone": "+91 6543210987",
+        "address": {
+          "houseNo": "7-3-101",
+          "area": "Secunderabad",
+          "city": "Hyderabad",
+          "state": "Telangana",
+          "pincode": "500003"
+        },
+        "orderedAmount": {
+          "completedOrders": 30000,
+          "pending": 12000
+        },
+        "userId": "#UD003058",
+        "emailVerify": "Verified",
+        "registerAt": "Nov 20, 2023"
+      },
+      "recentOrders": [
+        {
+          "sNo": 1,
+          "orderId": "#ORD021",
+          "noOfProducts": 5,
+          "amount": 2000,
+          "status": 1
+        },
+        {
+          "sNo": 2,
+          "orderId": "#ORD022",
+          "noOfProducts": 3,
+          "amount": 1200,
+          "status": 2
+        },
+        {
+          "sNo": 3,
+          "orderId": "#ORD023",
+          "noOfProducts": 4,
+          "amount": 1800,
+          "status": 3
+        },
+        {
+          "sNo": 4,
+          "orderId": "#ORD024",
+          "noOfProducts": 2,
+          "amount": 800,
+          "status": 4
+        },
+        {
+          "sNo": 5,
+          "orderId": "#ORD025",
+          "noOfProducts": 6,
+          "amount": 2500,
+          "status": 5
+        }
+      ]
     }
   ],
   "orders": [
@@ -640,7 +989,7 @@
       "totalCost": 18200,
       "subTotal": 17000,
       "deliveryFee": 1200,
-      "status": 2,
+      "status": 3,
       "orderDate": "Mon, Aug 5, 2024",
       "orderTime": "10:30 AM",
       "deliveryAddress": {
@@ -859,7 +1208,7 @@
       "totalCost": 27500,
       "subTotal": 25000,
       "deliveryFee": 2500,
-      "status": 1,
+      "status": 0,
       "orderDate": "Fri, Aug 9, 2024",
       "orderTime": "2:00 PM",
       "deliveryAddress": {
@@ -900,7 +1249,7 @@
       "totalCost": 8200,
       "subTotal": 7000,
       "deliveryFee": 1200,
-      "status": 0,
+      "status": 1,
       "orderDate": "Sun, Aug 11, 2024",
       "orderTime": "4:00 PM",
       "deliveryAddress": {
@@ -941,7 +1290,7 @@
       "totalCost": 16000,
       "subTotal": 15000,
       "deliveryFee": 1000,
-      "status": 5,
+      "status": 0,
       "orderDate": "Wed, Aug 7, 2024",
       "orderTime": "11:00 AM",
       "deliveryAddress": {
@@ -1043,7 +1392,7 @@
       "totalCost": 23600,
       "subTotal": 18000,
       "deliveryFee": 5600,
-      "status": 2,
+      "status": 1,
       "orderDate": "Sun, Aug 11, 2024",
       "orderTime": "7:00 PM",
       "deliveryAddress": {
@@ -1155,7 +1504,7 @@
       "totalCost": 14000,
       "subTotal": 13000,
       "deliveryFee": 1000,
-      "status": 5,
+      "status": 0,
       "orderDate": "Wed, Aug 7, 2024",
       "orderTime": "2:00 PM",
       "deliveryAddress": {
@@ -1231,7 +1580,7 @@
       "totalCost": 33000,
       "subTotal": 26000,
       "deliveryFee": 7000,
-      "status": 3,
+      "status": 5,
       "orderDate": "Thu, Aug 8, 2024",
       "orderTime": "3:00 PM",
       "deliveryAddress": {

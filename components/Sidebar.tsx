@@ -42,7 +42,7 @@ const Sidebar = () => {
                 title: "Categories", icon: Tags, variant: "ghost", href: '/categories', hasDropdown: true, dropdownLinks: [
                     { title: "All Categories", href: '/categories' },
                     { title: "Sub Category", href: '/categories/sub' },
-                    // { title: "Child Category", href: '/categories/child' }
+                    { title: "Child Category", href: '/categories/child' }
                 ]
             },
             { title: "UsersList", icon: Users, variant: "ghost", href: '/userslist' },

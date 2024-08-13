@@ -27,6 +27,25 @@ import { useParams } from "next/navigation";
 import { Separator } from '@/components/ui/separator';
 import { Badge } from '@/components/ui/badge';
 import axiosInstance from '@/app/Instance';
+import { Button } from '@/components/ui/button';
+import { Plus } from 'lucide-react';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { useToast } from '@/components/ui/use-toast';
 
 interface Product {
   productName: string;
@@ -70,12 +89,16 @@ const SingleOrder = () => {
   const [error, setError] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [itemsPerPage, setItemsPerPage] = useState<number>(4);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const { toast } = useToast();
+  const [selectedStatus, setSelectedStatus] = useState<number | null>(null);
 
   useEffect(() => {
     const fetchOrderData = async () => {
       try {
         const response = await axiosInstance.get(`/neworders/${id}`);
         setOrder(response.data);
+        setSelectedStatus(response.data.status);
         setLoading(false);
       } catch (err) {
         setError('Failed to fetch order data');
@@ -90,6 +113,26 @@ const SingleOrder = () => {
     setCurrentPage(page);
   };
 
+  const handleStatusChange = async () => {
+    if (order && selectedStatus !== null) {
+      try {
+        await axiosInstance.patch(`/neworders/${order.id}`, { status: selectedStatus });
+        setOrder((prevOrder) => prevOrder ? { ...prevOrder, status: selectedStatus } : null);
+        setIsModalOpen(false);
+        toast({
+          description: "Status updated successfully",
+          variant: "success"
+        })
+      } catch (err) {
+        console.error('Failed to update status', err);
+        toast({
+          description: "Error updating status",
+          variant: "destructive",
+        })
+      }
+    }
+  };
+
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
   if (!order) return <p>No order found</p>;
@@ -100,10 +143,44 @@ const SingleOrder = () => {
 
   return (
     <div className="p-6">
-      <div className="mb-8">
+      <div className="flex justify-between items-center mb-8 ">
         <div>
           <span className='text-lg md:text-4xl font-semibold'>Order Number: </span>
           <span className='text-lg md:text-4xl font-extrabold text-red-600'>#{order?.orderId}</span>
+        </div>
+        <div>
+          <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+            <DialogTrigger asChild>
+              <Button>
+                Update Status
+              </Button>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Update Order Status</DialogTitle>
+                <DialogDescription>
+                  Select the new status for the order.
+                </DialogDescription>
+              </DialogHeader>
+              <Select onValueChange={(value) => setSelectedStatus(Number(value))} defaultValue={order.status.toString()}>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Select Status" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="0">Pending</SelectItem>
+                  <SelectItem value="1">Processing</SelectItem>
+                  <SelectItem value="2">Shipping</SelectItem>
+                  <SelectItem value="3">Delivered</SelectItem>
+                  <SelectItem value="4">Return / Replacement</SelectItem>
+                  <SelectItem value="5">Cancelled</SelectItem>
+                </SelectContent>
+              </Select>
+              <DialogFooter>
+                <Button variant="outline" onClick={() => setIsModalOpen(false)}>Cancel</Button>
+                <Button onClick={handleStatusChange}>Save</Button>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
         </div>
       </div>
 

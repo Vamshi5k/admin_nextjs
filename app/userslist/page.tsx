@@ -1,4 +1,5 @@
 'use client';
+
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -9,6 +10,13 @@ import { Eye, EyeOff } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 import { Skeleton } from '@/components/ui/skeleton';
 import Link from 'next/link';
+import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from '@/components/ui/pagination';
+import { Input } from '@/components/ui/input';
+import ErrorImage from "../../img/error.svg"
+import Image from 'next/image';
+import { notFound } from 'next/navigation';
+import { useToast } from '@/components/ui/use-toast';
+import { Switch } from '@/components/ui/switch';
 
 interface User {
   id: number;
@@ -18,48 +26,99 @@ interface User {
   status: number;
   dateOfJoining: string;
   profilePic: string;
+  isActive: number;
 }
 
 const UserList = () => {
   const [users, setUsers] = useState<User[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [toggledUsers, setToggledUsers] = useState<Record<number, boolean>>({});
+  const [currentPage, setCurrentPage] = useState(1);
+  const [searchQuery, setSearchQuery] = useState<string>('');
+  const { toast } = useToast();
+  const itemsPerPage = 7;
 
-  const ToggleHandler = (id: number) => {
-    setToggledUsers(prev => ({
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await axiosInstance.get('/userslist');
+        if (response) {
+          setUsers(response.data);
+        } else {
+          notFound
+        }
+      } catch (error) {
+        setError('Error fetching users data');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUsers();
+  }, []);
+
+  const filterUsers = users.filter((user) => {
+    return (
+      user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      user.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      user.mobile.includes(searchQuery)
+    );
+  });
+
+  const totalPages = Math.ceil(filterUsers.length / itemsPerPage);
+  const currentUserList = filterUsers.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+
+  const handleToggle = (id: number) => {
+    setToggledUsers((prev) => ({
       ...prev,
-      [id]: !prev[id]
+      [id]: !prev[id],
     }));
   };
 
-  const getUsers = async () => {
-    setLoading(true);
-    setError(null);
-    try {
-      const response = await axiosInstance.get('/userslist');
-      if (response?.data) {
-        setUsers(response.data);
-      }
-    } catch (error) {
-      setError("Error fetching users data");
-    } finally {
-      setLoading(false);
-    }
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
   };
 
-  useEffect(() => {
-    getUsers();
-  }, []);
+  const HandleSwitchChange = async (id: any) => {
+    try {
+      const user = users.find((item) =>item?.id == id);
+      if(user){
+        const updatedUser = {...user, isActive: user.isActive === 1 ? 0 : 1}
+        // const res = await axiosInstance.put(`/userlist/${id}`, updatedUser);
+
+        // console.log(res);
+        setUsers((prevUsers) => 
+          
+          {return prevUsers.map((item) => item.id == id ? updatedUser : item)}
+        )
+      }
+    } catch (error) {
+       console.log(error);
+       toast({
+          description: "Error Updating Status Of User",
+          variant: "destructive"
+       })
+    }
+  }
 
   return (
     <div>
       <Card>
         <CardHeader>
-          <div className='w-full h-auto flex justify-between items-center'>
+          <div className='flex justify-between items-center'>
             <div>
               <CardTitle className="text-lg md:text-2xl font-semibold">Users</CardTitle>
               <CardDescription>Overall {users.length} New Users</CardDescription>
+            </div>
+            <div>
+              <Input
+                type="search"
+                placeholder="Search Users...."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-96 appearance-none bg-background pl-4 shadow-none"
+              />
             </div>
           </div>
         </CardHeader>
@@ -74,15 +133,13 @@ const UserList = () => {
                   <TableHead className='text-black font-semibold'>MOBILE</TableHead>
                   <TableHead className='text-black font-semibold'>STATUS</TableHead>
                   <TableHead className='text-black font-semibold'>DATE OF JOINING</TableHead>
-                  <TableHead className='text-black font-semibold'>ACTIONS</TableHead>
+                  <TableHead className='text-black font-semibold'>STATUS SWITCH</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {[...Array(10)].map((_, index) => (
+                {[...Array(5)].map((_, index) => (
                   <TableRow key={index}>
-                    <TableCell>
-                      <Skeleton className="h-6 w-10" />
-                    </TableCell>
+                    <TableCell><Skeleton className="h-6 w-10" /></TableCell>
                     <TableCell>
                       <div className='flex items-center gap-2'>
                         <Skeleton className="h-10 w-10 rounded-full" />
@@ -92,27 +149,22 @@ const UserList = () => {
                         </div>
                       </div>
                     </TableCell>
-                    <TableCell>
-                      <Skeleton className="h-6 w-48" />
-                    </TableCell>
-                    <TableCell>
-                      <Skeleton className="h-6 w-32" />
-                    </TableCell>
-                    <TableCell>
-                      <Skeleton className="h-6 w-24" />
-                    </TableCell>
-                    <TableCell>
-                      <Skeleton className="h-6 w-40" />
-                    </TableCell>
-                    <TableCell>
-                      <Skeleton className="h-6 w-12" />
-                    </TableCell>
+                    <TableCell><Skeleton className="h-6 w-48" /></TableCell>
+                    <TableCell><Skeleton className="h-6 w-32" /></TableCell>
+                    <TableCell><Skeleton className="h-6 w-24" /></TableCell>
+                    <TableCell><Skeleton className="h-6 w-40" /></TableCell>
+                    <TableCell><Skeleton className="h-6 w-12" /></TableCell>
                   </TableRow>
                 ))}
               </TableBody>
             </Table>
           ) : error ? (
             <p className="text-red-500">Error: {error}</p>
+          ) : filterUsers.length === 0 ? (
+            <div className="flex flex-col items-center justify-center text-center py-20">
+              <Image src={ErrorImage} alt="No Users Found" className="mb-4 w-60 h-60" />
+              <p className="text-gray-500">No users found matching your search criteria.</p>
+            </div>
           ) : (
             <Table>
               <TableHeader>
@@ -123,50 +175,39 @@ const UserList = () => {
                   <TableHead className='text-black font-semibold'>MOBILE</TableHead>
                   <TableHead className='text-black font-semibold'>STATUS</TableHead>
                   <TableHead className='text-black font-semibold'>DATE OF JOINING</TableHead>
-                  <TableHead className='text-black font-semibold'>ACTIONS</TableHead>
+                  <TableHead className='text-black font-semibold'>STATUS SWITCH</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {users.map((item, index) => (
-                  <TableRow key={item.id}>
-                    <TableCell>{index + 1}</TableCell>
+                {currentUserList.map((user, index) => (
+                  <TableRow key={user.id}>
+                    <TableCell>{(currentPage - 1) * itemsPerPage + index + 1}</TableCell>
                     <TableCell className='font-semibold'>
-                      <Link href={`/userslist/singleuser/${item?.id}`}>
+                      <Link href={`/userslist/singleuser/${user.id}`}>
                         <div className='flex items-center gap-2'>
                           <Avatar>
-                            {item.profilePic ? (
-                              <AvatarImage src={item.profilePic} width={40} className='rounded-lg' />
+                            {user.profilePic ? (
+                              <AvatarImage src={user.profilePic} width={40} className='rounded-lg' />
                             ) : (
                               <AvatarFallback className='flex items-center justify-center w-10 h-10 bg-gray-200 text-gray-700 rounded-lg text-lg'>
-                                {item.name[0]}
+                                {user.name[0]}
                               </AvatarFallback>
                             )}
                           </Avatar>
-                          {item.name}
+                          {user.name}
                         </div>
                       </Link>
-
                     </TableCell>
-                    <TableCell>{item.email}</TableCell>
-                    <TableCell>{item.mobile}</TableCell>
+                    <TableCell>{user.email}</TableCell>
+                    <TableCell>{user.mobile}</TableCell>
                     <TableCell>
-                      <Badge variant={item.status === 0 ? "success" : "error"}>
-                        {item.status === 0 ? "Active" : "Blocked"}
+                      <Badge variant={user.isActive === 0 ? "success" : "error"}>
+                        {user.isActive === 0 ? "Active" : "Blocked"}
                       </Badge>
                     </TableCell>
-                    <TableCell>{item.dateOfJoining}</TableCell>
+                    <TableCell>{user.dateOfJoining}</TableCell>
                     <TableCell>
-                      <Button
-                        variant="outline"
-                        size="icon"
-                        onClick={() => ToggleHandler(item.id)}
-                      >
-                        {toggledUsers[item.id] ? (
-                          <EyeOff className='h-4 w-4' />
-                        ) : (
-                          <Eye className='h-4 w-4' />
-                        )}
-                      </Button>
+                       <Switch checked={user.isActive === 1} onCheckedChange={() => HandleSwitchChange(user?.id)} />
                     </TableCell>
                   </TableRow>
                 ))}
@@ -175,6 +216,42 @@ const UserList = () => {
           )}
         </CardContent>
       </Card>
+      <div className='mt-3'>
+        <Pagination>
+          <PaginationContent>
+            <PaginationItem aria-disabled={currentPage === 1}>
+              <PaginationPrevious
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (currentPage > 1) handlePageChange(currentPage - 1);
+                }}
+                aria-label="Previous Page"
+              />
+            </PaginationItem>
+            {[...Array(totalPages)].map((_, index) => (
+              <PaginationItem key={index} aria-current={currentPage === index + 1 ? 'page' : undefined}>
+                <PaginationLink
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handlePageChange(index + 1);
+                  }}
+                >
+                  {index + 1}
+                </PaginationLink>
+              </PaginationItem>
+            ))}
+            <PaginationItem aria-disabled={currentPage === totalPages}>
+              <PaginationNext
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (currentPage < totalPages) handlePageChange(currentPage + 1);
+                }}
+                aria-label="Next Page"
+              />
+            </PaginationItem>
+          </PaginationContent>
+        </Pagination>
+      </div>
     </div>
   );
 };
