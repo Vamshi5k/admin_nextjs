@@ -4,14 +4,14 @@ import Link from "next/link"
 
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
-import { UserAuthForm } from "./components/AuthForm"
+import { RegisterForm } from "./components/RegisterForm"
 
 export const metadata: Metadata = {
   title: "Sign In - Among Us",
   description: "Authentication Pages Of Among Us",
 }
 
-export default function AuthenticationPage() {
+export default function RegisterPage() {
   return (
     <>
       <div className="md:hidden">
@@ -72,13 +72,13 @@ export default function AuthenticationPage() {
           <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-96">
             <div className="flex flex-col space-y-2 text-center">
               <h1 className="text-2xl font-semibold tracking-tight">
-                Welcome Back To Among Us
+                Sign Up By Among Us
               </h1>
               <p className="text-sm text-muted-foreground">
                 Enter your username and password to continue.
               </p>
             </div>
-            <UserAuthForm />
+            <RegisterForm />
            
           </div>
         </div>

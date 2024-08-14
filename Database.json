@@ -129,349 +129,566 @@
     {
       "id": "1",
       "name": "mattresses",
-      "description": "various types of mattresses for all preferences."
+      "description": "Various types of mattresses for all preferences."
     },
     {
       "id": "2",
       "name": "pillows",
-      "description": "a range of pillows for different support needs."
+      "description": "A range of pillows for different support needs."
     },
     {
       "id": "3",
       "name": "bed frames",
-      "description": "different styles of bed frames."
+      "description": "Different styles of bed frames."
     },
     {
       "id": "4",
       "name": "bedding",
-      "description": "bedding items including sheets, duvets, and more."
+      "description": "Bedding items including sheets, duvets, and more."
     },
     {
       "id": "5",
       "name": "protectors",
-      "description": "protectors for mattresses and pillows."
+      "description": "Protectors for mattresses and pillows."
     },
     {
       "id": "8fab",
       "name": "hery",
-      "description": "asklaldfsb"
+      "description": "Asklaldfsb"
     }
   ],
   "subcategories": [
     {
       "id": "c8c1",
       "subcategory": "Gel Memory Foam Mattress",
-      "description": "Mattresses infused with gel to enhance cooling and comfort.",
-      "parentCategoryId": "3"
+      "description": "Infused with gel to enhance cooling and comfort.",
+      "parentCategoryId": "1"
     },
     {
       "id": "e54a",
       "subcategory": "Latex Foam Mattress",
-      "description": "Mattresses made from natural or synthetic latex for a resilient feel.",
-      "parentCategoryId": "3"
+      "description": "Made from natural or synthetic latex for a resilient feel.",
+      "parentCategoryId": "1"
     },
     {
       "id": "a12b",
       "subcategory": "Hybrid Mattress",
-      "description": "Mattresses combining memory foam and innerspring systems for balanced support.",
-      "parentCategoryId": "3"
+      "description": "Combines memory foam and innerspring systems for balanced support.",
+      "parentCategoryId": "1"
     },
     {
       "id": "b34c",
       "subcategory": "Innerspring Mattress",
       "description": "Traditional mattresses with an internal spring system for support and bounce.",
-      "parentCategoryId": "3"
+      "parentCategoryId": "1"
     },
     {
       "id": "d56e",
       "subcategory": "Memory Foam Mattress",
-      "description": "Mattresses made from memory foam that contours to your body for pressure relief.",
-      "parentCategoryId": "3"
+      "description": "Contours to your body for pressure relief.",
+      "parentCategoryId": "1"
     },
     {
       "id": "f78g",
       "subcategory": "Adjustable Mattress",
-      "description": "Mattresses that can be adjusted for different sleeping positions and comfort levels.",
-      "parentCategoryId": "3"
+      "description": "Can be adjusted for different sleeping positions and comfort levels.",
+      "parentCategoryId": "1"
     },
     {
       "id": "g89h",
       "subcategory": "Pillow Top Mattress",
-      "description": "Mattresses with an additional layer of padding on top for extra softness and comfort.",
-      "parentCategoryId": "3"
+      "description": "Features an additional layer of padding on top for extra softness.",
+      "parentCategoryId": "1"
     },
     {
       "id": "h90i",
       "subcategory": "Orthopedic Mattress",
-      "description": "Mattresses designed to support and align the spine, particularly for orthopedic needs.",
-      "parentCategoryId": "3"
+      "description": "Designed to support and align the spine, particularly for orthopedic needs.",
+      "parentCategoryId": "1"
     },
     {
       "id": "i12j",
       "subcategory": "Cooling Mattress",
-      "description": "Mattresses designed to maintain a cool temperature throughout the night.",
-      "parentCategoryId": "3"
+      "description": "Maintains a cool temperature throughout the night.",
+      "parentCategoryId": "1"
     },
     {
       "id": "j23k",
       "subcategory": "Euro Top Mattress",
-      "description": "Mattresses with a plush layer sewn into the top for enhanced comfort and support.",
-      "parentCategoryId": "3"
+      "description": "Includes a plush layer sewn into the top for enhanced comfort.",
+      "parentCategoryId": "1"
     },
     {
       "id": "k34l",
       "subcategory": "Natural Fiber Mattress",
-      "description": "Mattresses made from natural fibers such as cotton, wool, or bamboo for eco-friendly options.",
-      "parentCategoryId": "3"
+      "description": "Made from natural fibers like cotton, wool, or bamboo for eco-friendly options.",
+      "parentCategoryId": "1"
     },
     {
       "id": "l45m",
       "subcategory": "Firm Mattress",
-      "description": "Mattresses designed to provide a firm, supportive sleeping surface.",
-      "parentCategoryId": "3"
+      "description": "Provides a firm, supportive sleeping surface.",
+      "parentCategoryId": "1"
     },
     {
       "id": "m56n",
       "subcategory": "Soft Mattress",
-      "description": "Mattresses offering a soft, plush surface for a more cushioned sleep experience.",
-      "parentCategoryId": "3"
+      "description": "Offers a soft, plush surface for a more cushioned sleep experience.",
+      "parentCategoryId": "1"
     },
     {
       "id": "n67o",
       "subcategory": "Eco-Friendly Mattress",
-      "description": "Mattresses made from sustainable and eco-friendly materials.",
-      "parentCategoryId": "3"
+      "description": "Made from sustainable and eco-friendly materials.",
+      "parentCategoryId": "1"
     },
     {
       "id": "o78p",
       "subcategory": "Children's Mattress",
-      "description": "Mattresses designed specifically for children, often featuring additional safety features.",
-      "parentCategoryId": "3"
+      "description": "Designed specifically for children, often with additional safety features.",
+      "parentCategoryId": "1"
     },
     {
       "id": "p89q",
       "subcategory": "Adjustable Air Mattress",
-      "description": "Mattresses with air chambers that can be adjusted for customized firmness.",
-      "parentCategoryId": "3"
+      "description": "Features air chambers that can be adjusted for customized firmness.",
+      "parentCategoryId": "1"
     },
     {
       "id": "q90r",
       "subcategory": "Luxury Mattress",
-      "description": "High-end mattresses featuring premium materials and craftsmanship.",
-      "parentCategoryId": "3"
+      "description": "High-end options featuring premium materials and craftsmanship.",
+      "parentCategoryId": "1"
     },
     {
       "id": "r12s",
       "subcategory": "Compact Mattress",
-      "description": "Mattresses designed for smaller spaces or portable use.",
-      "parentCategoryId": "3"
+      "description": "Designed for smaller spaces or portable use.",
+      "parentCategoryId": "1"
     },
     {
       "id": "s23t",
       "subcategory": "High-Density Foam Mattress",
-      "description": "Mattresses made with high-density foam for enhanced durability and support.",
-      "parentCategoryId": "3"
+      "description": "Made with high-density foam for enhanced durability and support.",
+      "parentCategoryId": "1"
     },
     {
       "id": "t34u",
       "subcategory": "Tempur-Pedic Mattress",
-      "description": "Mattresses using Tempur material for superior comfort and support.",
+      "description": "Uses Tempur material for superior comfort and support.",
+      "parentCategoryId": "1"
+    },
+    {
+      "id": "c8c1",
+      "subcategory": "Memory Foam Pillow",
+      "description": "Contours to your head and neck for customized support.",
+      "parentCategoryId": "2"
+    },
+    {
+      "id": "d54e",
+      "subcategory": "Feather Pillow",
+      "description": "Filled with natural feathers for a soft, plush feel.",
+      "parentCategoryId": "2"
+    },
+    {
+      "id": "e65f",
+      "subcategory": "Latex Pillow",
+      "description": "Offers firm support and is resistant to dust mites and allergens.",
+      "parentCategoryId": "2"
+    },
+    {
+      "id": "f76g",
+      "subcategory": "Gel Pillow",
+      "description": "Infused with cooling gel for temperature regulation.",
+      "parentCategoryId": "2"
+    },
+    {
+      "id": "g87h",
+      "subcategory": "Down Pillow",
+      "description": "Filled with down feathers for a luxurious, soft feel.",
+      "parentCategoryId": "2"
+    },
+    {
+      "id": "h98i",
+      "subcategory": "Orthopedic Pillow",
+      "description": "Supports proper alignment of the head, neck, and shoulders.",
+      "parentCategoryId": "2"
+    },
+    {
+      "id": "i09j",
+      "subcategory": "Body Pillow",
+      "description": "Long pillow for full-body support and comfort.",
+      "parentCategoryId": "2"
+    },
+    {
+      "id": "j10k",
+      "subcategory": "Pregnancy Pillow",
+      "description": "Supports pregnant women in various sleeping positions.",
+      "parentCategoryId": "2"
+    },
+    {
+      "id": "k21l",
+      "subcategory": "Cooling Pillow",
+      "description": "Features cooling technology to keep you comfortable.",
+      "parentCategoryId": "2"
+    },
+    {
+      "id": "l32m",
+      "subcategory": "Adjustable Pillow",
+      "description": "Customize the fill level for personalized comfort.",
+      "parentCategoryId": "2"
+    },
+    {
+      "id": "m43n",
+      "subcategory": "Platform Bed Frame",
+      "description": "Low-profile frame that supports a mattress without the need for a box spring.",
       "parentCategoryId": "3"
     },
     {
-      "id": "c033",
-      "subcategory": "hery-1",
-      "description": "Heyabfakjsbfkjasdbfkj",
+      "id": "n54o",
+      "subcategory": "Sleigh Bed Frame",
+      "description": "Features curved, elegant head and footboards.",
+      "parentCategoryId": "3"
+    },
+    {
+      "id": "o65p",
+      "subcategory": "Canopy Bed Frame",
+      "description": "Includes posts at each corner, extending to support a canopy.",
+      "parentCategoryId": "3"
+    },
+    {
+      "id": "p76q",
+      "subcategory": "Adjustable Bed Frame",
+      "description": "Allows for adjustment of the head and foot positions.",
+      "parentCategoryId": "3"
+    },
+    {
+      "id": "q87r",
+      "subcategory": "Four-Poster Bed Frame",
+      "description": "Features posts at each corner extending to a decorative top.",
+      "parentCategoryId": "3"
+    },
+    {
+      "id": "r98s",
+      "subcategory": "Bed Frame with Storage",
+      "description": "Includes built-in storage options such as drawers or shelves.",
+      "parentCategoryId": "3"
+    },
+    {
+      "id": "s09t",
+      "subcategory": "Metal Bed Frame",
+      "description": "Constructed from metal for a sleek, durable design.",
+      "parentCategoryId": "3"
+    },
+    {
+      "id": "t10u",
+      "subcategory": "Wooden Bed Frame",
+      "description": "Made from wood for a classic, sturdy appearance.",
+      "parentCategoryId": "3"
+    },
+    {
+      "id": "u21v",
+      "subcategory": "Upholstered Bed Frame",
+      "description": "Features a padded and fabric-covered headboard.",
+      "parentCategoryId": "3"
+    },
+    {
+      "id": "v32w",
+      "subcategory": "Adjustable Base",
+      "description": "Allows for customizable angles and positions for added comfort.",
+      "parentCategoryId": "3"
+    },
+    {
+      "id": "w43x",
+      "subcategory": "Bedding Set",
+      "description": "Includes matching sheets, pillowcases, and a duvet cover.",
+      "parentCategoryId": "4"
+    },
+    {
+      "id": "x54y",
+      "subcategory": "Sheet Set",
+      "description": "Includes fitted and flat sheets, and pillowcases.",
+      "parentCategoryId": "4"
+    },
+    {
+      "id": "y65z",
+      "subcategory": "Duvet Cover",
+      "description": "Protective cover for a duvet or comforter.",
+      "parentCategoryId": "4"
+    },
+    {
+      "id": "z76a",
+      "subcategory": "Pillowcase",
+      "description": "Protective covering for pillows, available in various sizes.",
+      "parentCategoryId": "4"
+    },
+    {
+      "id": "a87b",
+      "subcategory": "Bedspread",
+      "description": "A decorative coverlet that covers the entire bed.",
+      "parentCategoryId": "4"
+    },
+    {
+      "id": "b98c",
+      "subcategory": "Quilt",
+      "description": "Layered fabric with a decorative stitching pattern.",
+      "parentCategoryId": "4"
+    },
+    {
+      "id": "c09d",
+      "subcategory": "Comforter",
+      "description": "Thick, warm covering for the bed, usually filled with synthetic fibers.",
+      "parentCategoryId": "4"
+    },
+    {
+      "id": "d10e",
+      "subcategory": "Throw Blanket",
+      "description": "Small, decorative blanket used for added warmth.",
+      "parentCategoryId": "4"
+    },
+    {
+      "id": "e21f",
+      "subcategory": "Bed Skirt",
+      "description": "Fabric that hangs from the base of the bed frame to cover the box spring and legs.",
+      "parentCategoryId": "4"
+    },
+    {
+      "id": "f32g",
+      "subcategory": "Mattress Pad",
+      "description": "Protective layer placed on top of a mattress for added comfort.",
+      "parentCategoryId": "4"
+    },
+    {
+      "id": "g43h",
+      "subcategory": "Mattress Protector",
+      "description": "Waterproof cover to protect the mattress from spills and stains.",
+      "parentCategoryId": "5"
+    },
+    {
+      "id": "h54i",
+      "subcategory": "Pillow Protector",
+      "description": "Protective cover for pillows to extend their lifespan.",
+      "parentCategoryId": "5"
+    },
+    {
+      "id": "i65j",
+      "subcategory": "Allergen Barrier",
+      "description": "Protects against allergens and dust mites.",
+      "parentCategoryId": "5"
+    },
+    {
+      "id": "j76k",
+      "subcategory": "Waterproof Protector",
+      "description": "Repels liquids to keep mattresses and pillows dry.",
+      "parentCategoryId": "5"
+    },
+    {
+      "id": "k87l",
+      "subcategory": "Breathable Protector",
+      "description": "Allows airflow while protecting against spills and stains.",
+      "parentCategoryId": "5"
+    },
+    {
+      "id": "l98m",
+      "subcategory": "Hery Subcategory 1",
+      "description": "Heyabfakjsbfkjasdbf",
       "parentCategoryId": "8fab"
     }
   ],
   "childCategories": [
     {
+      "id": "2cd7",
       "name": "Cooling Memory Foam",
-      "description": "Memory foam mattresses with cooling technology -updated",
-      "parentCategoryId": "3",
-      "subcategoryid": "b34c",
-      "id": "2cd7"
+      "description": "Memory foam mattresses with cooling technology.",
+      "parentCategoryId": "1",
+      "subcategoryId": "b34c"
     },
     {
-      "subcategoryid": 101,
+      "id": "d292",
       "name": "Gel-Infused Memory Foam",
       "description": "Memory foam mattresses with gel infusion for better support.",
-      "id": "d292"
+      "subcategoryId": "d56e"
     },
     {
-      "subcategoryid": 102,
+      "id": "6175",
       "name": "Pocketed Coil",
       "description": "Innerspring mattresses with individually pocketed coils.",
-      "id": "6175"
+      "subcategoryId": "b34c"
     },
     {
-      "subcategoryid": 102,
+      "id": "1b56",
       "name": "Continuous Coil",
       "description": "Innerspring mattresses with a continuous coil system.",
-      "id": "1b56"
+      "subcategoryId": "b34c"
     },
     {
-      "subcategoryid": 103,
+      "id": "2064",
       "name": "Foam Top Hybrid",
       "description": "Hybrid mattresses with a foam top layer.",
-      "id": "2064"
+      "subcategoryId": "a12b"
     },
     {
-      "subcategoryid": 103,
+      "id": "5cca",
       "name": "Latex Top Hybrid",
       "description": "Hybrid mattresses with a latex top layer.",
-      "id": "5cca"
+      "subcategoryId": "a12b"
     },
     {
-      "subcategoryid": 104,
+      "id": "41c4",
       "name": "Natural Latex",
       "description": "Mattresses made from 100% natural latex.",
-      "id": "41c4"
+      "subcategoryId": "e54a"
     },
     {
-      "subcategoryid": 104,
+      "id": "c878",
       "name": "Blended Latex",
       "description": "Mattresses with a blend of natural and synthetic latex.",
-      "id": "c878"
+      "subcategoryId": "e54a"
     },
     {
-      "subcategoryid": 201,
+      "id": "fa57",
       "name": "Contour Memory Foam",
       "description": "Contoured memory foam pillows for neck support.",
-      "id": "fa57"
+      "subcategoryId": "201"
     },
     {
-      "subcategoryid": 201,
+      "id": "0577",
       "name": "Shredded Memory Foam",
       "description": "Shredded memory foam pillows for adjustable loft.",
-      "id": "0577"
+      "subcategoryId": "201"
     },
     {
-      "subcategoryid": 202,
+      "id": "17fe",
       "name": "Duck Feather",
       "description": "Pillows filled with duck feathers for softness.",
-      "id": "17fe"
+      "subcategoryId": "202"
     },
     {
-      "subcategoryid": 202,
+      "id": "89ea",
       "name": "Goose Feather",
       "description": "Pillows filled with goose feathers for luxury.",
-      "id": "89ea"
+      "subcategoryId": "202"
     },
     {
-      "subcategoryid": 203,
+      "id": "5470",
       "name": "Solid Latex",
       "description": "Solid latex pillows for consistent support.",
-      "id": "5470"
+      "subcategoryId": "203"
     },
     {
-      "subcategoryid": 203,
+      "id": "fded",
       "name": "Perforated Latex",
       "description": "Latex pillows with perforations for added breathability.",
-      "id": "fded"
+      "subcategoryId": "203"
     },
     {
-      "subcategoryid": 204,
+      "id": "2f79",
       "name": "Gel-Infused",
       "description": "Pillows infused with cooling gel for comfort.",
-      "id": "2f79"
+      "subcategoryId": "204"
     },
     {
-      "subcategoryid": 204,
+      "id": "5394",
       "name": "Gel Overlay",
       "description": "Pillows with a gel overlay for added cooling effects.",
-      "id": "5394"
+      "subcategoryId": "204"
     },
     {
-      "subcategoryid": 301,
+      "id": "8f33",
       "name": "Platform Bed",
       "description": "Wooden platform beds with a low profile.",
-      "id": "8f33"
+      "subcategoryId": "301"
     },
     {
-      "subcategoryid": 301,
+      "id": "a03c",
       "name": "Canopy Bed",
       "description": "Wooden canopy beds with overhead structures.",
-      "id": "a03c"
+      "subcategoryId": "301"
     },
     {
-      "subcategoryid": 302,
+      "id": "faab",
       "name": "Sleigh Bed",
       "description": "Metal sleigh bed frames with curved details.",
-      "id": "faab"
+      "subcategoryId": "302"
     },
     {
-      "subcategoryid": 302,
+      "id": "a3b5",
       "name": "Four-Poster Bed",
       "description": "Metal bed frames with four posts for a classic look.",
-      "id": "a3b5"
+      "subcategoryId": "302"
     },
     {
-      "subcategoryid": 303,
+      "id": "ce5b",
       "name": "Electric Adjustable",
       "description": "Electric adjustable bed frames with remote control.",
-      "id": "ce5b"
+      "subcategoryId": "303"
     },
     {
-      "subcategoryid": 303,
+      "id": "e706",
       "name": "Manual Adjustable",
       "description": "Manually adjustable bed frames with lever controls.",
-      "id": "e706"
+      "subcategoryId": "303"
     },
     {
-      "subcategoryid": 401,
+      "id": "9b35",
       "name": "Cotton Sheets",
       "description": "Soft and breathable cotton sheets.",
-      "id": "9b35"
+      "subcategoryId": "401"
     },
     {
-      "subcategoryid": 401,
+      "id": "a37b",
       "name": "Microfiber Sheets",
       "description": "Affordable and easy-care microfiber sheets.",
-      "id": "a37b"
+      "subcategoryId": "401"
     },
     {
-      "subcategoryid": 402,
+      "id": "73d1",
       "name": "Down Duvets",
       "description": "Luxurious duvets filled with down feathers.",
-      "id": "73d1"
+      "subcategoryId": "402"
     },
     {
-      "subcategoryid": 402,
+      "id": "121c",
       "name": "Synthetic Duvets",
       "description": "Duvets made from synthetic fibers for allergy sufferers.",
-      "id": "121c"
+      "subcategoryId": "402"
     },
     {
-      "subcategoryid": 403,
+      "id": "a901",
       "name": "Cotton Pillowcases",
       "description": "Classic cotton pillowcases for comfort.",
-      "id": "a901"
+      "subcategoryId": "403"
     },
     {
-      "subcategoryid": 403,
+      "id": "9516",
       "name": "Satin Pillowcases",
       "description": "Satin pillowcases to reduce hair frizz and skin creases.",
-      "id": "9516"
+      "subcategoryId": "403"
     },
     {
-      "subcategoryid": 501,
+      "id": "cb95",
       "name": "Waterproof",
       "description": "Mattress protectors with waterproof features.",
-      "id": "cb95"
+      "subcategoryId": "501"
     },
     {
-      "subcategoryid": 501,
+      "id": "fb89",
       "name": "Anti-Allergy",
       "description": "Protectors designed to reduce allergens.",
-      "id": "fb89"
+      "subcategoryId": "501"
     },
     {
-      "subcategoryid": 502,
+      "id": "651a",
       "name": "Waterproof",
       "description": "Waterproof pillow protectors to safeguard against spills.",
-      "id": "651a"
+      "subcategoryId": "502"
+    },
+    {
+      "id": "b6e1",
+      "name": "asldkbasld",
+      "description": "asdlkabsd",
+      "parentCategoryId": "3",
+      "subcategoryid": "p76q"
     }
   ],
   "userslist": [
@@ -1208,7 +1425,7 @@
       "totalCost": 27500,
       "subTotal": 25000,
       "deliveryFee": 2500,
-      "status": 0,
+      "status": 3,
       "orderDate": "Fri, Aug 9, 2024",
       "orderTime": "2:00 PM",
       "deliveryAddress": {

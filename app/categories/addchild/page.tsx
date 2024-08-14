@@ -31,7 +31,6 @@ import { AxiosError } from 'axios';
 import axiosInstance from "@/app/Instance";
 import { useRouter } from "next/navigation";
 
-// Define TypeScript interfaces for API responses
 interface ParentCategory {
     id: string;
     name: string;
@@ -40,6 +39,7 @@ interface ParentCategory {
 interface SubCategory {
     id: string;
     subcategory: string;
+    parentCategoryId: string;
 }
 
 const formSchema = z.object({
@@ -53,6 +53,7 @@ const AddChildCategory = () => {
     const [loading, setLoading] = useState(false);
     const [parentCategory, setParentCategory] = useState<ParentCategory[]>([]);
     const [subCategory, setSubCategory] = useState<SubCategory[]>([]);
+    const [filteredSubCategories, setFilteredSubCategories] = useState<SubCategory[]>([]);
     const { toast } = useToast();
     const router = useRouter();
 
@@ -86,8 +87,8 @@ const AddChildCategory = () => {
         try {
             const res = await axiosInstance.get<SubCategory[]>('/subcategories');
             if (res.data) {
-                console.log(res?.data);
                 setSubCategory(res.data);
+                setFilteredSubCategories(res.data);
             }
         } catch (error) {
             console.error("Error Fetching Sub Categories", error);
@@ -103,6 +104,17 @@ const AddChildCategory = () => {
         fetchParent();
         fetchSubCategories();
     }, []);
+
+    useEffect(() => {
+        const parentId = form.watch("parentCategoryId");
+        if (parentId) {
+            setFilteredSubCategories(subCategory.filter(sub => sub.parentCategoryId == parentId));
+        } else {
+            setFilteredSubCategories(subCategory);
+        }
+    }, [form.watch("parentCategoryId"), subCategory]);
+
+
 
     const onSubmit = async (data: z.infer<typeof formSchema>) => {
         setLoading(true);
@@ -148,7 +160,7 @@ const AddChildCategory = () => {
                         <Separator className="my-6" />
                     </div>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="px-10">
                     <Form {...form}>
                         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                             <div className="grid grid-cols-1 gap-4">
@@ -204,9 +216,9 @@ const AddChildCategory = () => {
                                                         </SelectTrigger>
                                                         <SelectContent>
                                                             <SelectGroup>
-                                                                {subCategory.map((item) => (
+                                                                {filteredSubCategories.map((item) => (
                                                                     <SelectItem key={item.id} value={item.id}>
-                                                                        {item?.subcategory}
+                                                                        {item.subcategory}
                                                                     </SelectItem>
                                                                 ))}
                                                             </SelectGroup>
