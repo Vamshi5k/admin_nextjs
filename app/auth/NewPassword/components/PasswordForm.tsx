@@ -128,7 +128,7 @@ export function NewPasswordForm({ className, ...props }: NewPasswordFormProps) {
             </form>
             <p className="text-center text-sm text-muted-foreground mt-4">
                 <span>
-                    Don't have an account? <Link href={'/auth/Register'} className="text-black font-semibold underline">
+                Don&apos;thave an account? <Link href={'/auth/Register'} className="text-black font-semibold underline">
                         Register
                     </Link>
                 </span>

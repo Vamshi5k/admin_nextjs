@@ -12,7 +12,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import Link from 'next/link';
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from '@/components/ui/pagination';
 import { Input } from '@/components/ui/input';
-import ErrorImage from "../../img/error.svg"
+import ErrorImage from "../../img/error.svg";
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { useToast } from '@/components/ui/use-toast';
@@ -22,9 +22,9 @@ interface User {
   id: number;
   name: string;
   email: string;
-  mobile: string;
+  phone: string;
   status: number;
-  dateOfJoining: string;
+  dateOfRegistration: string;
   profilePic: string;
   isActive: number;
 }
@@ -44,9 +44,9 @@ const UserList = () => {
       try {
         const response = await axiosInstance.get('/userslist');
         if (response) {
-          setUsers(response.data);
+          setUsers(response?.data);
         } else {
-          notFound
+          notFound();
         }
       } catch (error) {
         setError('Error fetching users data');
@@ -59,10 +59,14 @@ const UserList = () => {
   }, []);
 
   const filterUsers = users.filter((user) => {
+    const name = user.name?.toLowerCase() || '';
+    const email = user.email?.toLowerCase() || '';
+    const mobile = user.phone || '';
+
     return (
-      user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      user.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      user.mobile.includes(searchQuery)
+      name.includes(searchQuery.toLowerCase()) ||
+      email.includes(searchQuery.toLowerCase()) ||
+      mobile.includes(searchQuery)
     );
   });
 
@@ -82,25 +86,24 @@ const UserList = () => {
 
   const HandleSwitchChange = async (id: any) => {
     try {
-      const user = users.find((item) =>item?.id == id);
-      if(user){
-        const updatedUser = {...user, isActive: user.isActive === 1 ? 0 : 1}
+      const user = users.find((item) => item?.id === id);
+      if (user) {
+        const updatedUser = { ...user, isActive: user.isActive === 1 ? 0 : 1 };
         // const res = await axiosInstance.put(`/userlist/${id}`, updatedUser);
 
         // console.log(res);
-        setUsers((prevUsers) => 
-          
-          {return prevUsers.map((item) => item.id == id ? updatedUser : item)}
-        )
+        setUsers((prevUsers) =>
+          prevUsers.map((item) => (item.id === id ? updatedUser : item))
+        );
       }
     } catch (error) {
-       console.log(error);
-       toast({
-          description: "Error Updating Status Of User",
-          variant: "destructive"
-       })
+      console.log(error);
+      toast({
+        description: "Error Updating Status Of User",
+        variant: "destructive"
+      });
     }
-  }
+  };
 
   return (
     <div>
@@ -127,13 +130,12 @@ const UserList = () => {
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead className='text-black font-semibold'>S.NO</TableHead>
-                  <TableHead className='text-black font-semibold'>NAME</TableHead>
-                  <TableHead className='text-black font-semibold'>EMAIL</TableHead>
-                  <TableHead className='text-black font-semibold'>MOBILE</TableHead>
-                  <TableHead className='text-black font-semibold'>STATUS</TableHead>
-                  <TableHead className='text-black font-semibold'>DATE OF JOINING</TableHead>
-                  <TableHead className='text-black font-semibold'>STATUS SWITCH</TableHead>
+                  <TableHead className='text-heading-dark dark:text-[#FACC15] font-bold'>S.NO</TableHead>
+                  <TableHead className='text-heading-dark dark:text-[#FACC15] font-bold'>NAME</TableHead>
+                  <TableHead className='text-heading-dark dark:text-[#FACC15] font-bold'>EMAIL</TableHead>
+                  <TableHead className='text-heading-dark dark:text-[#FACC15] font-bold'>MOBILE</TableHead>
+                  <TableHead className='text-heading-dark dark:text-[#FACC15] font-bold'>DATE OF JOINING</TableHead>
+                  <TableHead className='text-heading-dark dark:text-[#FACC15] font-bold'>STATUS SWITCH</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -163,19 +165,19 @@ const UserList = () => {
           ) : filterUsers.length === 0 ? (
             <div className="flex flex-col items-center justify-center text-center py-20">
               <Image src={ErrorImage} alt="No Users Found" className="mb-4 w-60 h-60" />
-              <p className="text-gray-500">No users found matching your search criteria.</p>
+              <p className="text-heading-dark dark:text-[#FACC15] font-bold">No users found matching your search criteria.</p>
             </div>
           ) : (
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead className='text-black font-semibold'>S.NO</TableHead>
-                  <TableHead className='text-black font-semibold'>NAME</TableHead>
-                  <TableHead className='text-black font-semibold'>EMAIL</TableHead>
-                  <TableHead className='text-black font-semibold'>MOBILE</TableHead>
-                  <TableHead className='text-black font-semibold'>STATUS</TableHead>
-                  <TableHead className='text-black font-semibold'>DATE OF JOINING</TableHead>
-                  <TableHead className='text-black font-semibold'>STATUS SWITCH</TableHead>
+                  <TableHead className='text-heading-dark dark:text-[#FACC15] font-bold'>S.NO</TableHead>
+                  <TableHead className='text-heading-dark dark:text-[#FACC15] font-bold'>NAME</TableHead>
+                  <TableHead className='text-heading-dark dark:text-[#FACC15] font-bold'>EMAIL</TableHead>
+                  <TableHead className='text-heading-dark dark:text-[#FACC15] font-bold'>MOBILE</TableHead>
+                  <TableHead className='text-heading-dark dark:text-[#FACC15] font-bold'>STATUS</TableHead>
+                  <TableHead className='text-heading-dark dark:text-[#FACC15] font-bold'>DOR</TableHead>
+                  <TableHead className='text-heading-dark dark:text-[#FACC15] font-bold'>SWITCH STATUS</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -194,20 +196,20 @@ const UserList = () => {
                               </AvatarFallback>
                             )}
                           </Avatar>
-                          {user.name}
+                          {user?.name}
                         </div>
                       </Link>
                     </TableCell>
-                    <TableCell>{user.email}</TableCell>
-                    <TableCell>{user.mobile}</TableCell>
+                    <TableCell className='text-heading-dark dark:text-'>{user.email}</TableCell>
+                    <TableCell>{user.phone}</TableCell>
                     <TableCell>
                       <Badge variant={user.isActive === 0 ? "success" : "error"}>
                         {user.isActive === 0 ? "Active" : "Blocked"}
                       </Badge>
                     </TableCell>
-                    <TableCell>{user.dateOfJoining}</TableCell>
+                    <TableCell>{user.dateOfRegistration}</TableCell>
                     <TableCell>
-                       <Switch checked={user.isActive === 1} onCheckedChange={() => HandleSwitchChange(user?.id)} />
+                      <Switch checked={user.isActive === 1} onCheckedChange={() => HandleSwitchChange(user?.id)} />
                     </TableCell>
                   </TableRow>
                 ))}

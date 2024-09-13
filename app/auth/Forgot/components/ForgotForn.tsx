@@ -122,7 +122,7 @@ export function ForgetForm({ className, ...props }: ForgetFormProps) {
          
             <p className="text-center text-sm text-muted-foreground mt-4">
                 <span>
-                    Don't have an account? <Link href={'/auth/Register'} className="text-black font-semibold underline">
+                Don&apos;t have an account? <Link href={'/auth/Register'} className="text-black font-semibold underline">
                         Register
                     </Link>
                 </span>

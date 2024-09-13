@@ -120,7 +120,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
             </form>
             <p className="text-center text-sm text-muted-foreground mt-4">
                 <span>
-                    Doesn't have an account? <Link href={'/auth/Register'} className="text-black font-semibold underline">
+                Don&apos;t have an account? <Link href={'/auth/Register'} className="text-black font-semibold underline">
                         Register
                     </Link>
                 </span>

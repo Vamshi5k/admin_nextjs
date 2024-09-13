@@ -12,8 +12,8 @@ interface CardsProps {
     title: string;
     Icon: ReactElement;
     number: number | string;
-    description: string;
-    loading: boolean; // Added loading prop
+    description?: string;
+    loading: boolean; 
 }
 
 const DashboardCard = ({ title, Icon, number, description, loading }: CardsProps) => {
